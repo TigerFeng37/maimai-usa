@@ -5,8 +5,7 @@ name: Update Location Data
 
 on:
   schedule:
-    - cron: '0 13 * * *'  # 9:00 AM Eastern Time
-    - cron: '0 22 * * *'  # 7:00 AM Japan Time
+    - cron: '0 * * * *'  # Run at the start of every hour
   
   # Allow manual triggering
   workflow_dispatch:
