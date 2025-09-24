@@ -90,9 +90,7 @@ jobs:
         if [ -f update_output.log ]; then
           SUMMARY=$(grep -E "• (Activated|Deactivated): [0-9]+ locations" update_output.log | head -2 || echo "")
           if [ ! -z "$SUMMARY" ]; then
-            COMMIT_MSG="${COMMIT_MSG}
-
-${SUMMARY}"
+            COMMIT_MSG="${COMMIT_MSG}"$'\n\n'"${SUMMARY}"
           fi
         fi
         
