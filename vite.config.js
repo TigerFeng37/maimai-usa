@@ -8,4 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  base: '/maimai-usa/',  // Set base path for GitHub Pages
 })
