@@ -13,7 +13,7 @@ on:
       force_update:
         description: 'Force update even if no changes detected'
         required: false
-        default: 'false'
+        default: false
         type: boolean
 
 # Set permissions for the workflow
@@ -40,8 +40,11 @@ jobs:
         node-version: '20'
         cache: 'npm'
     
-    - name: Install dependencies
-      run: npm ci
+    - name: Clear npm cache and install dependencies
+      run: |
+        npm cache clean --force
+        rm -rf node_modules package-lock.json
+        npm install
     
     - name: Update location data
       id: update
@@ -167,8 +170,11 @@ jobs:
         node-version: '20'
         cache: 'npm'
     
-    - name: Install dependencies
-      run: npm ci
+    - name: Clear npm cache and install dependencies
+      run: |
+        npm cache clean --force
+        rm -rf node_modules package-lock.json
+        npm install
     
     - name: Build application
       run: npm run build
