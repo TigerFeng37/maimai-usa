@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@layer base {
+  html {
+    font-family: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+  
+  .font-serif {
+    font-family: "IBM Plex Serif", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  }
+  
+  .font-mono {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+}
+
+@layer components {
+  .border-grid-item {
+    box-shadow: 
+      inset 1px 0 0 0 rgb(229 231 235), /* left border */
+      inset 0 1px 0 0 rgb(229 231 235); /* top border */
+  }
+  
+  /* Alternative approach using CSS borders with negative margins */
+  .border-grid-alt {
+    border: 1px solid rgb(229 231 235);
+    margin: -1px 0 0 -1px;
+  }
+}

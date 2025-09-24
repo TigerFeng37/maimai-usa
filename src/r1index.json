@@ -1,0 +1,506 @@
+[
+  {
+    "code": "APM",
+    "name": "Arlington Parks",
+    "city": "Arlington",
+    "state": "TX",
+    "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
+    "cab_count": 2,
+    "index": "005"
+  },
+  {
+    "code": "ATC",
+    "name": "Arrowhead Towne Center",
+    "city": "Glendale",
+    "state": "AZ",
+    "address": "7700 W Arrowhead Towne Center, Glendale, AZ 85308",
+    "cab_count": 2,
+    "index": "053"
+  },
+  {
+    "code": "BTC",
+    "name": "Burbank Town Center",
+    "city": "Burbank",
+    "state": "CA",
+    "address": "201 E Magnolia Blvd, Ste. 145, Burbank, CA 91502",
+    "cab_count": 3,
+    "index": "041"
+  },
+  {
+    "code": "BWM",
+    "name": "Broadway Mall",
+    "city": "Hicksville",
+    "state": "NY",
+    "address": "358 N Broadway, Ste. 1950, Hicksville, NY 11801",
+    "cab_count": 2,
+    "index": "016"
+  },
+  {
+    "code": "CCM",
+    "name": "Coronado Center",
+    "city": "Albuquerque",
+    "state": "NM",
+    "address": "6600 Menaul Blvd NE, Ste. 2000-2, Albuquerque, NM 87110",
+    "cab_count": 2,
+    "index": "023"
+  },
+  {
+    "code": "CHF",
+    "name": "Chandler Fashion Center",
+    "city": "Chandler",
+    "state": "AZ",
+    "address": "3111 W Chandler Blvd, Ste. 2140, Chandler, AZ 85226",
+    "cab_count": 3,
+    "index": "060"
+  },
+  {
+    "code": "CLM",
+    "name": "Cumberland Mall",
+    "city": "Atlanta",
+    "state": "GA",
+    "address": "2860 Cumberland Mall, Ste. 1500, Atlanta, GA 30339",
+    "cab_count": 3,
+    "index": "045"
+  },
+  {
+    "code": "CRG",
+    "name": "Galleria at Crystal Run",
+    "city": "Middletown",
+    "state": "NY",
+    "address": "1 Galleria Dr, Ste. 01, Middletown, NY 10941",
+    "cab_count": 2,
+    "index": "017"
+  },
+  {
+    "code": "DBF",
+    "name": "Danbury Fair",
+    "city": "Danbury",
+    "state": "CT",
+    "address": "7 Backus Ave, Ste. 210, Danbury, CT 06810",
+    "cab_count": 2,
+    "index": "054"
+  },
+  {
+    "code": "DBK",
+    "name": "Deerbrook Mall",
+    "city": "Humble",
+    "state": "TX",
+    "address": "20131 Highway 59 N, Ste. 3000, Humble, TX 77338",
+    "cab_count": 2,
+    "index": "061"
+  },
+  {
+    "code": "DFM",
+    "name": "Deptford Mall",
+    "city": "Deptford",
+    "state": "NJ",
+    "address": "1750 Deptford Center Rd, Space #2350, Deptford Township, NJ 08096",
+    "cab_count": 2,
+    "index": "044"
+  },
+  {
+    "code": "ESC",
+    "name": "Eastridge Shopping Center",
+    "city": "San Jose",
+    "state": "CA",
+    "address": "2200 Eastridge Loop, Ste. 2094, San Jose, CA 95122",
+    "cab_count": 2,
+    "index": "008"
+  },
+  {
+    "code": "EXM",
+    "name": "Exton Square Mall",
+    "city": "Exton",
+    "state": "PA",
+    "address": "172 Exton Square Pkwy, D100, Exton, PA 19341",
+    "cab_count": 3,
+    "index": "012"
+  },
+  {
+    "code": "FDP",
+    "name": "Fashion District Philadelphia",
+    "city": "Philadelphia",
+    "state": "PA",
+    "address": "1001 Market St, #3010, Philadelphia, PA 19107",
+    "cab_count": 2,
+    "index": "039"
+  },
+  {
+    "code": "FFC",
+    "name": "Fairfield Commons",
+    "city": "Beavercreek",
+    "state": "OH",
+    "address": "2727 Fairfield Commons, Beavercreek, OH 45431",
+    "cab_count": 2,
+    "index": "037"
+  },
+  {
+    "code": "FSM",
+    "name": "Four Seasons Town Centre",
+    "city": "Greensboro",
+    "state": "NC",
+    "address": "410 Four Seasons Town Centre, Greensboro, NC 27407",
+    "cab_count": 3,
+    "index": "020"
+  },
+  {
+    "code": "FVM",
+    "name": "Fox Valley Mall",
+    "city": "Aurora",
+    "state": "IL",
+    "address": "195 Fox Valley Center, Aurora, IL 60504",
+    "cab_count": 3,
+    "index": "015"
+  },
+  {
+    "code": "GLC",
+    "name": "Great Lakes Crossing",
+    "city": "Auburn Hills",
+    "state": "MI",
+    "address": "4000 Baldwin Rd, Auburn Hills, MI 48326",
+    "cab_count": 4,
+    "index": "018"
+  },
+  {
+    "code": "GLM",
+    "name": "Great Lakes Mall",
+    "city": "Mentor",
+    "state": "OH",
+    "address": "7850 Mentor Ave, Mentor, OH 44060",
+    "cab_count": 3,
+    "index": "021"
+  },
+  {
+    "code": "GUR",
+    "name": "Gurnee Mills",
+    "city": "Gurnee",
+    "state": "IL",
+    "address": "6170 W Grand Ave, Gurnee, IL 60031",
+    "cab_count": 2,
+    "index": "057"
+  },
+  {
+    "code": "GVM",
+    "name": "Grapevine Mills",
+    "city": "Grapevine",
+    "state": "TX",
+    "address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
+    "cab_count": 3,
+    "index": "010"
+  },
+  {
+    "code": "GWM",
+    "name": "Gateway Mall",
+    "city": "Lincoln",
+    "state": "NE",
+    "address": "6100 O St, Lincoln, NE 68505",
+    "cab_count": 2,
+    "index": "027"
+  },
+  {
+    "code": "HYM",
+    "name": "Holyoke Mall at Ingleside",
+    "city": "Holyoke",
+    "state": "MA",
+    "address": "50 Holyoke St, Holyoke, MA 01040",
+    "cab_count": 2,
+    "index": "031"
+  },
+  {
+    "code": "JSG",
+    "name": "The Mills at Jersey Gardens",
+    "city": "Elizabeth",
+    "state": "NJ",
+    "address": "651 Kapkowski Rd, Elizabeth, NJ 07201",
+    "cab_count": 2,
+    "index": "062"
+  },
+  {
+    "code": "LAS",
+    "name": "Meadows Mall",
+    "city": "Las Vegas",
+    "state": "NV",
+    "address": "4300 Meadows Ln, Las Vegas, NV 89107",
+    "cab_count": 2,
+    "index": "036"
+  },
+  {
+    "code": "LVO",
+    "name": "Las Vegas South Premium Outlets",
+    "city": "Las Vegas",
+    "state": "NV",
+    "address": "7400 Las Vegas Blvd S, Las Vegas, NV 89123",
+    "cab_count": 2,
+    "index": "055"
+  },
+  {
+    "code": "LWM",
+    "name": "Lakewood Center Mall",
+    "city": "Lakewood",
+    "state": "CA",
+    "address": "500 Lakewood Center Mall, Lakewood, CA 90712",
+    "cab_count": 2,
+    "index": "003"
+  },
+  {
+    "code": "MCM",
+    "name": "Millcreek Mall",
+    "city": "Erie",
+    "state": "PA",
+    "address": "5800 Peach St, Erie, PA 16509",
+    "cab_count": 2,
+    "index": "025"
+  },
+  {
+    "code": "MEM",
+    "name": "Maine Mall",
+    "city": "South Portland",
+    "state": "ME",
+    "address": "364 Maine Mall Rd, South Portland, ME 04106",
+    "cab_count": 2,
+    "index": "022"
+  },
+  {
+    "code": "MPM",
+    "name": "Main Place Mall",
+    "city": "Santa Ana",
+    "state": "CA",
+    "address": "2800 N Main St, Santa Ana, CA 92705",
+    "cab_count": 2,
+    "index": "006"
+  },
+  {
+    "code": "MVJ",
+    "name": "The Shops at Mission Viejo",
+    "city": "Mission Viejo",
+    "state": "CA",
+    "address": "555 The Shops at Mission Viejo, Mission Viejo, CA 92691",
+    "cab_count": 2,
+    "index": "058"
+  },
+  {
+    "code": "NRM",
+    "name": "Northridge Mall",
+    "city": "Salinas",
+    "state": "CA",
+    "address": "1600 Northridge Mall, #200, Salinas, CA 93906",
+    "cab_count": 2,
+    "index": "030"
+  },
+  {
+    "code": "NRS",
+    "name": "North Riverside Park Mall",
+    "city": "North Riverside",
+    "state": "IL",
+    "address": "7501 W Cermak Rd, North Riverside, IL 60546",
+    "cab_count": 2,
+    "index": "028"
+  },
+  {
+    "code": "NSM",
+    "name": "North Star Mall",
+    "city": "San Antonio",
+    "state": "TX",
+    "address": "7400 San Pedro Ave, San Antonio, TX 78216",
+    "cab_count": 2,
+    "index": "052"
+  },
+  {
+    "code": "PBO",
+    "name": "Westfield Plaza Bonita",
+    "city": "National City",
+    "state": "CA",
+    "address": "3030 Plaza Bonita Rd, National City, CA 91950",
+    "cab_count": 3,
+    "index": "056"
+  },
+  {
+    "code": "PCC",
+    "name": "Park City Center",
+    "city": "Lancaster",
+    "state": "PA",
+    "address": "142 Park City Center, Lancaster, PA 17601",
+    "cab_count": 2,
+    "index": "046"
+  },
+  {
+    "code": "PHM",
+    "name": "Puente Hills Mall",
+    "city": "City of Industry",
+    "state": "CA",
+    "address": "1600 S Azusa Ave, City of Industry, CA 91748",
+    "cab_count": 3,
+    "index": "001"
+  },
+  {
+    "code": "PLM",
+    "name": "Pembroke Lakes Mall",
+    "city": "Pembroke Pines",
+    "state": "FL",
+    "address": "12055 Pines Blvd, Pembroke Pines, FL 33026",
+    "cab_count": 3,
+    "index": "049"
+  },
+  {
+    "code": "PMM",
+    "name": "Potomac Mills",
+    "city": "Woodbridge",
+    "state": "VA",
+    "address": "2700 Potomac Mills Cir, Woodbridge, VA 22192",
+    "cab_count": 2,
+    "index": "043"
+  },
+  {
+    "code": "PPM",
+    "name": "Park Place Mall",
+    "city": "Tuscon",
+    "state": "AZ",
+    "address": "5950 E Broadway Blvd, Ste. 110, Tucson, AZ 85711",
+    "cab_count": 2,
+    "index": "035"
+  },
+  {
+    "code": "QSM",
+    "name": "Quail Springs Mall",
+    "city": "Oklahoma City",
+    "state": "OK",
+    "address": "2501 W Memorial Rd, Oklahoma City, OK 73134",
+    "cab_count": 2,
+    "index": "048"
+  },
+  {
+    "code": "RNO",
+    "name": "Meadowood Mall",
+    "city": "Reno",
+    "state": "NV",
+    "address": "5000 Meadowood Mall Cir, Reno, NV 89502",
+    "cab_count": 2,
+    "index": "034"
+  },
+  {
+    "code": "RVM",
+    "name": "Westfield Galleria at Roseville",
+    "city": "Roseville",
+    "state": "CA",
+    "address": "1911 Galleria Blvd, Ste. 150, Roseville, CA 95678",
+    "cab_count": 3,
+    "index": "050"
+  },
+  {
+    "code": "SCM",
+    "name": "Westfield Southcenter",
+    "city": "Tukwila",
+    "state": "WA",
+    "address": "2351 Southcenter Mall, Tukwila, WA 98188",
+    "cab_count": 3,
+    "index": "007"
+  },
+  {
+    "code": "SHM",
+    "name": "South Hill Mall",
+    "city": "Puyallup",
+    "state": "WA",
+    "address": "3500 S Meridian, Ste. 900, Puyallup, WA 98373",
+    "cab_count": 2,
+    "index": "051"
+  },
+  {
+    "code": "SLM",
+    "name": "Southland Mall",
+    "city": "Hayward",
+    "state": "CA",
+    "address": "551 Southland Mall Dr, Hayward, CA 94545",
+    "cab_count": 2,
+    "index": "033"
+  },
+  {
+    "code": "SRM",
+    "name": "Southridge Mall",
+    "city": "Greendale",
+    "state": "WI",
+    "address": "5200 S 76th St, Ste. C, Greendale, WI 53129",
+    "cab_count": 2,
+    "index": "029"
+  },
+  {
+    "code": "STC",
+    "name": "Shops at South Town",
+    "city": "Sandy",
+    "state": "UT",
+    "address": "10450 S State St, Ste. 2405-1, Sandy, UT 84070",
+    "cab_count": 3,
+    "index": "024"
+  },
+  {
+    "code": "STG",
+    "name": "Stonestown Galleria",
+    "city": "San Francisco",
+    "state": "CA",
+    "address": "3251 20th Ave, Ste. 250, San Francisco, CA 94132",
+    "cab_count": 3,
+    "index": "059"
+  },
+  {
+    "code": "SVM",
+    "name": "Sunvalley Mall",
+    "city": "Concord",
+    "state": "CA",
+    "address": "185 Sunvalley Mall, Concord, CA 94520",
+    "cab_count": 2,
+    "index": "011"
+  },
+  {
+    "code": "SWP",
+    "name": "Southwest Plaza",
+    "city": "Littleton",
+    "state": "CO",
+    "address": "8501 W Bowles Ave, Space 1183, Littleton, CO 80123",
+    "cab_count": 2,
+    "index": "013"
+  },
+  {
+    "code": "TES",
+    "name": "Town East Square",
+    "city": "Wichita",
+    "state": "KS",
+    "address": "7700 E Kellogg Dr, Ste. G03J, Wichita, KS 67207",
+    "cab_count": 2,
+    "index": "042"
+  },
+  {
+    "code": "TMP",
+    "name": "Promenade Temecula",
+    "city": "Temecula",
+    "state": "CA",
+    "address": "40710 Winchester Rd, Ste. #100, Temecula, CA 92591",
+    "cab_count": 3,
+    "index": "032"
+  },
+  {
+    "code": "TTC",
+    "name": "Towson Town Center",
+    "city": "Towson",
+    "state": "MD",
+    "address": "825 Dulaney Valley Rd, Ste. 1190, Towson, MD 21204",
+    "cab_count": 2,
+    "index": "038"
+  },
+  {
+    "code": "VCM",
+    "name": "Vancouver Mall",
+    "city": "Vancouver",
+    "state": "WA",
+    "address": "8800 NE Vancouver Mall Dr, Ste. 100, Vancouver, WA 98662",
+    "cab_count": 2,
+    "index": "047"
+  },
+  {
+    "code": "VRC",
+    "name": "Valley River Center",
+    "city": "Eugene",
+    "state": "OR",
+    "address": "600 Valley River Center, Ste. 101, Eugene, OR 97401",
+    "cab_count": 2,
+    "index": "040"
+  }
+]

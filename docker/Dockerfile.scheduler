@@ -1,0 +1,46 @@
+# Docker container for running scheduled location updates
+# This can be used with Kubernetes CronJobs or Docker Compose
+
+FROM node:18-alpine
+
+# Install necessary packages
+RUN apk add --no-cache \
+    git \
+    curl \
+    bash \
+    dcron \
+    && rm -rf /var/cache/apk/*
+
+# Create app directory
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+COPY yarn.lock ./
+
+# Install dependencies
+RUN npm ci --only=production
+
+# Copy application files
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+# Create cron entry
+RUN echo "0 6 * * * cd /app && node scripts/updateLocations.js >> /app/logs/cron.log 2>&1" > /etc/crontabs/root
+
+# Create startup script
+COPY docker/start-scheduler.sh /start-scheduler.sh
+RUN chmod +x /start-scheduler.sh
+
+# Health check
+HEALTHCHECK --interval=1h --timeout=10s --start-period=5s --retries=3 \
+    CMD [ "sh", "-c", "find /app/logs -name '*.log' -mmin -1440 | grep -q . || exit 1" ]
+
+# Set up volume for persistent data
+VOLUME ["/app/src", "/app/logs"]
+
+# Run the scheduler
+CMD ["/start-scheduler.sh"]

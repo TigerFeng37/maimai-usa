@@ -1,0 +1,200 @@
+# Kubernetes CronJob for automated maimai location updates
+# Apply with: kubectl apply -f k8s/location-updater-cronjob.yaml
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: maimai-location-updater
+  namespace: default
+  labels:
+    app: maimai-usa
+    component: location-updater
+spec:
+  # Schedule: daily at 6:00 AM (adjust timezone as needed)
+  schedule: "0 6 * * *"
+  
+  # Job history limits
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  
+  # Concurrency policy
+  concurrencyPolicy: Forbid  # Don't run concurrent jobs
+  
+  jobTemplate:
+    metadata:
+      labels:
+        app: maimai-usa
+        component: location-updater
+    spec:
+      template:
+        metadata:
+          labels:
+            app: maimai-usa
+            component: location-updater
+        spec:
+          restartPolicy: OnFailure
+          
+          # Service account (if needed for cluster permissions)
+          # serviceAccountName: maimai-updater
+          
+          containers:
+          - name: location-updater
+            image: node:18-alpine
+            
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "🚀 Starting location data update..."
+              
+              # Install dependencies
+              apk add --no-cache git curl
+              
+              # Install node dependencies
+              npm ci --only=production
+              
+              # Run the update script
+              echo "📊 Running update script..."
+              if npm run update-locations; then
+                echo "✅ Update completed successfully"
+                exit 0
+              else
+                echo "❌ Update failed"
+                exit 1
+              fi
+            
+            workingDir: /app
+            
+            # Environment variables
+            env:
+            - name: TZ
+              value: "America/Los_Angeles"
+            - name: NODE_ENV
+              value: "production"
+            
+            # Volume mounts
+            volumeMounts:
+            - name: app-source
+              mountPath: /app
+              readOnly: false
+            - name: data-storage
+              mountPath: /app/src
+              readOnly: false
+            
+            # Resource limits
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "100m"
+              limits:
+                memory: "256Mi"
+                cpu: "500m"
+          
+          # Volumes
+          volumes:
+          - name: app-source
+            configMap:
+              name: maimai-app-source
+          - name: data-storage
+            persistentVolumeClaim:
+              claimName: maimai-data-pvc
+
+---
+# ConfigMap for application source code
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: maimai-app-source
+  labels:
+    app: maimai-usa
+    component: location-updater
+data:
+  package.json: |
+    {
+      "name": "maimai-usa",
+      "type": "module",
+      "scripts": {
+        "update-locations": "node scripts/updateLocations.js"
+      },
+      "dependencies": {
+        "node-fetch": "^3.3.2"
+      }
+    }
+
+---
+# PersistentVolumeClaim for data storage
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: maimai-data-pvc
+  labels:
+    app: maimai-usa
+    component: location-updater
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # Uncomment and modify for specific storage class
+  # storageClassName: fast-ssd
+
+---
+# Optional: Service Monitor for Prometheus monitoring
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: maimai-location-updater
+  labels:
+    app: maimai-usa
+    component: location-updater
+spec:
+  selector:
+    matchLabels:
+      app: maimai-usa
+      component: location-updater
+  endpoints:
+  - port: metrics
+    interval: 5m
+    path: /metrics
+
+---
+# Optional: RBAC for service account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: maimai-updater
+  labels:
+    app: maimai-usa
+    component: location-updater
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: maimai-updater-role
+  labels:
+    app: maimai-usa
+    component: location-updater
+rules:
+- apiGroups: [""]
+  resources: ["configmaps", "persistentvolumeclaims"]
+  verbs: ["get", "list", "watch", "update", "patch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: maimai-updater-binding
+  labels:
+    app: maimai-usa
+    component: location-updater
+subjects:
+- kind: ServiceAccount
+  name: maimai-updater
+  namespace: default
+roleRef:
+  kind: Role
+  name: maimai-updater-role
+  apiGroup: rbac.authorization.k8s.io

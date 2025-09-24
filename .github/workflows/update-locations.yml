@@ -1,0 +1,182 @@
+name: Update Location Data
+
+# Automated location data updates using GitHub Actions
+# Runs daily and commits changes back to the repository
+
+on:
+  schedule:
+    # Run daily at 6:00 AM UTC (adjust timezone as needed)
+    - cron: '0 6 * * *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+    inputs:
+      force_update:
+        description: 'Force update even if no changes detected'
+        required: false
+        default: 'false'
+        type: boolean
+
+# Set permissions for the workflow
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  update-locations:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        # Use a personal access token with repo permissions
+        # Create this as a repository secret named 'GITHUB_TOKEN'
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Update location data
+      id: update
+      run: |
+        echo "🔄 Running location data update..."
+        
+        # Capture the output of the update script
+        if npm run update-locations > update_output.log 2>&1; then
+          echo "update_success=true" >> $GITHUB_OUTPUT
+          echo "✅ Update completed successfully"
+        else
+          echo "update_success=false" >> $GITHUB_OUTPUT
+          echo "❌ Update failed"
+          cat update_output.log
+          exit 1
+        fi
+        
+        # Check if there are any changes
+        if git diff --quiet src/r1index-geocoded.json; then
+          echo "changes_detected=false" >> $GITHUB_OUTPUT
+          echo "ℹ️ No changes detected in location data"
+        else
+          echo "changes_detected=true" >> $GITHUB_OUTPUT
+          echo "📊 Changes detected in location data"
+        fi
+        
+        # Show the update log
+        echo "📋 Update Log:"
+        cat update_output.log
+    
+    - name: Commit changes
+      if: steps.update.outputs.changes_detected == 'true' || github.event.inputs.force_update == 'true'
+      run: |
+        # Configure git
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Add and commit changes
+        git add src/r1index-geocoded.json
+        
+        # Create commit message with summary
+        COMMIT_MSG="🤖 Automated location data update - $(date '+%Y-%m-%d %H:%M:%S UTC')"
+        
+        # Add change summary to commit message if available
+        if [ -f update_output.log ]; then
+          SUMMARY=$(grep -E "• (Activated|Deactivated): [0-9]+ locations" update_output.log | head -2 || echo "")
+          if [ ! -z "$SUMMARY" ]; then
+            COMMIT_MSG="${COMMIT_MSG}
+
+${SUMMARY}"
+          fi
+        fi
+        
+        git commit -m "$COMMIT_MSG"
+    
+    - name: Push changes
+      if: steps.update.outputs.changes_detected == 'true' || github.event.inputs.force_update == 'true'
+      run: |
+        git push
+        echo "✅ Changes pushed to repository"
+    
+    - name: Create summary
+      if: always()
+      run: |
+        echo "## 📊 Location Update Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ steps.update.outputs.update_success }}" = "true" ]; then
+          echo "✅ **Status**: Update completed successfully" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ **Status**: Update failed" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ "${{ steps.update.outputs.changes_detected }}" = "true" ]; then
+          echo "📈 **Changes**: Location data was updated" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "📊 **Changes**: No changes in location data" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Update Log" >> $GITHUB_STEP_SUMMARY
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        if [ -f update_output.log ]; then
+          cat update_output.log >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+        
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "🕐 **Timestamp**: $(date '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+    
+    - name: Upload logs
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: update-logs-${{ github.run_number }}
+        path: |
+          update_output.log
+          src/r1index-geocoded-backup-*.json
+        retention-days: 30
+
+  # Optional: Deploy updated data to web server
+  deploy:
+    needs: update-locations
+    runs-on: ubuntu-latest
+    if: needs.update-locations.outputs.changes_detected == 'true'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        ref: main  # Make sure we get the latest changes
+    
+    - name: Deploy to server
+      # Uncomment and configure this section if you want to auto-deploy
+      # You'll need to set up server credentials as secrets
+      run: |
+        echo "🚀 Deployment step - configure based on your hosting setup"
+        echo "Examples:"
+        echo "  • FTP/SFTP upload"
+        echo "  • rsync to server"  
+        echo "  • Docker image rebuild"
+        echo "  • CDN cache invalidation"
+        
+        # Example rsync deployment (requires SSH_PRIVATE_KEY secret):
+        # - name: Deploy via SSH
+        #   run: |
+        #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
+        #     chmod 600 ssh_key
+        #     rsync -avz -e "ssh -i ssh_key -o StrictHostKeyChecking=no" \
+        #       src/r1index-geocoded.json user@yourserver.com:/var/www/maimai-usa/src/
+        
+        # Example webhook notification:
+        # - name: Notify webhook
+        #   run: |
+        #     curl -X POST "${{ secrets.DEPLOY_WEBHOOK_URL }}" \
+        #       -H "Content-Type: application/json" \
+        #       -d '{"event": "location_data_updated", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}'
