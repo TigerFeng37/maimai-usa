@@ -140,40 +140,47 @@ jobs:
           src/r1index-geocoded-backup-*.json
         retention-days: 30
 
-  # Optional: Deploy updated data to web server
+  # Deploy to GitHub Pages
   deploy:
     needs: update-locations
     runs-on: ubuntu-latest
-    if: needs.update-locations.outputs.changes_detected == 'true'
+    if: always()  # Deploy regardless of whether data changed
+    
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        ref: main  # Make sure we get the latest changes
+        ref: main
     
-    - name: Deploy to server
-      # Uncomment and configure this section if you want to auto-deploy
-      # You'll need to set up server credentials as secrets
-      run: |
-        echo "🚀 Deployment step - configure based on your hosting setup"
-        echo "Examples:"
-        echo "  • FTP/SFTP upload"
-        echo "  • rsync to server"  
-        echo "  • Docker image rebuild"
-        echo "  • CDN cache invalidation"
-        
-        # Example rsync deployment (requires SSH_PRIVATE_KEY secret):
-        # - name: Deploy via SSH
-        #   run: |
-        #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ssh_key
-        #     chmod 600 ssh_key
-        #     rsync -avz -e "ssh -i ssh_key -o StrictHostKeyChecking=no" \
-        #       src/r1index-geocoded.json user@yourserver.com:/var/www/maimai-usa/src/
-        
-        # Example webhook notification:
-        # - name: Notify webhook
-        #   run: |
-        #     curl -X POST "${{ secrets.DEPLOY_WEBHOOK_URL }}" \
-        #       -H "Content-Type: application/json" \
-        #       -d '{"event": "location_data_updated", "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"}'
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build application
+      run: npm run build
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./dist
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
