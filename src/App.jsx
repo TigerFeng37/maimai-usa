@@ -28,7 +28,7 @@ function AppContent() {
   return (
     <TransitionWrapper>
       <Routes location={location}>
-        <Route path="/" element={<ListView />} />
+        <Route path="/list" element={<ListView />} />
         <Route path="/map" element={<MapView />} />
       </Routes>
     </TransitionWrapper>
@@ -37,7 +37,7 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <AppContent />
     </Router>
   )

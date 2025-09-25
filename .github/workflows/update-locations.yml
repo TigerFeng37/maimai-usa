@@ -49,15 +49,18 @@ jobs:
     - name: Update location data
       id: update
       run: |
-        echo "🔄 Running location data update..."
+        echo "🔄 Running location data update with browser automation..."
         
-        # Capture the output of the update script
-        if npm run update-locations > update_output.log 2>&1; then
+        # Try browser version first, fallback to simple version
+        if npm run update-locations-browser > update_output.log 2>&1; then
           echo "update_success=true" >> $GITHUB_OUTPUT
-          echo "✅ Update completed successfully"
+          echo "✅ Browser update completed successfully"
+        elif npm run update-locations > update_output.log 2>&1; then
+          echo "update_success=true" >> $GITHUB_OUTPUT
+          echo "✅ Fallback update completed successfully"
         else
           echo "update_success=false" >> $GITHUB_OUTPUT
-          echo "❌ Update failed"
+          echo "❌ Both update methods failed"
           cat update_output.log
           exit 1
         fi

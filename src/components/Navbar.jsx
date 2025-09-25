@@ -22,16 +22,16 @@ function Navbar({ currentView = 'list' }) {
         <span className="text-2xl font-extralight text-gray-500">Directory</span>
       </div>
       <div className="flex flex-row items-center gap-2">
-        {currentView === 'list' ? (
+        {currentView === 'map' ? (
           <button
-            onClick={() => handleNavigation('/map')}
+            onClick={() => handleNavigation('/list')}
             className="py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95"
           >
             Map
           </button>
         ) : (
           <button
-            onClick={() => handleNavigation('/')}
+            onClick={() => handleNavigation('/map')}
             className="py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95"
           >
             List

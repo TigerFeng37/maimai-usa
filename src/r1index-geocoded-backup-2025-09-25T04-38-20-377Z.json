@@ -655,7 +655,7 @@
     "lng": -122.080796,
     "geocoded": true,
     "geocoded_address": "Hayward, CA",
-    "active": true
+    "active": false
   },
   {
     "code": "SRM",
