@@ -183,7 +183,7 @@
   },
   {
     "code": "FDP",
-    "name": "Round1 Fashion District Philadelphia",
+    "name": "Round1 Fashion District",
     "city": "Philadelphia",
     "state": "PA",
     "address": "1001 Market St, #3010, Philadelphia, PA 19107",
@@ -309,7 +309,7 @@
   },
   {
     "code": "HYM",
-    "name": "Round1 Holyoke Mall at Ingleside",
+    "name": "Round1 Holyoke Mall",
     "city": "Holyoke",
     "state": "MA",
     "address": "50 Holyoke St, Holyoke, MA 01040",
@@ -323,7 +323,7 @@
   },
   {
     "code": "JSG",
-    "name": "Round1 The Mills at Jersey Gardens",
+    "name": "Round1 The Mills at Jersey Garden",
     "city": "Elizabeth",
     "state": "NJ",
     "address": "651 Kapkowski Rd, Elizabeth, NJ 07201",
@@ -617,7 +617,7 @@
   },
   {
     "code": "SCM",
-    "name": "Round1 Westfield Southcenter",
+    "name": "Round1 Southcenter Mall",
     "city": "Tukwila",
     "state": "WA",
     "address": "2351 Southcenter Mall, Tukwila, WA 98188",

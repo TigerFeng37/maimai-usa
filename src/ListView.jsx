@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import data from './r1index-geocoded.json'
 import Navbar from './components/Navbar'
 import FilterBar from './components/FilterBar'
 
 function ListView() {
-  const [sortType, setSortType] = useState('name')
+  const navigate = useNavigate()
+  const [sortType, setSortType] = useState('active')
   const [sortDirection, setSortDirection] = useState('asc')
   const [sortedData, setSortedData] = useState([])
   const [selectedStates, setSelectedStates] = useState([])
@@ -111,6 +113,17 @@ function ListView() {
     setSelectedCabCount(null)
   }
 
+  const handleLocationClick = (locationCode) => {
+    // Use View Transitions API if supported
+    if ('startViewTransition' in document) {
+      document.startViewTransition(() => {
+        navigate(`/location/${locationCode}`)
+      })
+    } else {
+      navigate(`/location/${locationCode}`)
+    }
+  }
+
   return (
     <div className="w-screen overflow-x-hidden view-list page-enter page-enter-list">
       <div className="fixed top-0 w-full z-[1000]">
@@ -131,12 +144,16 @@ function ListView() {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200 mt-[6rem] transition-all duration-300 ease-in-out">
         {sortedData.map((location) => (
-          <div className="p-4 bg-white border-b border-r border-gray-200 flex flex-col min-h-[18rem] md:min-h-0" key={location.code}>
+          <div 
+            className="p-4 bg-white border-b border-r border-gray-200 flex flex-col min-h-[18rem] md:min-h-0 cursor-pointer hover:bg-gray-50 transition-colors duration-200" 
+            key={location.code}
+            onClick={() => handleLocationClick(location.code)}
+          >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row items-start gap-2">
                 <span className="text-sm font-medium text-black p-1 bg-gray-100 rounded-md">{location.code}</span>
                 <span className="text-sm text-gray-500 p-1 bg-gray-100 rounded-md">{location.state}</span>
-                <span className={`hidden md:flex text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-xl flex-row items-center gap-1`}>{location.active ? 'Online' : 'Coming Soon'}
+                <span className={`hidden md:flex text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-xl flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                   <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                 </span>
               </div>
@@ -144,11 +161,11 @@ function ListView() {
             </div>
             <h2 className="text-xl font-regular min-h-16 leading-tight">{location.name}</h2>
             <div className="flex flex-col items-start">
-              <span className="text-4xl text-black">{location.cab_count}</span>
-              <span className="text-sm text-gray-500">Cabinets</span>
+              <span className="text-4xl text-[#41BCCC]">{location.cab_count}</span>
+              <span className="text-sm text-black">Cabinets</span>
             </div>
             <span className="text-xs text-gray-500 mt-auto">{location.address}</span>
-            <span className={`md:hidden w-fit text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-xl flex flex-row items-center gap-1 mt-2`}>{location.active ? 'Online' : 'Coming Soon'}
+            <span className={`md:hidden w-fit text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-xl flex flex-row items-center gap-1 mt-2`}>{location.active ? 'Active' : 'Coming Soon'}
               <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
             </span>
           </div>

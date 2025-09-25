@@ -151,7 +151,7 @@ function MapView() {
                     <div className="flex flex-row items-center gap-2">
                     <span className="text-sm font-medium text-black py-1 px-2 bg-gray-100 rounded-md">{location.code}</span>
                     <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 rounded-md">{location.state}</span>
-                    <span className={`text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex flex-row items-center gap-1`}>{location.active ? 'Online' : 'Coming Soon'}
+                    <span className={`text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                       <span className={`text-[1rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                     </span>
                   </div>
@@ -162,8 +162,8 @@ function MapView() {
                   <h3 className="text-lg font-medium mb-2">{location.name}</h3>
                   <div className="flex flex-row items-center justify-between">
                     <div className="flex flex-col justify-center items-start">
-                      <span className="text-4xl text-black">{location.cab_count}</span>
-                      <span className="text-sm text-gray-500">Cabinets</span>
+                      <span className="text-4xl text-[#41BCCC]">{location.cab_count}</span>
+                      <span className="text-sm text-black">Cabinets</span>
                     </div>
                   </div>
                   <p className="text-xs text-gray-500 wrap-break-anywhere">{location.address}</p>

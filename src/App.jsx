@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import './main.css'
 import ListView from './ListView'
 import MapView from './MapView'
+import DetailView from './DetailView'
 
 // Transition wrapper component
 function TransitionWrapper({ children }) {
@@ -31,6 +32,7 @@ function AppContent() {
         <Route path="/" element={<Navigate to="/map" replace />} />
         <Route path="/list" element={<ListView />} />
         <Route path="/map" element={<MapView />} />
+        <Route path="/location/:locationCode" element={<DetailView />} />
       </Routes>
     </TransitionWrapper>
   )

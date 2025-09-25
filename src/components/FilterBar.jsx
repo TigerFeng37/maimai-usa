@@ -62,6 +62,12 @@ function FilterBar({
             <span className="block md:hidden text-sm text-gray-500">Sort</span>
             <span className="hidden md:block text-sm text-gray-500">Sort by</span>
             <button 
+              onClick={() => handleSort('active')} 
+              className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'active' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+            >
+              Status {sortType === 'active' && (sortDirection === 'asc' ? '↑' : '↓')}
+            </button>
+            <button 
               onClick={() => handleSort('name')} 
               className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'name' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
             >
@@ -74,22 +80,10 @@ function FilterBar({
               State {sortType === 'state' && (sortDirection === 'asc' ? '↑' : '↓')}
             </button>
             <button 
-              onClick={() => handleSort('index')} 
-              className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'index' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
-            >
-              Location Index {sortType === 'index' && (sortDirection === 'asc' ? '↑' : '↓')}
-            </button>
-            <button 
               onClick={() => handleSort('cab_count')} 
               className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'cab_count' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
             >
               Cabinet Count {sortType === 'cab_count' && (sortDirection === 'asc' ? '↑' : '↓')}
-            </button>
-            <button 
-              onClick={() => handleSort('active')} 
-              className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'active' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
-            >
-              Status {sortType === 'active' && (sortDirection === 'asc' ? '↑' : '↓')}
             </button>
           </div>
         )}
