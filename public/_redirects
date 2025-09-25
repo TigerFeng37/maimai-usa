@@ -1,0 +1,3 @@
+# SPA redirect for Cloudflare Pages
+# This ensures all routes serve the React app
+/*    /index.html   200

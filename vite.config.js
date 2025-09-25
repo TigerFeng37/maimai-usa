@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/',  // Set base path for GitHub Pages
+  base: './',  // Set base path for Cloudflare Pages (relative paths)
 })
