@@ -160,43 +160,24 @@ async function fetchAllNetLocationsWithBrowser() {
       for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         
-        // Look for lines that contain ROUND1 and end with GoogleMapで見る Details
-        if (line.includes('ROUND1') && line.includes('GoogleMapで見る Details')) {
-          console.log('Found potential location line:', line.substring(0, 150));
+        // Look for lines that start with ROUND1 (location name lines)
+        if (line.startsWith('ROUND1')) {
+          console.log('Found ROUND1 line:', line);
           
-          // Parse the line: "ROUND1 [NAME] [ADDRESS] GoogleMapで見る Details"
-          const match = line.match(/ROUND1\s+(.+?)\s+(\d+.+?)(?:\s+GoogleMapで見る Details)?$/);
-          
-          if (match) {
-            let locationName = match[1].trim();
-            let addressPart = match[2].trim();
+          // The next line should be the address
+          if (i + 1 < lines.length) {
+            const nextLine = lines[i + 1];
             
-            // Clean up the location name (remove any trailing numbers or address parts)
-            locationName = locationName.replace(/\s+\d+.*$/, '').trim();
-            
-            // Ensure the location name starts with ROUND1
-            if (!locationName.startsWith('ROUND1')) {
-              locationName = `ROUND1 ${locationName}`;
-            }
-            
-            // Clean up the address part (remove GoogleMapで見る Details if still present)
-            addressPart = addressPart.replace(/\s*GoogleMapで見る Details\s*$/, '').trim();
-            
-            // Extract city and state from the address
-            const addressMatch = addressPart.match(/,\s*([^,]+),\s*([A-Z]{2})\s*,?\s*(\d{5})/);
-            
-            if (addressMatch) {
-              const city = addressMatch[1].trim();
-              const state = addressMatch[2].trim();
+            // Check if next line looks like an address (contains numbers and commas)
+            if (/\d+.*,.*\d{5}/.test(nextLine)) {
+              console.log('Found address line:', nextLine);
               
               locations.push({
-                name: locationName,
-                address: addressPart,
-                city: city,
-                state: state
+                name: line.trim(),
+                address: nextLine.trim()
               });
               
-              console.log(`Parsed: ${locationName} in ${city}, ${state}`);
+              console.log(`Extracted: ${line.trim()} - ${nextLine.trim()}`);
             }
           }
         }
@@ -712,70 +693,25 @@ function matchLocations(allNetLocations, jsonLocations) {
   const activeMatches = new Set();
   
   for (const allNetLocation of allNetLocations) {
-    let bestMatch = null;
-    let highestScore = 0;
+    // Extract zip code from scraped address
+    const zipMatch = allNetLocation.address.match(/\b(\d{5})$/);
+    const scrapedZip = zipMatch ? zipMatch[1] : null;
     
-    for (const jsonLocation of jsonLocations) {
-      let score = 0;
-      
-      // Check state match (highest priority)
-      if (allNetLocation.state === jsonLocation.state) {
-        score += 50;
-        
-        // Check city match
-        if (allNetLocation.city.toLowerCase() === jsonLocation.city.toLowerCase()) {
-          score += 30;
-        }
-        
-        // Check name similarity
-        const allNetName = normalizeLocationName(allNetLocation.name);
-        const jsonName = normalizeLocationName(jsonLocation.name);
-        
-        if (jsonName.includes(allNetName) || allNetName.includes(jsonName)) {
-          score += 25;
-        }
-        
-        // Check address similarity
-        const allNetAddr = normalizeAddress(allNetLocation.address);
-        const jsonAddr = normalizeAddress(jsonLocation.address);
-        
-        // Extract key address components for comparison
-        const allNetNumbers = allNetAddr.match(/\d+/g) || [];
-        const jsonNumbers = jsonAddr.match(/\d+/g) || [];
-        
-        // Check if key numbers match
-        const commonNumbers = allNetNumbers.filter(num => 
-          jsonNumbers.some(jNum => Math.abs(parseInt(num) - parseInt(jNum)) < 50)
-        );
-        
-        if (commonNumbers.length > 0) {
-          score += 15;
-        }
-        
-        // Check if addresses contain similar street names
-        const allNetWords = allNetAddr.split(' ').filter(word => word.length > 3);
-        const jsonWords = jsonAddr.split(' ').filter(word => word.length > 3);
-        
-        const commonWords = allNetWords.filter(word => 
-          jsonWords.some(jWord => jWord.includes(word) || word.includes(jWord))
-        );
-        
-        if (commonWords.length > 0) {
-          score += 10;
-        }
-      }
-      
-      if (score > highestScore && score >= 70) { // Minimum confidence threshold
-        highestScore = score;
-        bestMatch = jsonLocation;
-      }
+    if (!scrapedZip) {
+      console.log(`❌ No zip found for: ${allNetLocation.name} - ${allNetLocation.address}`);
+      continue;
     }
     
-    if (bestMatch) {
-      activeMatches.add(bestMatch.code);
-      console.log(`✅ Matched: ${allNetLocation.name} -> ${bestMatch.name} (${bestMatch.code}) - Score: ${highestScore}`);
+    // Find JSON location with matching zip
+    const matchedLocation = jsonLocations.find(jsonLocation => 
+      jsonLocation.address.includes(scrapedZip)
+    );
+    
+    if (matchedLocation) {
+      activeMatches.add(matchedLocation.code);
+      console.log(`✅ Matched by ZIP ${scrapedZip}: ${allNetLocation.name} -> ${matchedLocation.name} (${matchedLocation.code})`);
     } else {
-      console.log(`❌ No match found for: ${allNetLocation.name} in ${allNetLocation.city}, ${allNetLocation.state}`);
+      console.log(`❌ No match found for ZIP ${scrapedZip}: ${allNetLocation.name}`);
     }
   }
   
