@@ -26,4 +26,33 @@
     border: 1px solid rgb(229 231 235);
     margin: -1px 0 0 -1px;
   }
+
+  /* Safari safe area support */
+  .safe-area-screen {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-container {
+    height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Ensure proper safe area handling for iOS Safari */
+  @supports (padding: max(0px)) {
+    .safe-area-bottom {
+      padding-bottom: max(env(safe-area-inset-bottom), 16px);
+    }
+  }
 }

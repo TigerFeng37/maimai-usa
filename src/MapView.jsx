@@ -110,7 +110,7 @@ function MapView() {
     : [39.8283, -98.5795]; // Fallback to center of US
 
   return (
-    <div className="w-screen h-screen flex flex-col view-map page-enter page-enter-map">
+    <div className="w-screen safe-area-screen flex flex-col view-map page-enter page-enter-map">
       {/* Header */}
       <Navbar currentView="map" />
 
