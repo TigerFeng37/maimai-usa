@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom'
+import { List, Location } from '@carbon/icons-react'
 
 function Navbar({ currentView = 'list' }) {
   const navigate = useNavigate()
@@ -25,16 +26,20 @@ function Navbar({ currentView = 'list' }) {
         {currentView === 'map' ? (
           <button
             onClick={() => handleNavigation('/list')}
-            className="py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95"
+            className="min-w-[4rem] py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95 flex justify-between items-center gap-1"
           >
-            List
+            <List size={16} />
+            <span className="block md:hidden">List</span>
+            <span className="hidden md:block">List View</span>
           </button>
         ) : (
           <button
             onClick={() => handleNavigation('/map')}
-            className="py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95"
+            className="min-w-[4rem] py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95 flex justify-between items-center gap-1"
           >
-            Map
+            <Location size={16} />
+            <span className="block md:hidden">Map</span>
+            <span className="hidden md:block">Map View</span>
           </button>
         )}
       </div>
