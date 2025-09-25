@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 import './main.css'
 import ListView from './ListView'
@@ -28,6 +28,7 @@ function AppContent() {
   return (
     <TransitionWrapper>
       <Routes location={location}>
+        <Route path="/" element={<Navigate to="/map" replace />} />
         <Route path="/list" element={<ListView />} />
         <Route path="/map" element={<MapView />} />
       </Routes>
