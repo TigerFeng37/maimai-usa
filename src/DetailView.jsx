@@ -27,15 +27,15 @@ const activeIcon = new L.Icon({
 });
 
 const comingSoonIcon = new L.Icon({
-  iconUrl: 'data:image/svg+xml;base64=' + btoa(`
-    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="8" fill="#c0c0c0" stroke="#ffffff" stroke-width="2"/>
-    </svg>
-  `),
-  iconSize: [25, 25],
-  iconAnchor: [12, 12],
-  popupAnchor: [0, -12]
-});
+    iconUrl: 'data:image/svg+xml;base64,' + btoa(`
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="8" fill="#c0c0c0" stroke="#ffffff" stroke-width="2"/>
+      </svg>
+    `),
+    iconSize: [25, 25],
+    iconAnchor: [12, 12],
+    popupAnchor: [0, -12]
+  });
 
 function DetailView() {
   const { locationCode } = useParams()
