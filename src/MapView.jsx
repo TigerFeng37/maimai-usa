@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import data from './r1index-geocoded.json';
 import Navbar from './components/Navbar';
 import FilterBar from './components/FilterBar';
+import './mapStyles.css';
 
 // Fix for default markers in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -22,8 +24,8 @@ const activeIcon = new L.Icon({
     </svg>
   `),
   iconSize: [25, 25],
-  iconAnchor: [12, 25],
-  popupAnchor: [0, -25]
+  iconAnchor: [12, 12],
+  popupAnchor: [0, -12]
 });
 
 const comingSoonIcon = new L.Icon({
@@ -33,12 +35,13 @@ const comingSoonIcon = new L.Icon({
     </svg>
   `),
   iconSize: [25, 25],
-  iconAnchor: [12, 25],
-  popupAnchor: [0, -25]
+  iconAnchor: [12, 12],
+  popupAnchor: [0, -12]
 });
 
 
 function MapView() {
+  const navigate = useNavigate();
   const [selectedStates, setSelectedStates] = useState([]);
   const [selectedCabCount, setSelectedCabCount] = useState(null);
   const [selectedActive, setSelectedActive] = useState(null);
@@ -131,7 +134,7 @@ function MapView() {
       <div className="flex-1">
         <MapContainer 
           center={center} 
-          zoom={4} 
+          zoom={window.innerWidth >= 768 ? 5 : 3}
           style={{ height: '100%', width: '100%' }}
           className="z-0"
         >
@@ -146,7 +149,7 @@ function MapView() {
               icon={location.active ? activeIcon : comingSoonIcon}
             >
               <Popup>
-                <div className="p-0 min-w-[15rem] max-w-[20rem]">
+                <div className="py-2 min-w-[15rem] max-w-[20rem]">
                   <div className="flex flex-row justify-between items-center mb-2">
                     <div className="flex flex-row items-center gap-2">
                     <span className="text-sm font-medium text-black py-1 px-2 bg-gray-100 rounded-md">{location.code}</span>
@@ -167,6 +170,19 @@ function MapView() {
                     </div>
                   </div>
                   <p className="text-xs text-gray-500 wrap-break-anywhere">{location.address}</p>
+                  
+                  {/* View Details Button */}
+                  <div>
+                    <button
+                      onClick={() => navigate(`/location/${location.code}`)}
+                      className="w-full flex items-center justify-between gap-2 px-3 py-2 bg-[#41BCCC] text-white rounded-md hover:bg-[#41BCCC]/90 transition-colors duration-200 text-sm font-medium"
+                    >
+                      View Details
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </Popup>
             </Marker>

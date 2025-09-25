@@ -22,8 +22,8 @@ const activeIcon = new L.Icon({
     </svg>
   `),
   iconSize: [25, 25],
-  iconAnchor: [12, 25],
-  popupAnchor: [0, -25]
+  iconAnchor: [12, 12],
+  popupAnchor: [0, -12]
 });
 
 const comingSoonIcon = new L.Icon({
@@ -33,8 +33,8 @@ const comingSoonIcon = new L.Icon({
     </svg>
   `),
   iconSize: [25, 25],
-  iconAnchor: [12, 25],
-  popupAnchor: [0, -25]
+  iconAnchor: [12, 12],
+  popupAnchor: [0, -12]
 });
 
 function DetailView() {
@@ -134,11 +134,11 @@ function DetailView() {
       {/* Main content */}
       <div className="p-0 md:px-4 max-w-4xl mx-auto">
         <div className="bg-white border border-gray-200 mt-[3rem] overflow-hidden">
-            <div className="h-64 md:h-80">
+            <div className="h-64 md:h-80 block md:hidden">
             {location.lat && location.lng && (
                 <MapContainer 
-                center={[location.lat, location.lng]} 
-                zoom={15} 
+                center={[39.8283, -98.5795]} 
+                zoom={3} 
                 style={{ height: '100%', width: '100%' }}
                 zoomControl={false}
                 scrollWheelZoom={false}
@@ -149,15 +149,43 @@ function DetailView() {
                 keyboard={false}
                 attributionControl={false}
                 >
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                />
-                <Marker
-                    position={[location.lat, location.lng]}
-                    icon={location.active ? activeIcon : comingSoonIcon}
-                />
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                    />
+                    <Marker
+                        position={[location.lat, location.lng]}
+                        icon={location.active ? activeIcon : comingSoonIcon}
+                    />
                 </MapContainer>
+                
+            )}
+            </div>
+            <div className="h-64 md:h-95 hidden md:block">
+            {location.lat && location.lng && (
+                <MapContainer 
+                center={[39.8283, -98.5795]} 
+                zoom={4} 
+                style={{ height: '100%', width: '100%' }}
+                zoomControl={false}
+                scrollWheelZoom={false}
+                doubleClickZoom={false}
+                dragging={false}
+                touchZoom={false}
+                boxZoom={false}
+                keyboard={false}
+                attributionControl={false}
+                >
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+                        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                    />
+                    <Marker
+                        position={[location.lat, location.lng]}
+                        icon={location.active ? activeIcon : comingSoonIcon}
+                    />
+                </MapContainer>
+                
             )}
             </div>
         </div>
