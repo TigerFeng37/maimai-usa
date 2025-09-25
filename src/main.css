@@ -55,4 +55,36 @@
       padding-bottom: max(env(safe-area-inset-bottom), 16px);
     }
   }
+
+  /* iOS Safari optimizations for better fullscreen experience */
+  body {
+    /* Prevent rubber band scrolling on iOS */
+    overscroll-behavior-y: none;
+    /* Optimize touch interactions */
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Full height container for PWA mode */
+  html, body, #root {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height */
+    overflow-x: hidden;
+  }
+
+  /* Better scroll behavior for iOS Safari toolbar hiding */
+  .scroll-container {
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+
+  /* PWA standalone mode adjustments */
+  @media all and (display-mode: standalone) {
+    body {
+      /* Additional styling when launched from home screen */
+      background-color: #ffffff;
+    }
+  }
 }
