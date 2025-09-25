@@ -38,7 +38,7 @@ function AppContent() {
           <Route path="/location/:locationCode" element={<DetailView />} />
         </Routes>
       </TransitionWrapper>
-      {!isMapView && <Footer />}
+      <Footer isMapView={isMapView} />
     </div>
   )
 }
