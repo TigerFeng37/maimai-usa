@@ -115,7 +115,7 @@ function DetailView() {
     <div className="w-screen min-h-screen bg-white">
       {/* Header with back navigation */}
       <div className="fixed top-0 w-full z-[1000] bg-white border-b border-gray-200">
-        <div className="p-2 flex flex-row items-center gap-4">
+        <div className="p-2 flex flex-row items-center gap-1">
           <button 
             onClick={handleBack}
             className="p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
@@ -125,8 +125,9 @@ function DetailView() {
             </svg>
           </button>
           <div className="flex flex-row items-center gap-2">
-            <img src="/kuma.png" alt="Derakkuma" className="w-8 h-8" />
-            <h1 className="text-xl font-regular">Maimai USA</h1>
+            <img src="/kuma.png" alt="Kuma" className="aspect-auto w-10 mt-[-.25rem] mr-[-.15rem]" />
+            <h1 className="text-2xl font-regular">Maimai USA</h1>
+            <span className="text-2xl font-extralight text-gray-500">Directory</span>
           </div>
         </div>
       </div>
@@ -235,7 +236,7 @@ function DetailView() {
                     href={generateRound1URL(location)} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-blue-600 hover:text-blue-800 underline"
+                    className="text-blue-500 hover:text-blue-800 underline"
                   >
                     official website
                   </a>
@@ -248,7 +249,7 @@ function DetailView() {
                 <div>
                   <p className="text-gray-900">
                     <span className="font-medium">Phone:</span> 
-                    <a href={`tel:${getContactInfo().phone}`} className="ml-2 text-blue-600 hover:text-blue-800">
+                    <a href={`tel:${getContactInfo().phone}`} className="ml-2 text-blue-500 hover:text-blue-800">
                       {getContactInfo().phone}
                     </a>
                   </p>
@@ -258,7 +259,7 @@ function DetailView() {
                       href={generateRound1URL(location)} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="ml-2 text-blue-600 hover:text-blue-800"
+                      className="ml-2 text-blue-500 hover:text-blue-800"
                     >
                       View Official Website ↗
                     </a>
@@ -298,7 +299,7 @@ function DetailView() {
                 href={generateMapsURL(location)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-800 transition-colors duration-200"
               >
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>

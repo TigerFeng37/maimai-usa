@@ -4,6 +4,7 @@ import './main.css'
 import ListView from './ListView'
 import MapView from './MapView'
 import DetailView from './DetailView'
+import Footer from './components/Footer'
 
 // Transition wrapper component
 function TransitionWrapper({ children }) {
@@ -25,16 +26,20 @@ function TransitionWrapper({ children }) {
 
 function AppContent() {
   const location = useLocation()
+  const isMapView = location.pathname === '/map'
 
   return (
-    <TransitionWrapper>
-      <Routes location={location}>
-        <Route path="/" element={<Navigate to="/map" replace />} />
-        <Route path="/list" element={<ListView />} />
-        <Route path="/map" element={<MapView />} />
-        <Route path="/location/:locationCode" element={<DetailView />} />
-      </Routes>
-    </TransitionWrapper>
+    <div className="min-h-screen flex flex-col">
+      <TransitionWrapper>
+        <Routes location={location}>
+          <Route path="/" element={<Navigate to="/map" replace />} />
+          <Route path="/list" element={<ListView />} />
+          <Route path="/map" element={<MapView />} />
+          <Route path="/location/:locationCode" element={<DetailView />} />
+        </Routes>
+      </TransitionWrapper>
+      {!isMapView && <Footer />}
+    </div>
   )
 }
 

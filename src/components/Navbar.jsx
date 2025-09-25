@@ -17,7 +17,7 @@ function Navbar({ currentView = 'list' }) {
   return (
     <div className="p-2 border-b w-full border-gray-200 bg-white z-[1000] max-h-[3rem] flex flex-row justify-between items-center gap-2">
       <div className="flex flex-row items-center gap-2">
-        <img src="/kuma.png" alt="Derakkuma" className="w-10 h-10" />
+        <img src="/kuma.png" alt="Kuma" className="aspect-auto w-10 mt-[-.25rem] mr-[-.15rem]" />
         <h1 className="text-2xl font-regular">Maimai USA</h1>
         <span className="text-2xl font-extralight text-gray-500">Directory</span>
       </div>
