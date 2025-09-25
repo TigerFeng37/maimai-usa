@@ -8,5 +8,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: './',  // Set base path for Cloudflare Pages (relative paths)
+  base: '/',  // Set base path for proper SPA routing
 })
