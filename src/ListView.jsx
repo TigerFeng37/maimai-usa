@@ -151,9 +151,9 @@ function ListView() {
           >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row items-start gap-2">
-                <span className="text-sm font-medium text-black p-1 bg-gray-100 rounded-md">{location.code}</span>
-                <span className="text-sm text-gray-500 p-1 bg-gray-100 rounded-md">{location.state}</span>
-                <span className={`hidden md:flex text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-xl flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
+                <span className="text-sm font-medium text-black py-1 px-2 bg-gray-100 rounded-md">{location.code}</span>
+                <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 rounded-md">{location.state}</span>
+                <span className={`hidden md:flex text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                   <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                 </span>
               </div>

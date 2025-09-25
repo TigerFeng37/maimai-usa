@@ -197,7 +197,7 @@ function DetailView() {
                     <div className="flex flex-row items-center gap-2">
                         <span className="text-sm font-medium text-black px-2 py-1 bg-gray-100 rounded-md">{location.code}</span>
                         <span className="text-sm text-gray-500 px-2 py-1 bg-gray-100 rounded-md">{location.state}</span>
-                        <span className={`text-sm text-black py-1 px-3 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-xl flex flex-row items-center gap-2`}>
+                        <span className={`text-sm text-black py-1 px-3 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex flex-row items-center gap-2`}>
                             {location.active ? 'Active' : 'Coming Soon'}
                             <span className={`text-xs ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                         </span>
