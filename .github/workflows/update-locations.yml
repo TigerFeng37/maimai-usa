@@ -1,7 +1,7 @@
 name: Update Location Data
 
 # Automated location data updates using GitHub Actions
-# Runs daily and commits changes back to the repository
+# Runs hourly, commits changes when detected, and automatically deploys
 
 on:
   schedule:
@@ -20,6 +20,7 @@ on:
 permissions:
   contents: write
   actions: read
+  deployments: write
 
 jobs:
   update-locations:
@@ -107,6 +108,25 @@ jobs:
         git push
         echo "✅ Changes pushed to repository"
     
+    - name: Build and Deploy
+      if: steps.update.outputs.changes_detected == 'true' || github.event.inputs.force_update == 'true'
+      run: |
+        echo "🚀 Building and deploying updated location data..."
+        npm run build
+        echo "✅ Build completed successfully"
+    
+    - name: Deploy to Cloudflare Pages
+      if: steps.update.outputs.changes_detected == 'true' || github.event.inputs.force_update == 'true'
+      id: deploy
+      uses: cloudflare/pages-action@v1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+        directory: dist
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        wranglerVersion: '3'
+    
     - name: Create summary
       if: always()
       run: |
@@ -121,8 +141,13 @@ jobs:
         
         if [ "${{ steps.update.outputs.changes_detected }}" = "true" ]; then
           echo "📈 **Changes**: Location data was updated" >> $GITHUB_STEP_SUMMARY
+          echo "🚀 **Deployment**: Automatically deployed to Cloudflare Pages" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ steps.deploy.outputs.url }}" != "" ]; then
+            echo "🌐 **URL**: ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          fi
         else
           echo "📊 **Changes**: No changes in location data" >> $GITHUB_STEP_SUMMARY
+          echo "⏸️ **Deployment**: Skipped (no changes detected)" >> $GITHUB_STEP_SUMMARY
         fi
         
         echo "" >> $GITHUB_STEP_SUMMARY

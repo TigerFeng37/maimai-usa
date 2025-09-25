@@ -1,7 +1,8 @@
 name: Simple Cloudflare Pages Deploy
 
 # Simple deployment workflow for Cloudflare Pages
-# Use this if you want to separate location updates from deployments
+# Deploys code changes without updating location data
+# Location data is updated and deployed automatically by update-locations.yml
 
 on:
   push:
