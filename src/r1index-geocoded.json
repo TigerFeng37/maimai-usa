@@ -641,7 +641,7 @@
     "lng": -122.2967446,
     "geocoded": true,
     "geocoded_address": "3500 S Meridian, Puyallup, WA 98373",
-    "active": false
+    "active": true
   },
   {
     "code": "SLM",
@@ -795,6 +795,6 @@
     "lng": -123.1071148,
     "geocoded": true,
     "geocoded_address": "600 Valley River Center, Eugene, OR 97401",
-    "active": false
+    "active": true
   }
 ]
