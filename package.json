@@ -10,6 +10,8 @@
     "preview": "vite preview",
     "update-locations": "node scripts/updateLocations.js",
     "update-locations-browser": "node scripts/updateLocationsWithBrowser.js",
+    "validate-locations": "node scripts/validateLocationData.js",
+    "rollback-locations": "node scripts/rollbackLocationData.js",
     "debug-website": "node scripts/debugWebsite.js",
     "find-missing-location": "node scripts/findMissingLocation.js"
   },
