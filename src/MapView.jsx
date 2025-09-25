@@ -5,7 +5,6 @@ import L from 'leaflet';
 import data from './r1index-geocoded.json';
 import Navbar from './components/Navbar';
 import FilterBar from './components/FilterBar';
-import LocationUpdater from './components/LocationUpdater';
 
 // Fix for default markers in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -174,7 +173,6 @@ function MapView() {
           ))}
         </MapContainer>
       </div>
-      <LocationUpdater />
     </div>
   );
 }

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import data from './r1index-geocoded.json'
 import Navbar from './components/Navbar'
 import FilterBar from './components/FilterBar'
-import LocationUpdater from './components/LocationUpdater'
 
 function ListView() {
   const [sortType, setSortType] = useState('name')
@@ -155,7 +154,6 @@ function ListView() {
           </div>
         ))}
       </div>
-      <LocationUpdater />
     </div>
   )
 }

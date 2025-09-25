@@ -27,14 +27,14 @@ function Navbar({ currentView = 'list' }) {
             onClick={() => handleNavigation('/list')}
             className="py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95"
           >
-            Map
+            List
           </button>
         ) : (
           <button
             onClick={() => handleNavigation('/map')}
             className="py-1 px-2 text-black rounded-md text-md bg-gray-100 hover:bg-gray-200 transition-all duration-200 hover:shadow-sm active:scale-95"
           >
-            List
+            Map
           </button>
         )}
       </div>
