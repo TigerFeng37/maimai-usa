@@ -53,7 +53,7 @@ function FilterBar({
   return (
     <div 
       ref={filterBarRef} 
-      className={`px-4 py-2 border-b w-full border-gray-200 overflow-x-auto bg-white/85 backdrop-blur-sm min-h-[3rem] transition-all duration-300 ease-in-out ${className}`}
+      className={`px-4 py-2 border-b w-full border-gray-200 dark:border-gray-700 overflow-x-auto bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm min-h-[3rem] transition-all duration-300 ease-in-out ${className}`}
     >
       <div className="flex flex-row items-center gap-4 min-w-max">
         {/* Sort Section */}
@@ -63,25 +63,25 @@ function FilterBar({
             <span className="hidden md:block text-sm text-gray-500">Sort by</span>
             <button 
               onClick={() => handleSort('active')} 
-              className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'active' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+              className={`py-1 px-2 text-black dark:text-white rounded-md text-sm transition-colors ${sortType === 'active' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'}`}
             >
               Status {sortType === 'active' && (sortDirection === 'asc' ? '↑' : '↓')}
             </button>
             <button 
               onClick={() => handleSort('name')} 
-              className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'name' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+              className={`py-1 px-2 text-black dark:text-white rounded-md text-sm transition-colors ${sortType === 'name' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'}`}
             >
               A-Z {sortType === 'name' && (sortDirection === 'asc' ? '↑' : '↓')}
             </button>
             <button 
               onClick={() => handleSort('state')} 
-              className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'state' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+              className={`py-1 px-2 text-black dark:text-white rounded-md text-sm transition-colors ${sortType === 'state' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'}`}
             >
               State {sortType === 'state' && (sortDirection === 'asc' ? '↑' : '↓')}
             </button>
             <button 
               onClick={() => handleSort('cab_count')} 
-              className={`py-1 px-2 text-black rounded-md text-sm transition-colors ${sortType === 'cab_count' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200'}`}
+              className={`py-1 px-2 text-black dark:text-white rounded-md text-sm transition-colors ${sortType === 'cab_count' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'}`}
             >
               Cabinet Count {sortType === 'cab_count' && (sortDirection === 'asc' ? '↑' : '↓')}
             </button>
@@ -96,7 +96,7 @@ function FilterBar({
               className={`py-1 px-2 ml-[-.5rem] md:ml-0 text-sm rounded-md transition-colors ${
                 selectedActive === true
                   ? 'bg-[#41BCCC] text-white'
-                  : 'bg-gray-100 text-black hover:bg-gray-200'
+                  : 'bg-gray-100 text-black hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white dark:border-[#41BCCC] dark:border'
               }`}
             >
               Active Cabs
@@ -112,7 +112,7 @@ function FilterBar({
           <select 
             value="" 
             onChange={(e) => e.target.value && onStateFilter(e.target.value)}
-            className="py-1 pl-2 pr-1.5 text-black rounded-md bg-gray-100 text-sm hover:bg-gray-200 transition-colors"
+            className="py-1 pl-2 pr-1.5 text-black dark:text-white rounded-md bg-gray-100 text-sm hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
           >
             <option value="">Add State</option>
             {uniqueStates.map(state => (
@@ -127,7 +127,7 @@ function FilterBar({
                 <button
                   key={state}
                   onClick={() => onStateFilter(state)}
-                  className="inline-flex items-center py-1 px-2 rounded-md text-sm bg-gray-100 text-gray-500 hover:bg-gray-200 transition-colors"
+                  className="inline-flex items-center py-1 px-2 rounded-md text-sm bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
                 >
                   {state}
                   <span className="ml-2 text-xs text-[#F35659]">×</span>
@@ -146,10 +146,10 @@ function FilterBar({
               <button
                 key={option.value}
                 onClick={() => onCabCountFilter(option.value)}
-                className={`py-1 px-2 text-sm border-r border-gray-300 last:border-r-0 transition-colors ${
+                className={`py-1 px-2 text-sm border-r border-gray-300 dark:border-gray-700 last:border-r-0 transition-colors ${
                   selectedCabCount === option.value
                     ? 'bg-[#41BCCC] text-white'
-                    : 'bg-gray-100 text-black hover:bg-gray-200'
+                    : 'bg-gray-100 text-black hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white'
                 }`}
               >
                 {option.label}
@@ -162,7 +162,7 @@ function FilterBar({
         {(selectedStates.length > 0 || selectedCabCount !== null || (!showSort && selectedActive !== null)) && (
           <button
             onClick={onClearFilters}
-            className="py-1 px-2 ml-[-.5rem] md:ml-0 text-white bg-[#F35659] rounded-md text-sm hover:bg-red-600 transition-colors min-w-24"
+            className="py-1 px-2 ml-[-.5rem] md:ml-0 text-white bg-[#F35659] rounded-md text-sm hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 transition-colors min-w-24"
           >
             Clear Filters
           </button>

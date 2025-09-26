@@ -145,27 +145,27 @@ function ListView() {
       <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200 mt-[6rem] transition-all duration-300 ease-in-out">
         {sortedData.map((location) => (
           <div 
-            className="p-4 bg-white border-b border-r border-gray-200 flex flex-col min-h-[18rem] md:min-h-0 cursor-pointer hover:bg-gray-50 transition-colors duration-200" 
+            className="p-4 border-b border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-[18rem] md:min-h-0 cursor-pointer bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 transition-colors duration-200 text-black dark:text-white" 
             key={location.code}
             onClick={() => handleLocationClick(location.code)}
           >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row items-start gap-2">
-                <span className="text-sm font-medium text-black py-1 px-2 bg-gray-100 rounded-md">{location.code}</span>
-                <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 rounded-md">{location.state}</span>
-                <span className={`hidden md:flex text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
+                <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
+                <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
+                <span className={`hidden md:flex text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-3xl flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                   <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                 </span>
               </div>
               <span className="text-sm font-mono font-light text-gray-500">{`#${location.index}`}</span>
             </div>
-            <h2 className="text-xl font-regular min-h-16 leading-tight">{location.name}</h2>
+            <h2 className="text-xl font-regular min-h-16 mt-2 leading-tight">{location.name}</h2>
             <div className="flex flex-col items-start">
               <span className="text-4xl text-[#41BCCC]">{location.cab_count}</span>
-              <span className="text-sm text-black">Cabinets</span>
+              <span className="text-sm text-black dark:text-white">Cabinets</span>
             </div>
             <span className="text-xs text-gray-500 mt-auto">{location.address}</span>
-            <span className={`md:hidden w-fit text-sm text-black py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-xl flex flex-row items-center gap-1 mt-2`}>{location.active ? 'Active' : 'Coming Soon'}
+            <span className={`md:hidden w-fit text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-xl flex flex-row items-center gap-1 mt-2`}>{location.active ? 'Active' : 'Coming Soon'}
               <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
             </span>
           </div>

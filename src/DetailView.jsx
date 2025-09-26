@@ -97,7 +97,7 @@ function DetailView() {
 
   if (!location) {
     return (
-      <div className="w-screen h-screen flex items-center justify-center">
+      <div className="w-screen h-screen flex items-center justify-center bg-white dark:bg-gray-900">
         <div className="text-center">
           <div className="text-xl text-gray-600">Location not found</div>
           <button 
@@ -112,45 +112,35 @@ function DetailView() {
   }
 
   return (
-    <div className="w-screen min-h-screen bg-white">
-      {/* Header with back navigation */}
-      <div className="fixed top-0 w-full z-[1000] bg-white border-b border-gray-200">
-        <div className="p-2 flex flex-row items-center gap-1">
-          <button 
-            onClick={handleBack}
-            className="p-2 hover:bg-gray-100 rounded-md transition-colors duration-200"
-          >
-            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <div className="flex flex-row items-center gap-2">
-            <img src="/kuma.png" alt="Kuma" className="aspect-auto w-10 mt-[-.25rem] mr-[-.15rem]" />
-            <h1 className="text-2xl font-regular">Maimai USA</h1>
-            <span className="text-2xl font-extralight text-gray-500">Directory</span>
-          </div>
-        </div>
+    <div className="w-screen min-h-screen bg-white dark:bg-gray-900">
+      {/* Header with integrated navbar and back button */}
+      <div className="fixed top-0 w-full z-[1000]">
+        <Navbar 
+          showBackButton={true}
+          onBackClick={handleBack}
+        />
       </div>
 
       {/* Main content */}
       <div className="p-0 md:px-4 max-w-4xl mx-auto">
-        <div className="bg-white border border-gray-200 mt-[3rem] overflow-hidden">
+        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 mt-[3rem] overflow-hidden">
             <div className="h-64 md:h-80 block md:hidden">
             {location.lat && location.lng && (
                 <MapContainer 
-                center={[39.8283, -98.5795]} 
-                zoom={3} 
-                style={{ height: '100%', width: '100%' }}
-                zoomControl={false}
-                scrollWheelZoom={false}
-                doubleClickZoom={false}
-                dragging={false}
-                touchZoom={false}
-                boxZoom={false}
-                keyboard={false}
-                attributionControl={false}
+                    center={[39.8283, -98.5795]} 
+                    zoom={3} 
+                    style={{ height: '100%', width: '100%' }}
+                    zoomControl={false}
+                    scrollWheelZoom={false}
+                    doubleClickZoom={false}
+                    dragging={false}
+                    touchZoom={false}
+                    boxZoom={false}
+                    keyboard={false}
+                    attributionControl={false}
                 >
                     <TileLayer
+                        className="dark:invert dark:contrast-[.95] dark:saturate-0 dark:hue-rotate-15"
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     />
@@ -178,6 +168,7 @@ function DetailView() {
                 attributionControl={false}
                 >
                     <TileLayer
+                        className="dark:invert dark:contrast-[.95] dark:saturate-0 dark:hue-rotate-15"
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                     />
@@ -191,29 +182,29 @@ function DetailView() {
             </div>
         </div>
         {/* Location header */}
-        <div className="bg-white border p-6 border-t-0 border-gray-200">
+        <div className="bg-white dark:bg-gray-900 border p-6 border-t-0 border-gray-200 dark:border-gray-700">
           <div className="flex flex-col md:justify-between gap-4">
             <div>
                 <div className="flex flex-row justify-between items-center gap-2 mb-2 w-full">
                     <div className="flex flex-row items-center gap-2">
-                        <span className="text-sm font-medium text-black px-2 py-1 bg-gray-100 rounded-md">{location.code}</span>
-                        <span className="text-sm text-gray-500 px-2 py-1 bg-gray-100 rounded-md">{location.state}</span>
-                        <span className={`text-sm text-black py-1 px-3 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex flex-row items-center gap-2`}>
+                        <span className="text-sm font-medium text-black dark:text-white px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
+                        <span className="text-sm text-gray-500 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
+                        <span className={`text-sm text-black dark:text-white py-1 px-3 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex flex-row items-center gap-2`}>
                             {location.active ? 'Active' : 'Coming Soon'}
                             <span className={`text-xs ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                         </span>
                     </div>
                     <span className="text-sm font-mono font-light text-gray-500">#{location.index}</span>
                 </div>
-              <h1 className="text-3xl font-regular text-gray-900">{location.name}</h1>
-              <p className="text-gray-600 text-md   ">{location.city}, {location.state}</p>
+              <h1 className="text-3xl font-regular text-black dark:text-white">{location.name}</h1>
+              <p className="text-gray-600 dark:text-gray-400 text-md   ">{location.city}, {location.state}</p>
             </div>
           </div>
           
           {/* Cabinet count */}
           <div className="flex flex-col items-start mt-8">
             <span className="text-4xl font-light text-[#41BCCC]">{location.cab_count}</span>
-            <span className="text-sm text-black">Cabinets</span>
+            <span className="text-sm text-black dark:text-white">Cabinets</span>
           </div>
         </div>
 
@@ -223,13 +214,13 @@ function DetailView() {
         {/* Content grid */}
         <div className="grid md:grid-cols-2">
           {/* Hours and Contact Info */}
-          <div className="bg-white border p-6 border-gray-200 border-t-0 flex flex-col justify-between">
+          <div className="bg-white dark:bg-gray-900 border p-6 border-gray-200 dark:border-gray-700 border-t-0 flex flex-col justify-between">
             {/* <h2 className="text-xl font-medium text-gray-900 mb-4">Information</h2> */}
             
             <div>
               <div className="mb-4">
-                <h3 className="text-xs font-medium text-gray-700">Hours of Operation</h3>
-                <p className="text-gray-900 text-lg">{getStandardHours(location)}</p>
+                <h3 className="text-xs font-medium text-gray-700 dark:text-gray-300">Hours of Operation</h3>
+                <p className="text-gray-900 dark:text-white text-lg">{getStandardHours(location)}</p>
                 <p className="text-xs text-gray-500 mt-1">
                   Standard hours - Check{' '}
                   <a 
@@ -245,15 +236,15 @@ function DetailView() {
               </div>
               
               <div className="mb-4">
-                <h3 className="text-xs font-medium text-gray-700">Contact Information</h3>
+                <h3 className="text-xs font-medium text-gray-700 dark:text-gray-300">Contact Information</h3>
                 <div>
-                  <p className="text-gray-900">
+                  <p className="text-gray-900 dark:text-white">
                     <span className="font-medium">Phone:</span> 
                     <a href={`tel:${getContactInfo().phone}`} className="ml-2 text-blue-500 hover:text-blue-800">
                       {getContactInfo().phone}
                     </a>
                   </p>
-                  <p className="text-gray-900">
+                  <p className="text-gray-900 dark:text-white">
                     <span className="font-medium">Website:</span> 
                     <a 
                       href={generateRound1URL(location)} 
@@ -267,16 +258,16 @@ function DetailView() {
                 </div>
               </div>
               <div>
-                <h3 className="text-xs font-medium text-gray-700">Address</h3>
-                <p className="text-gray-900 text-lg">{location.address}</p>
+                <h3 className="text-xs font-medium text-gray-700 dark:text-gray-300">Address</h3>
+                <p className="text-gray-900 dark:text-white text-lg">{location.address}</p>
               </div>
             </div>
           </div>
 
           {/* Map */}
-          <div className="bg-white border border-gray-200 border-t-0 border-l-0">
-            <h2 className="text-xl font-medium text-gray-900 p-6">Location</h2>
-            <div className="aspect-square overflow-hidden border border-gray-200">
+          <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 border-t-0 border-l-0">
+            <h2 className="text-xl font-medium text-gray-900 dark:text-white p-6">Location</h2>
+            <div className="aspect-square overflow-hidden border border-x-0 border-gray-200 dark:border-gray-700">
               {location.lat && location.lng && (
                 <MapContainer 
                   center={[location.lat, location.lng]} 
@@ -284,6 +275,7 @@ function DetailView() {
                   style={{ height: '100%', width: '100%' }}
                 >
                   <TileLayer
+                    className="dark:invert dark:contrast-[.95] dark:saturate-0 dark:hue-rotate-15"
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
                   />

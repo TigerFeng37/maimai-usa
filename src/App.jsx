@@ -29,7 +29,7 @@ function AppContent() {
   const isMapView = location.pathname === '/map'
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-200">
       <TransitionWrapper>
         <Routes location={location}>
           <Route path="/" element={<Navigate to="/map" replace />} />
