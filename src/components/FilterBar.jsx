@@ -162,7 +162,7 @@ function FilterBar({
         {(selectedStates.length > 0 || selectedCabCount !== null || (!showSort && selectedActive !== null)) && (
           <button
             onClick={onClearFilters}
-            className="py-1 px-2 ml-[-.5rem] md:ml-0 text-white bg-[#F35659] rounded-md text-sm hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 transition-colors min-w-24"
+            className="py-1 px-2 ml-[-.5rem] md:ml-0 text-white bg-[#F35659] rounded-md text-sm hover:bg-red-500 dark:bg-red-300 dark:hover:bg-red-400 transition-colors min-w-24"
           >
             Clear Filters
           </button>

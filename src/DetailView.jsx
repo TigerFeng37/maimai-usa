@@ -273,6 +273,8 @@ function DetailView() {
                   center={[location.lat, location.lng]} 
                   zoom={16} 
                   style={{ height: '100%', width: '100%' }}
+                  attributionControl={false}
+                  className="z-0 [&_.leaflet-control-zoom]:dark:invert"
                 >
                   <TileLayer
                     className="dark:invert dark:contrast-[.95] dark:saturate-0 dark:hue-rotate-15"

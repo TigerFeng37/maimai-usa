@@ -39,19 +39,17 @@ function Navbar({ currentView = 'list', showBackButton = false, onBackClick, hid
           {currentView === 'map' ? (
             <button
               onClick={() => handleNavigation('/list')}
-              className="min-w-[4rem] py-1 px-2 text-black dark:text-white rounded-md text-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 hover:shadow-sm active:scale-95 flex justify-between items-center gap-1"
+              className="w-fit py-2 md:py-1 px-2 text-black dark:text-white rounded-md text-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 hover:shadow-sm active:scale-95 flex justify-between items-center gap-1"
             >
               <List size={16} />
-              <span className="block md:hidden">List</span>
               <span className="hidden md:block">List View</span>
             </button>
           ) : (
             <button
               onClick={() => handleNavigation('/map')}
-              className="min-w-[4rem] py-1 px-2 text-black dark:text-white rounded-md text-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 hover:shadow-sm active:scale-95 flex justify-between items-center gap-1"
+              className="w-fit py-2 md:py-1 px-2 text-black dark:text-white rounded-md text-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 transition-all duration-200 hover:shadow-sm active:scale-95 flex justify-between items-center gap-1"
             >
               <Location size={16} />
-              <span className="block md:hidden">Map</span>
               <span className="hidden md:block">Map View</span>
             </button>
           )}
