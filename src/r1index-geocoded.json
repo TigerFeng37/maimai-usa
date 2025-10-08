@@ -179,7 +179,7 @@
     "lng": -75.622268,
     "geocoded": true,
     "geocoded_address": "172 Exton Square Pkwy, Exton, PA",
-    "active": false
+    "active": true
   },
   {
     "code": "FDP",
@@ -235,7 +235,7 @@
     "lng": -88.2145192,
     "geocoded": true,
     "geocoded_address": "195 Fox Valley Center, Aurora, IL 60504",
-    "active": false
+    "active": true
   },
   {
     "code": "GLC",
@@ -669,7 +669,7 @@
     "lng": -88.0045914,
     "geocoded": true,
     "geocoded_address": "5200 S 76th St, Greendale, WI 53129",
-    "active": false
+    "active": true
   },
   {
     "code": "STC",
