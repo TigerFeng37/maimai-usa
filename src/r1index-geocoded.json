@@ -613,7 +613,7 @@
     "lng": -121.2666443,
     "geocoded": true,
     "geocoded_address": "1911 Galleria Blvd, Roseville, CA 95678",
-    "active": false
+    "active": true
   },
   {
     "code": "SCM",
