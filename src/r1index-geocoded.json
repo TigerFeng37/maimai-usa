@@ -53,7 +53,7 @@
     "lng": -73.5286572,
     "geocoded": true,
     "geocoded_address": "358 N Broadway, Hicksville, NY 11801",
-    "active": true
+    "active": false
   },
   {
     "code": "CCM",
@@ -165,7 +165,7 @@
     "lng": -121.81848,
     "geocoded": true,
     "geocoded_address": "2200 Eastridge Loop, San Jose, CA 95122",
-    "active": true
+    "active": false
   },
   {
     "code": "EXM",
@@ -179,7 +179,7 @@
     "lng": -75.622268,
     "geocoded": true,
     "geocoded_address": "172 Exton Square Pkwy, Exton, PA",
-    "active": true
+    "active": false
   },
   {
     "code": "FDP",
@@ -235,7 +235,7 @@
     "lng": -88.2145192,
     "geocoded": true,
     "geocoded_address": "195 Fox Valley Center, Aurora, IL 60504",
-    "active": true
+    "active": false
   },
   {
     "code": "GLC",
@@ -333,7 +333,7 @@
     "lng": -74.1716045,
     "geocoded": true,
     "geocoded_address": "651 Kapkowski Rd, Elizabeth, NJ 07201",
-    "active": true
+    "active": false
   },
   {
     "code": "LAS",
@@ -501,7 +501,7 @@
     "lng": -117.065887,
     "geocoded": true,
     "geocoded_address": "3030 Plaza Bonita Rd, National City, CA 91950",
-    "active": true
+    "active": false
   },
   {
     "code": "PCC",
@@ -613,7 +613,7 @@
     "lng": -121.2666443,
     "geocoded": true,
     "geocoded_address": "1911 Galleria Blvd, Roseville, CA 95678",
-    "active": true
+    "active": false
   },
   {
     "code": "SCM",
@@ -641,7 +641,7 @@
     "lng": -122.2967446,
     "geocoded": true,
     "geocoded_address": "3500 S Meridian, Puyallup, WA 98373",
-    "active": true
+    "active": false
   },
   {
     "code": "SLM",
@@ -669,7 +669,7 @@
     "lng": -88.0045914,
     "geocoded": true,
     "geocoded_address": "5200 S 76th St, Greendale, WI 53129",
-    "active": true
+    "active": false
   },
   {
     "code": "STC",
@@ -795,6 +795,6 @@
     "lng": -123.1071148,
     "geocoded": true,
     "geocoded_address": "600 Valley River Center, Eugene, OR 97401",
-    "active": true
+    "active": false
   }
 ]
