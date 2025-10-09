@@ -333,7 +333,7 @@
     "lng": -74.1716045,
     "geocoded": true,
     "geocoded_address": "651 Kapkowski Rd, Elizabeth, NJ 07201",
-    "active": false
+    "active": true
   },
   {
     "code": "LAS",
