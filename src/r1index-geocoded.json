@@ -249,7 +249,7 @@
     "lng": -83.29954,
     "geocoded": true,
     "geocoded_address": "4000 Baldwin Rd, Auburn Hills, MI 48326",
-    "active": false
+    "active": true
   },
   {
     "code": "GLM",
@@ -263,7 +263,7 @@
     "lng": -81.3611059,
     "geocoded": true,
     "geocoded_address": "7850 Mentor Ave, Mentor, OH 44060",
-    "active": false
+    "active": true
   },
   {
     "code": "GUR",
@@ -277,7 +277,7 @@
     "lng": -87.9891165,
     "geocoded": true,
     "geocoded_address": "6170 W Grand Ave, Gurnee, IL 60031",
-    "active": false
+    "active": true
   },
   {
     "code": "GVM",
