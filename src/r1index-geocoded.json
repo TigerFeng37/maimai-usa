@@ -53,7 +53,7 @@
     "lng": -73.5286572,
     "geocoded": true,
     "geocoded_address": "358 N Broadway, Hicksville, NY 11801",
-    "active": false
+    "active": true
   },
   {
     "code": "CCM",
@@ -165,7 +165,7 @@
     "lng": -121.81848,
     "geocoded": true,
     "geocoded_address": "2200 Eastridge Loop, San Jose, CA 95122",
-    "active": false
+    "active": true
   },
   {
     "code": "EXM",
@@ -179,7 +179,7 @@
     "lng": -75.622268,
     "geocoded": true,
     "geocoded_address": "172 Exton Square Pkwy, Exton, PA",
-    "active": false
+    "active": true
   },
   {
     "code": "FDP",
@@ -235,7 +235,7 @@
     "lng": -88.2145192,
     "geocoded": true,
     "geocoded_address": "195 Fox Valley Center, Aurora, IL 60504",
-    "active": false
+    "active": true
   },
   {
     "code": "GLC",
@@ -473,7 +473,7 @@
     "lng": -87.8107611,
     "geocoded": true,
     "geocoded_address": "7501 W Cermak Rd, North Riverside, IL 60546",
-    "active": false
+    "active": true
   },
   {
     "code": "NSM",
@@ -501,7 +501,7 @@
     "lng": -117.065887,
     "geocoded": true,
     "geocoded_address": "3030 Plaza Bonita Rd, National City, CA 91950",
-    "active": false
+    "active": true
   },
   {
     "code": "PCC",
@@ -613,7 +613,7 @@
     "lng": -121.2666443,
     "geocoded": true,
     "geocoded_address": "1911 Galleria Blvd, Roseville, CA 95678",
-    "active": false
+    "active": true
   },
   {
     "code": "SCM",
@@ -641,7 +641,7 @@
     "lng": -122.2967446,
     "geocoded": true,
     "geocoded_address": "3500 S Meridian, Puyallup, WA 98373",
-    "active": false
+    "active": true
   },
   {
     "code": "SLM",
@@ -669,7 +669,7 @@
     "lng": -88.0045914,
     "geocoded": true,
     "geocoded_address": "5200 S 76th St, Greendale, WI 53129",
-    "active": false
+    "active": true
   },
   {
     "code": "STC",
@@ -795,6 +795,6 @@
     "lng": -123.1071148,
     "geocoded": true,
     "geocoded_address": "600 Valley River Center, Eugene, OR 97401",
-    "active": false
+    "active": true
   }
 ]
