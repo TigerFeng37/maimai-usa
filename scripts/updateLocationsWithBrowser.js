@@ -695,25 +695,46 @@ function matchLocations(allNetLocations, jsonLocations) {
   const activeMatches = new Set();
   
   for (const allNetLocation of allNetLocations) {
+    let matchedLocation = null;
+    
     // Extract zip code from scraped address
     const zipMatch = allNetLocation.address.match(/\b(\d{5})$/);
     const scrapedZip = zipMatch ? zipMatch[1] : null;
     
-    if (!scrapedZip) {
-      console.log(`❌ No zip found for: ${allNetLocation.name} - ${allNetLocation.address}`);
-      continue;
+    // Strategy 1: Try to match by ZIP code (most reliable)
+    if (scrapedZip) {
+      matchedLocation = jsonLocations.find(jsonLocation => 
+        jsonLocation.address.includes(scrapedZip)
+      );
+      
+      if (matchedLocation) {
+        activeMatches.add(matchedLocation.code);
+        console.log(`✅ Matched by ZIP ${scrapedZip}: ${allNetLocation.name} -> ${matchedLocation.name} (${matchedLocation.code})`);
+        continue;
+      } else {
+        console.log(`⚠️  No ZIP match found for ${scrapedZip}: ${allNetLocation.name}, trying name match...`);
+      }
+    } else {
+      console.log(`⚠️  No zip found for: ${allNetLocation.name} - ${allNetLocation.address}, trying name match...`);
     }
     
-    // Find JSON location with matching zip
-    const matchedLocation = jsonLocations.find(jsonLocation => 
-      jsonLocation.address.includes(scrapedZip)
-    );
+    // Strategy 2: FAILSAFE - Try to match by location name
+    // This handles cases where zip parsing failed or zip-based match didn't work
+    const normalizedScrapedName = normalizeLocationName(allNetLocation.name);
+    
+    matchedLocation = jsonLocations.find(jsonLocation => {
+      const normalizedJsonName = normalizeLocationName(jsonLocation.name);
+      
+      // Check if names match (fuzzy match - one contains the other)
+      return normalizedJsonName.includes(normalizedScrapedName) || 
+             normalizedScrapedName.includes(normalizedJsonName);
+    });
     
     if (matchedLocation) {
       activeMatches.add(matchedLocation.code);
-      console.log(`✅ Matched by ZIP ${scrapedZip}: ${allNetLocation.name} -> ${matchedLocation.name} (${matchedLocation.code})`);
+      console.log(`✅ FAILSAFE: Matched by NAME: ${allNetLocation.name} -> ${matchedLocation.name} (${matchedLocation.code})`);
     } else {
-      console.log(`❌ No match found for ZIP ${scrapedZip}: ${allNetLocation.name}`);
+      console.log(`❌ No match found (neither ZIP nor name): ${allNetLocation.name}`);
     }
   }
   

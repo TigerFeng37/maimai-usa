@@ -286,7 +286,22 @@ function matchLocations(allNetLocations, jsonLocations) {
       activeMatches.add(bestMatch.code);
       console.log(`✅ Matched: ${allNetLocation.name} -> ${bestMatch.name} (${bestMatch.code}) - Score: ${highestScore}`);
     } else {
-      console.log(`❌ No match found for: ${allNetLocation.name} in ${allNetLocation.city}, ${allNetLocation.state}`);
+      console.log(`⚠️  No high-confidence match for: ${allNetLocation.name} in ${allNetLocation.city}, ${allNetLocation.state}`);
+      
+      // FAILSAFE: Try simple name-based match as last resort
+      const normalizedScrapedName = normalizeLocationName(allNetLocation.name);
+      const nameMatch = jsonLocations.find(jsonLocation => {
+        const normalizedJsonName = normalizeLocationName(jsonLocation.name);
+        return normalizedJsonName.includes(normalizedScrapedName) || 
+               normalizedScrapedName.includes(normalizedJsonName);
+      });
+      
+      if (nameMatch) {
+        activeMatches.add(nameMatch.code);
+        console.log(`✅ FAILSAFE: Matched by name only: ${allNetLocation.name} -> ${nameMatch.name} (${nameMatch.code})`);
+      } else {
+        console.log(`❌ No match found (even by name): ${allNetLocation.name}`);
+      }
     }
   }
   
