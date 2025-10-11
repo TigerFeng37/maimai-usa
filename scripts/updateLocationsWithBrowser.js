@@ -210,7 +210,7 @@ async function fetchAllNetLocationsWithBrowser() {
                   name = `ROUND1 ${name}`;
                 }
                 
-                const addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*,?\s*(\d{5})/);
+                const addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
                 if (addressMatch) {
                   locations.push({
                     name: name,
@@ -247,7 +247,7 @@ async function fetchAllNetLocationsWithBrowser() {
                 name = `ROUND1 ${name}`;
               }
               
-              const addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*,?\s*(\d{5})/);
+              const addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
               if (addressMatch) {
                 locations.push({
                   name: name,
@@ -455,8 +455,8 @@ function parseAllNetHTML(html) {
         // Extract city and state using multiple patterns
         let city, state;
         
-        // Pattern 1: Standard "street, city, state zip"
-        let addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*,?\s*(\d{5})/);
+        // Pattern 1: Standard "street, city, state zip" or "street, city, statezip" (no space)
+        let addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
         if (addressMatch) {
           city = addressMatch[1].trim();
           state = addressMatch[2].trim();
@@ -504,7 +504,7 @@ function parseAllNetHTML(html) {
         
         // Try different regex patterns, including handling addresses without spaces
         const patterns = [
-          /ROUND1\s+([^0-9]+?)\s+(\d+[^,]+,\s*[^,]+,\s*[A-Z]{2}\s*,?\s*\d{5})/,
+          /ROUND1\s+([^0-9]+?)\s+(\d+[^,]+,\s*[^,]+,\s*[A-Z]{2}\s*\d{5})/,
           /ROUND1\s+(.+?)\s+(\d+.*?[A-Z]{2}\s*\d{5})/,
           // Handle "Hayward,CA" format (no space between city and state)
           /ROUND1\s+([^0-9]+?)\s+(\d+[^,]+,\s*[^,]+[A-Z]{2}\s*\d{5})/
@@ -524,8 +524,8 @@ function parseAllNetHTML(html) {
             // Extract city and state using multiple patterns (same as Strategy 1)
             let city, state;
             
-            // Pattern 1: Standard "street, city, state zip"
-            let addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*,?\s*(\d{5})/);
+            // Pattern 1: Standard "street, city, state zip" or "street, city, statezip" (no space)
+            let addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
             if (addressMatch) {
               city = addressMatch[1].trim();
               state = addressMatch[2].trim();
@@ -605,8 +605,8 @@ function parseAllNetHTML(html) {
           // Extract city and state using multiple patterns (same as other strategies)
           let city, state;
           
-          // Pattern 1: Standard "street, city, state zip"
-          let addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*,?\s*(\d{5})/);
+          // Pattern 1: Standard "street, city, state zip" or "street, city, statezip" (no space)
+          let addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
           if (addressMatch) {
             city = addressMatch[1].trim();
             state = addressMatch[2].trim();
