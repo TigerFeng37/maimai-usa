@@ -504,6 +504,7 @@ function parseAllNetHTML(html) {
         
         // Try different regex patterns, including handling addresses without spaces
         const patterns = [
+          /ROUND1\s+([^0-9]+?)\s+(\d+[^,]+,\s*[^,]+,\s*[A-Z]{2}\s*,?\s*\d{5})/,
           /ROUND1\s+([^0-9]+?)\s+(\d+[^,]+,\s*[^,]+,\s*[A-Z]{2}\s*\d{5})/,
           /ROUND1\s+(.+?)\s+(\d+.*?[A-Z]{2}\s*\d{5})/,
           // Handle "Hayward,CA" format (no space between city and state)
