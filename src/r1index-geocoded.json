@@ -585,7 +585,7 @@
     "lng": -97.5583996,
     "geocoded": true,
     "geocoded_address": "2501 W Memorial Rd, Oklahoma City, OK 73134",
-    "active": false
+    "active": true
   },
   {
     "code": "RNO",
