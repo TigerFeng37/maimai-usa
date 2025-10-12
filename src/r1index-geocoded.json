@@ -277,7 +277,7 @@
     "lng": -87.9891165,
     "geocoded": true,
     "geocoded_address": "6170 W Grand Ave, Gurnee, IL 60031",
-    "active": true
+    "active": false
   },
   {
     "code": "GVM",
