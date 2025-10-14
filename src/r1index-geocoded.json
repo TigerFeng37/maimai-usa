@@ -207,7 +207,7 @@
     "lng": -84.0566596,
     "geocoded": true,
     "geocoded_address": "2727 Fairfield Commons, Beavercreek, OH 45431",
-    "active": false
+    "active": true
   },
   {
     "code": "FSM",
@@ -305,7 +305,7 @@
     "lng": -96.6369813,
     "geocoded": true,
     "geocoded_address": "6100 O St, Lincoln, NE 68505",
-    "active": false
+    "active": true
   },
   {
     "code": "HYM",
@@ -319,7 +319,7 @@
     "lng": -72.6410822,
     "geocoded": true,
     "geocoded_address": "50 Holyoke St, Holyoke, MA 01040",
-    "active": false
+    "active": true
   },
   {
     "code": "JSG",
@@ -739,7 +739,7 @@
     "lng": -97.2470472,
     "geocoded": true,
     "geocoded_address": "7700 E Kellogg Dr, Wichita, KS 67207",
-    "active": false
+    "active": true
   },
   {
     "code": "TMP",
