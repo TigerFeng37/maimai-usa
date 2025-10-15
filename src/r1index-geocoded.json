@@ -165,7 +165,7 @@
     "lng": -121.81848,
     "geocoded": true,
     "geocoded_address": "2200 Eastridge Loop, San Jose, CA 95122",
-    "active": true
+    "active": false
   },
   {
     "code": "EXM",
