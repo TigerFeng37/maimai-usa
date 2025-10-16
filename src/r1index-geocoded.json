@@ -361,7 +361,7 @@
     "lng": -115.1691447,
     "geocoded": true,
     "geocoded_address": "7400 Las Vegas Blvd S, Las Vegas, NV 89123",
-    "active": false
+    "active": true
   },
   {
     "code": "LWM",
