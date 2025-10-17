@@ -81,7 +81,7 @@
     "lng": -111.8989071,
     "geocoded": true,
     "geocoded_address": "3111 W Chandler Blvd, Chandler, AZ 85226",
-    "active": false
+    "active": true
   },
   {
     "code": "CLM",
@@ -95,7 +95,7 @@
     "lng": -84.4680708,
     "geocoded": true,
     "geocoded_address": "2860 Cumberland Mall, Atlanta, GA 30339",
-    "active": false
+    "active": true
   },
   {
     "code": "CRG",
@@ -403,7 +403,7 @@
     "lng": -70.3365511,
     "geocoded": true,
     "geocoded_address": "364 Maine Mall Rd, South Portland, ME 04106",
-    "active": false
+    "active": true
   },
   {
     "code": "MPM",
@@ -543,7 +543,7 @@
     "lng": -80.3089242,
     "geocoded": true,
     "geocoded_address": "12055 Pines Blvd, Pembroke Pines, FL 33026",
-    "active": false
+    "active": true
   },
   {
     "code": "PMM",
