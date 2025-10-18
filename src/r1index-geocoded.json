@@ -277,7 +277,7 @@
     "lng": -87.9891165,
     "geocoded": true,
     "geocoded_address": "6170 W Grand Ave, Gurnee, IL 60031",
-    "active": false
+    "active": true
   },
   {
     "code": "GVM",
@@ -515,7 +515,7 @@
     "lng": -76.3390136,
     "geocoded": true,
     "geocoded_address": "142 Park City Center, Lancaster, PA 17601",
-    "active": false
+    "active": true
   },
   {
     "code": "PHM",
