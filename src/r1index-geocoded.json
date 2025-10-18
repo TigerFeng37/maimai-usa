@@ -221,7 +221,7 @@
     "lng": -79.8379748,
     "geocoded": true,
     "geocoded_address": "410 Four Seasons Town Centre, Greensboro, NC 27407",
-    "active": false
+    "active": true
   },
   {
     "code": "FVM",
@@ -571,7 +571,7 @@
     "lng": -110.863724,
     "geocoded": true,
     "geocoded_address": "5950 E Broadway Blvd, Tucson, AZ 85711",
-    "active": false
+    "active": true
   },
   {
     "code": "QSM",
@@ -725,7 +725,7 @@
     "lng": -105.0951717,
     "geocoded": true,
     "geocoded_address": "8501 W Bowles Ave, Littleton, CO 80123",
-    "active": false
+    "active": true
   },
   {
     "code": "TES",
