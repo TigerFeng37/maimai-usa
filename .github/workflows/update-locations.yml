@@ -85,8 +85,8 @@ jobs:
       run: |
         echo "🔍 Checking for newly activated locations..."
         
-        # Create Node.js script to process recent locations
-        cat > process_recent_locations.js << 'EOF'
+        # Create Node.js script to process recent locations (as CommonJS)
+        cat > process_recent_locations.cjs << 'EOF'
         const fs = require('fs');
         const { execSync } = require('child_process');
 
@@ -163,7 +163,7 @@ jobs:
         EOF
         
         # Run the script
-        node process_recent_locations.js
+        node process_recent_locations.cjs
         
         # Set output flag
         if [ -f recent_locations_updated.flag ]; then
