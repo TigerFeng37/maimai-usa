@@ -151,7 +151,7 @@
     "lng": -75.09774,
     "geocoded": true,
     "geocoded_address": "1750 Deptford Center Rd, Deptford Township, NJ 08096",
-    "active": false
+    "active": true
   },
   {
     "code": "ESC",
@@ -697,7 +697,7 @@
     "lng": -122.475874,
     "geocoded": true,
     "geocoded_address": "3251 20th Ave, San Francisco, CA 94132",
-    "active": false
+    "active": true
   },
   {
     "code": "SVM",
