@@ -79,6 +79,98 @@ jobs:
         echo "📋 Update Log:"
         cat update_output.log
     
+    - name: Update recent locations
+      id: update_recent
+      if: steps.update.outputs.changes_detected == 'true'
+      run: |
+        echo "🔍 Checking for newly activated locations..."
+        
+        # Create Node.js script to process recent locations
+        cat > process_recent_locations.js << 'EOF'
+        const fs = require('fs');
+        const { execSync } = require('child_process');
+
+        try {
+          // Read current location data
+          const currentData = JSON.parse(fs.readFileSync('src/r1index-geocoded.json', 'utf8'));
+          
+          // Get the last two commits that modified r1index-geocoded.json
+          const commits = execSync('git log -2 --pretty=format:"%H" -- src/r1index-geocoded.json')
+            .toString()
+            .trim()
+            .split('\n')
+            .filter(h => h);
+          
+          console.log(`Found ${commits.length} recent commits`);
+          
+          // Track all newly activated locations
+          const newlyActivated = new Set();
+          
+          // Compare current with previous commits
+          for (let i = 0; i < Math.min(commits.length, 2); i++) {
+            const commitHash = commits[i];
+            console.log(`Checking commit: ${commitHash.substring(0, 7)}`);
+            
+            try {
+              // Get the file content from this commit
+              const previousContent = execSync(`git show ${commitHash}:src/r1index-geocoded.json`).toString();
+              const previousData = JSON.parse(previousContent);
+              
+              // Create lookup maps
+              const previousMap = new Map(previousData.map(loc => [loc.code, loc]));
+              
+              // Find newly activated locations
+              currentData.forEach(currentLoc => {
+                const prevLoc = previousMap.get(currentLoc.code);
+                
+                // Check if location was inactive before and is now active
+                if (currentLoc.active && prevLoc && !prevLoc.active) {
+                  newlyActivated.add(currentLoc.code);
+                  console.log(`  ✨ Newly activated: ${currentLoc.code} - ${currentLoc.name}`);
+                }
+              });
+            } catch (error) {
+              console.log(`  ⚠️ Could not read commit ${commitHash.substring(0, 7)}: ${error.message}`);
+            }
+          }
+          
+          // If we found newly activated locations, update recent-locations.json
+          if (newlyActivated.size > 0) {
+            console.log(`\n📍 Total newly activated locations: ${newlyActivated.size}`);
+            
+            // Get full data for newly activated locations
+            const recentLocations = currentData.filter(loc => newlyActivated.has(loc.code));
+            
+            // Write to recent-locations.json
+            fs.writeFileSync(
+              'src/recent-locations.json',
+              JSON.stringify(recentLocations, null, 4) + '\n'
+            );
+            
+            console.log(`✅ Updated recent-locations.json with ${recentLocations.length} locations`);
+            
+            // Output for GitHub Actions
+            fs.writeFileSync('recent_locations_updated.flag', 'true');
+          } else {
+            console.log('ℹ️ No newly activated locations found');
+            fs.writeFileSync('recent_locations_updated.flag', 'false');
+          }
+        } catch (error) {
+          console.error('❌ Error processing recent locations:', error.message);
+          // Don't fail the workflow, just log the error
+          fs.writeFileSync('recent_locations_updated.flag', 'false');
+        }
+        EOF
+        
+        # Run the script
+        node process_recent_locations.js
+        
+        # Set output flag
+        if [ -f recent_locations_updated.flag ]; then
+          UPDATED=$(cat recent_locations_updated.flag)
+          echo "recent_locations_updated=$UPDATED" >> $GITHUB_OUTPUT
+        fi
+    
     - name: Commit changes
       if: steps.update.outputs.changes_detected == 'true' || github.event.inputs.force_update == 'true'
       run: |
@@ -88,6 +180,11 @@ jobs:
         
         # Add and commit changes
         git add src/r1index-geocoded.json
+        
+        # Also add recent-locations.json if it was updated
+        if [ -f src/recent-locations.json ]; then
+          git add src/recent-locations.json
+        fi
         
         # Create commit message with summary
         COMMIT_MSG="🤖 Automated location data update - $(date '+%Y-%m-%d %H:%M:%S UTC')"
@@ -141,6 +238,15 @@ jobs:
         
         if [ "${{ steps.update.outputs.changes_detected }}" = "true" ]; then
           echo "📈 **Changes**: Location data was updated" >> $GITHUB_STEP_SUMMARY
+          
+          # Add recent locations info if available
+          if [ -f recent_locations_updated.flag ]; then
+            RECENT_UPDATED=$(cat recent_locations_updated.flag)
+            if [ "$RECENT_UPDATED" = "true" ]; then
+              echo "✨ **Recent Locations**: Updated with newly activated locations" >> $GITHUB_STEP_SUMMARY
+            fi
+          fi
+          
           echo "🚀 **Deployment**: Automatically deployed to Cloudflare Pages" >> $GITHUB_STEP_SUMMARY
           if [ "${{ steps.deploy.outputs.url }}" != "" ]; then
             echo "🌐 **URL**: ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
