@@ -1,1 +1,30 @@
-[]
+[
+    {
+        "code": "ATC",
+        "name": "Round1 Arrowhead Towne Center",
+        "city": "Glendale",
+        "state": "AZ",
+        "address": "7700 W Arrowhead Towne Center, Glendale, AZ 85308",
+        "cab_count": 2,
+        "index": "053",
+        "lat": 33.6416825,
+        "lng": -112.2212309,
+        "geocoded": true,
+        "geocoded_address": "7700 W Arrowhead Towne Center, Glendale, AZ",
+        "active": true
+    },
+    {
+        "code": "BTC",
+        "name": "Round1 Burbank Town Center",
+        "city": "Burbank",
+        "state": "CA",
+        "address": "201 E Magnolia Blvd, Ste. 145, Burbank, CA 91502",
+        "cab_count": 3,
+        "index": "041",
+        "lat": 34.1832097,
+        "lng": -118.311551,
+        "geocoded": true,
+        "geocoded_address": "201 E Magnolia Blvd, Burbank, CA 91502",
+        "active": true
+    }
+]

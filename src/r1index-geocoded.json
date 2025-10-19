@@ -25,7 +25,7 @@
     "lng": -112.2212309,
     "geocoded": true,
     "geocoded_address": "7700 W Arrowhead Towne Center, Glendale, AZ",
-    "active": false
+    "active": true
   },
   {
     "code": "BTC",
@@ -39,7 +39,7 @@
     "lng": -118.311551,
     "geocoded": true,
     "geocoded_address": "201 E Magnolia Blvd, Burbank, CA 91502",
-    "active": false
+    "active": true
   },
   {
     "code": "BWM",
@@ -571,7 +571,7 @@
     "lng": -110.863724,
     "geocoded": true,
     "geocoded_address": "5950 E Broadway Blvd, Tucson, AZ 85711",
-    "active": true
+    "active": false
   },
   {
     "code": "QSM",
