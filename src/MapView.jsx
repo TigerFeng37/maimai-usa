@@ -6,6 +6,7 @@ import L from 'leaflet';
 import data from './r1index-geocoded.json';
 import Navbar from './components/Navbar';
 import FilterBar from './components/FilterBar';
+import RecentsBanner from './components/RecentsBanner';
 import './mapStyles.css';
 
 // Fix for default markers in React-Leaflet
@@ -141,8 +142,6 @@ function MapView() {
     <div className="w-screen safe-area-screen flex flex-col view-map page-enter page-enter-map mb-[-6rem] md:mb-[-3rem] overflow-hidden">
       {/* Header */}
       <Navbar currentView="map" />
-
-      {/* Filter Bar */}
       <FilterBar
         showSort={false}
         uniqueStates={uniqueStates}
@@ -157,8 +156,7 @@ function MapView() {
         locationCount={filteredData.length}
         className="z-[999]"
       />
-
-      {/* Map */}
+      <RecentsBanner />
       <div className="flex-1 mb-[6rem] md:mb-[3rem]">
         <MapContainer 
           center={center}

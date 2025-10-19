@@ -796,5 +796,61 @@
     "geocoded": true,
     "geocoded_address": "600 Valley River Center, Eugene, OR 97401",
     "active": true
+  },
+  {
+    "code": "GA-FLS",
+    "name": "Gatcha Flushing",
+    "city": "Queens",
+    "state": "NY",
+    "address": "137-19 41st Ave, Ste. 101, Queens, NY 11354",
+    "cab_count": 2,
+    "index": "063",
+    "lat": 40.7564071,
+    "lng": -73.909187,
+    "geocoded": true,
+    "geocoded_address": "137-19 41st Ave, Queens, NY 11354",
+    "active": false
+  },
+  {
+    "code": "GA-MPM",
+    "name": "Gatcha Edison",
+    "city": "Edison",
+    "state": "NJ",
+    "address": "1000 State Route 18, Edison, NJ 08837",
+    "cab_count": 2,
+    "index": "064",
+    "lat": 40.53833,
+    "lng": -74.37861,
+    "geocoded": true,
+    "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
+    "active": false
+  },
+  {
+    "code": "GA-NTM",
+    "name": "Gatcha Natick Mall",
+    "city": "Natick",
+    "state": "NJ",
+    "address": "1255 Worcester St, Natick, MA 01760",
+    "cab_count": 2,
+    "index": "065",
+    "lat": 42.28283,
+    "lng": -71.33906,
+    "geocoded": true,
+    "geocoded_address": "1255 Worcester St, Natick, MA 01760",
+    "active": false
+  },
+  {
+    "code": "GA-ALS",
+    "name": "Gatcha Allston",
+    "city": "Boston",
+    "state": "MA",
+    "address": "TBD",
+    "cab_count": 2,
+    "index": "066",
+    "lat": 42.33821,
+    "lng": -71.12541,
+    "geocoded": true,
+    "geocoded_address": "TBD",
+    "active": false
   }
 ]
