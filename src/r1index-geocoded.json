@@ -123,7 +123,7 @@
     "lng": -73.4807429,
     "geocoded": true,
     "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
-    "active": false
+    "active": true
   },
   {
     "code": "DBK",
@@ -571,7 +571,7 @@
     "lng": -110.863724,
     "geocoded": true,
     "geocoded_address": "5950 E Broadway Blvd, Tucson, AZ 85711",
-    "active": false
+    "active": true
   },
   {
     "code": "QSM",

@@ -1,30 +1,16 @@
 [
     {
-        "code": "ATC",
-        "name": "Round1 Arrowhead Towne Center",
-        "city": "Glendale",
-        "state": "AZ",
-        "address": "7700 W Arrowhead Towne Center, Glendale, AZ 85308",
+        "code": "DBF",
+        "name": "Round1 Danbury Fair",
+        "city": "Danbury",
+        "state": "CT",
+        "address": "7 Backus Ave, Ste. 210, Danbury, CT 06810",
         "cab_count": 2,
-        "index": "053",
-        "lat": 33.6416825,
-        "lng": -112.2212309,
+        "index": "054",
+        "lat": 41.3793031,
+        "lng": -73.4807429,
         "geocoded": true,
-        "geocoded_address": "7700 W Arrowhead Towne Center, Glendale, AZ",
-        "active": true
-    },
-    {
-        "code": "BTC",
-        "name": "Round1 Burbank Town Center",
-        "city": "Burbank",
-        "state": "CA",
-        "address": "201 E Magnolia Blvd, Ste. 145, Burbank, CA 91502",
-        "cab_count": 3,
-        "index": "041",
-        "lat": 34.1832097,
-        "lng": -118.311551,
-        "geocoded": true,
-        "geocoded_address": "201 E Magnolia Blvd, Burbank, CA 91502",
+        "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
         "active": true
     },
     {
@@ -39,6 +25,20 @@
         "lng": -75.09774,
         "geocoded": true,
         "geocoded_address": "1750 Deptford Center Rd, Deptford Township, NJ 08096",
+        "active": true
+    },
+    {
+        "code": "PPM",
+        "name": "Round1 Park Place Mall",
+        "city": "Tuscon",
+        "state": "AZ",
+        "address": "5950 E Broadway Blvd, Ste. 110, Tucson, AZ 85711",
+        "cab_count": 2,
+        "index": "035",
+        "lat": 32.2214707,
+        "lng": -110.863724,
+        "geocoded": true,
+        "geocoded_address": "5950 E Broadway Blvd, Tucson, AZ 85711",
         "active": true
     },
     {
