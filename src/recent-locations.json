@@ -12,5 +12,33 @@
         "geocoded": true,
         "geocoded_address": "555 The Shops at Mission Viejo, Mission Viejo, CA 92691",
         "active": true
+    },
+    {
+        "code": "CRG",
+        "name": "Round1 Galleria at Crystal Run",
+        "city": "Middletown",
+        "state": "NY",
+        "address": "1 Galleria Dr, Ste. 01, Middletown, NY 10941",
+        "cab_count": 2,
+        "index": "017",
+        "lat": 41.4529757,
+        "lng": -74.3707953,
+        "geocoded": true,
+        "geocoded_address": "1 Galleria Dr, Middletown, NY 10941",
+        "active": true
+    },
+    {
+        "code": "DBK",
+        "name": "Round1 Deerbrook Mall",
+        "city": "Humble",
+        "state": "TX",
+        "address": "20131 Highway 59 N, Ste. 3000, Humble, TX 77338",
+        "cab_count": 2,
+        "index": "061",
+        "lat": 29.9988312,
+        "lng": -95.2621553,
+        "geocoded": true,
+        "geocoded_address": "Humble, TX",
+        "active": true
     }
 ]
