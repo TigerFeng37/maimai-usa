@@ -7,7 +7,7 @@ function RecentsBanner() {
                 <span className="text-sm text-gray-500">Recently Activated</span>
                 <div className="flex flex-row items-center gap-2">
                     {Locations.map((location) => (
-                        <button key={location.code} className="text-sm font-medium text-black dark:text-white">
+                        <button key={location.code} className="text-sm font-medium text-black dark:text-white" onClick={() => navigate(`/location/${location.code}`)}>
                             {location.name}
                         </button>
                     ))}
