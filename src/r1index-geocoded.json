@@ -431,7 +431,7 @@
     "lng": -117.6691164,
     "geocoded": true,
     "geocoded_address": "555 The Shops at Mission Viejo, Mission Viejo, CA 92691",
-    "active": false
+    "active": true
   },
   {
     "code": "MVM",
