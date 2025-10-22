@@ -109,7 +109,7 @@
     "lng": -74.3707953,
     "geocoded": true,
     "geocoded_address": "1 Galleria Dr, Middletown, NY 10941",
-    "active": false
+    "active": true
   },
   {
     "code": "DBF",
