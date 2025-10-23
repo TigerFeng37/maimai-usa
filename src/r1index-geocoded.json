@@ -137,7 +137,7 @@
     "lng": -95.2621553,
     "geocoded": true,
     "geocoded_address": "Humble, TX",
-    "active": false
+    "active": true
   },
   {
     "code": "DFM",
@@ -389,7 +389,7 @@
     "lng": -80.0983248,
     "geocoded": true,
     "geocoded_address": "5800 Peach St, Erie, PA 16509",
-    "active": false
+    "active": true
   },
   {
     "code": "MEM",
