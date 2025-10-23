@@ -1,5 +1,19 @@
 [
     {
+        "code": "APM",
+        "name": "Round1 Arlington Parks",
+        "city": "Arlington",
+        "state": "TX",
+        "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
+        "cab_count": 2,
+        "index": "005",
+        "lat": 32.684034,
+        "lng": -97.1325439,
+        "geocoded": true,
+        "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
+        "active": true
+    },
+    {
         "code": "DBK",
         "name": "Round1 Deerbrook Mall",
         "city": "Humble",
