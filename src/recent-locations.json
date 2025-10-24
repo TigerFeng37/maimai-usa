@@ -14,31 +14,17 @@
         "active": true
     },
     {
-        "code": "DBK",
-        "name": "Round1 Deerbrook Mall",
-        "city": "Humble",
+        "code": "GVM",
+        "name": "Round1 Grapevine Mills",
+        "city": "Grapevine",
         "state": "TX",
-        "address": "20131 Highway 59 N, Ste. 3000, Humble, TX 77338",
-        "cab_count": 2,
-        "index": "061",
-        "lat": 29.9988312,
-        "lng": -95.2621553,
+        "address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
+        "cab_count": 3,
+        "index": "010",
+        "lat": 32.9661965,
+        "lng": -97.0428635,
         "geocoded": true,
-        "geocoded_address": "Humble, TX",
-        "active": true
-    },
-    {
-        "code": "MCM",
-        "name": "Round1 Millcreek Mall",
-        "city": "Erie",
-        "state": "PA",
-        "address": "5800 Peach St, Erie, PA 16509",
-        "cab_count": 2,
-        "index": "025",
-        "lat": 42.0690814,
-        "lng": -80.0983248,
-        "geocoded": true,
-        "geocoded_address": "5800 Peach St, Erie, PA 16509",
+        "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
         "active": true
     }
 ]
