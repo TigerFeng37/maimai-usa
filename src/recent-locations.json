@@ -1,16 +1,16 @@
 [
     {
-        "code": "GVM",
-        "name": "Round1 Grapevine Mills",
-        "city": "Grapevine",
-        "state": "TX",
-        "address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
-        "cab_count": 3,
-        "index": "010",
-        "lat": 32.9661965,
-        "lng": -97.0428635,
+        "code": "DFM",
+        "name": "Round1 Deptford Mall",
+        "city": "Deptford",
+        "state": "NJ",
+        "address": "1750 Deptford Center Rd, Space #2350, Deptford Township, NJ 08096",
+        "cab_count": 2,
+        "index": "044",
+        "lat": 39.83341,
+        "lng": -75.09774,
         "geocoded": true,
-        "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
+        "geocoded_address": "1750 Deptford Center Rd, Deptford Township, NJ 08096",
         "active": true
     }
 ]
