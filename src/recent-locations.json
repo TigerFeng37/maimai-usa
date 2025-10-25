@@ -1,16 +1,44 @@
 [
     {
-        "code": "DFM",
-        "name": "Round1 Deptford Mall",
-        "city": "Deptford",
-        "state": "NJ",
-        "address": "1750 Deptford Center Rd, Space #2350, Deptford Township, NJ 08096",
+        "code": "APM",
+        "name": "Round1 Arlington Parks",
+        "city": "Arlington",
+        "state": "TX",
+        "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
         "cab_count": 2,
-        "index": "044",
-        "lat": 39.83341,
-        "lng": -75.09774,
+        "index": "005",
+        "lat": 32.684034,
+        "lng": -97.1325439,
         "geocoded": true,
-        "geocoded_address": "1750 Deptford Center Rd, Deptford Township, NJ 08096",
+        "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
+        "active": true
+    },
+    {
+        "code": "DBK",
+        "name": "Round1 Deerbrook Mall",
+        "city": "Humble",
+        "state": "TX",
+        "address": "20131 Highway 59 N, Ste. 3000, Humble, TX 77338",
+        "cab_count": 2,
+        "index": "061",
+        "lat": 29.9988312,
+        "lng": -95.2621553,
+        "geocoded": true,
+        "geocoded_address": "Humble, TX",
+        "active": true
+    },
+    {
+        "code": "GVM",
+        "name": "Round1 Grapevine Mills",
+        "city": "Grapevine",
+        "state": "TX",
+        "address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
+        "cab_count": 3,
+        "index": "010",
+        "lat": 32.9661965,
+        "lng": -97.0428635,
+        "geocoded": true,
+        "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
         "active": true
     }
 ]

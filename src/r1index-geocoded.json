@@ -11,7 +11,7 @@
     "lng": -97.1325439,
     "geocoded": true,
     "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
-    "active": false
+    "active": true
   },
   {
     "code": "ATC",
@@ -137,7 +137,7 @@
     "lng": -95.2621553,
     "geocoded": true,
     "geocoded_address": "Humble, TX",
-    "active": false
+    "active": true
   },
   {
     "code": "DFM",
@@ -291,7 +291,7 @@
     "lng": -97.0428635,
     "geocoded": true,
     "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
-    "active": false
+    "active": true
   },
   {
     "code": "GWM",
