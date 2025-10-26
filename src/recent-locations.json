@@ -1,16 +1,16 @@
 [
     {
-        "code": "VCM",
-        "name": "Round1 Vancouver Mall",
-        "city": "Vancouver",
-        "state": "WA",
-        "address": "8800 NE Vancouver Mall Dr, Ste. 100, Vancouver, WA 98662",
-        "cab_count": 2,
-        "index": "047",
-        "lat": 45.6574073,
-        "lng": -122.5825581,
+        "code": "GVM",
+        "name": "Round1 Grapevine Mills",
+        "city": "Grapevine",
+        "state": "TX",
+        "address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
+        "cab_count": 3,
+        "index": "010",
+        "lat": 32.9661965,
+        "lng": -97.0428635,
         "geocoded": true,
-        "geocoded_address": "8800 NE Vancouver Mall Dr, Vancouver, WA 98662",
+        "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
         "active": true
     }
 ]
