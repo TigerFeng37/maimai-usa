@@ -781,7 +781,7 @@
     "lng": -122.5825581,
     "geocoded": true,
     "geocoded_address": "8800 NE Vancouver Mall Dr, Vancouver, WA 98662",
-    "active": false
+    "active": true
   },
   {
     "code": "VRC",
