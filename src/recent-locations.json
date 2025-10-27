@@ -1,5 +1,19 @@
 [
     {
+        "code": "CCM",
+        "name": "Round1 Coronado Center",
+        "city": "Albuquerque",
+        "state": "NM",
+        "address": "6600 Menaul Blvd NE, Ste. 2000-2, Albuquerque, NM 87110",
+        "cab_count": 2,
+        "index": "023",
+        "lat": 35.1071269,
+        "lng": -106.5722559,
+        "geocoded": true,
+        "geocoded_address": "6600 Menaul Blvd NE, Albuquerque, NM 87110",
+        "active": true
+    },
+    {
         "code": "GVM",
         "name": "Round1 Grapevine Mills",
         "city": "Grapevine",
