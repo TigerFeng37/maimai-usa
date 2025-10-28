@@ -14,17 +14,17 @@
         "active": true
     },
     {
-        "code": "GVM",
-        "name": "Round1 Grapevine Mills",
-        "city": "Grapevine",
-        "state": "TX",
-        "address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
-        "cab_count": 3,
-        "index": "010",
-        "lat": 32.9661965,
-        "lng": -97.0428635,
+        "code": "LAS",
+        "name": "Round1 Meadows Mall",
+        "city": "Las Vegas",
+        "state": "NV",
+        "address": "4300 Meadows Ln, Las Vegas, NV 89107",
+        "cab_count": 2,
+        "index": "036",
+        "lat": 36.1722623,
+        "lng": -115.1973085,
         "geocoded": true,
-        "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
+        "geocoded_address": "4300 Meadows Ln, Las Vegas, NV 89107",
         "active": true
     }
 ]

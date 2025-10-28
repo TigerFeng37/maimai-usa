@@ -347,7 +347,7 @@
     "lng": -115.1973085,
     "geocoded": true,
     "geocoded_address": "4300 Meadows Ln, Las Vegas, NV 89107",
-    "active": false
+    "active": true
   },
   {
     "code": "LVO",
