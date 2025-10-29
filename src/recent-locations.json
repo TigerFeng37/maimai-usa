@@ -1,16 +1,30 @@
 [
     {
-        "code": "CCM",
-        "name": "Round1 Coronado Center",
-        "city": "Albuquerque",
-        "state": "NM",
-        "address": "6600 Menaul Blvd NE, Ste. 2000-2, Albuquerque, NM 87110",
+        "code": "APM",
+        "name": "Round1 Arlington Parks",
+        "city": "Arlington",
+        "state": "TX",
+        "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
         "cab_count": 2,
-        "index": "023",
-        "lat": 35.1071269,
-        "lng": -106.5722559,
+        "index": "005",
+        "lat": 32.684034,
+        "lng": -97.1325439,
         "geocoded": true,
-        "geocoded_address": "6600 Menaul Blvd NE, Albuquerque, NM 87110",
+        "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
+        "active": true
+    },
+    {
+        "code": "DBK",
+        "name": "Round1 Deerbrook Mall",
+        "city": "Humble",
+        "state": "TX",
+        "address": "20131 Highway 59 N, Ste. 3000, Humble, TX 77338",
+        "cab_count": 2,
+        "index": "061",
+        "lat": 29.9988312,
+        "lng": -95.2621553,
+        "geocoded": true,
+        "geocoded_address": "Humble, TX",
         "active": true
     },
     {
@@ -25,6 +39,20 @@
         "lng": -115.1973085,
         "geocoded": true,
         "geocoded_address": "4300 Meadows Ln, Las Vegas, NV 89107",
+        "active": true
+    },
+    {
+        "code": "STC",
+        "name": "Round1 Shops at South Town",
+        "city": "Sandy",
+        "state": "UT",
+        "address": "10450 S State St, Ste. 2405-1, Sandy, UT 84070",
+        "cab_count": 3,
+        "index": "024",
+        "lat": 40.5625514,
+        "lng": -111.8949297,
+        "geocoded": true,
+        "geocoded_address": "10450 S State St, Sandy, UT",
         "active": true
     }
 ]
