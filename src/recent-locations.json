@@ -1,47 +1,5 @@
 [
     {
-        "code": "APM",
-        "name": "Round1 Arlington Parks",
-        "city": "Arlington",
-        "state": "TX",
-        "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
-        "cab_count": 2,
-        "index": "005",
-        "lat": 32.684034,
-        "lng": -97.1325439,
-        "geocoded": true,
-        "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
-        "active": true
-    },
-    {
-        "code": "DBK",
-        "name": "Round1 Deerbrook Mall",
-        "city": "Humble",
-        "state": "TX",
-        "address": "20131 Highway 59 N, Ste. 3000, Humble, TX 77338",
-        "cab_count": 2,
-        "index": "061",
-        "lat": 29.9988312,
-        "lng": -95.2621553,
-        "geocoded": true,
-        "geocoded_address": "Humble, TX",
-        "active": true
-    },
-    {
-        "code": "LAS",
-        "name": "Round1 Meadows Mall",
-        "city": "Las Vegas",
-        "state": "NV",
-        "address": "4300 Meadows Ln, Las Vegas, NV 89107",
-        "cab_count": 2,
-        "index": "036",
-        "lat": 36.1722623,
-        "lng": -115.1973085,
-        "geocoded": true,
-        "geocoded_address": "4300 Meadows Ln, Las Vegas, NV 89107",
-        "active": true
-    },
-    {
         "code": "STC",
         "name": "Round1 Shops at South Town",
         "city": "Sandy",
