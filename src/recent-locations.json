@@ -1,16 +1,16 @@
 [
     {
-        "code": "STC",
-        "name": "Round1 Shops at South Town",
-        "city": "Sandy",
-        "state": "UT",
-        "address": "10450 S State St, Ste. 2405-1, Sandy, UT 84070",
-        "cab_count": 3,
-        "index": "024",
-        "lat": 40.5625514,
-        "lng": -111.8949297,
+        "code": "NSM",
+        "name": "Round1 North Star Mall",
+        "city": "San Antonio",
+        "state": "TX",
+        "address": "7400 San Pedro Ave, San Antonio, TX 78216",
+        "cab_count": 2,
+        "index": "052",
+        "lat": 29.5196287,
+        "lng": -98.496303,
         "geocoded": true,
-        "geocoded_address": "10450 S State St, Sandy, UT",
+        "geocoded_address": "7400 San Pedro Ave, San Antonio, TX 78216",
         "active": true
     }
 ]
