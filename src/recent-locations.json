@@ -12,19 +12,5 @@
         "geocoded": true,
         "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
         "active": true
-    },
-    {
-        "code": "NSM",
-        "name": "Round1 North Star Mall",
-        "city": "San Antonio",
-        "state": "TX",
-        "address": "7400 San Pedro Ave, San Antonio, TX 78216",
-        "cab_count": 2,
-        "index": "052",
-        "lat": 29.5196287,
-        "lng": -98.496303,
-        "geocoded": true,
-        "geocoded_address": "7400 San Pedro Ave, San Antonio, TX 78216",
-        "active": true
     }
 ]
