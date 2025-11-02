@@ -193,7 +193,7 @@
     "lng": -75.156878,
     "geocoded": true,
     "geocoded_address": "1001 Market St, Philadelphia, PA 19107",
-    "active": false
+    "active": true
   },
   {
     "code": "FFC",
@@ -375,7 +375,7 @@
     "lng": -118.117191,
     "geocoded": true,
     "geocoded_address": "Lakewood, CA",
-    "active": false
+    "active": true
   },
   {
     "code": "MCM",

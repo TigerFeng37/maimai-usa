@@ -1,16 +1,30 @@
 [
     {
-        "code": "APM",
-        "name": "Round1 Arlington Parks",
-        "city": "Arlington",
-        "state": "TX",
-        "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
+        "code": "FDP",
+        "name": "Round1 Fashion District",
+        "city": "Philadelphia",
+        "state": "PA",
+        "address": "1001 Market St, #3010, Philadelphia, PA 19107",
         "cab_count": 2,
-        "index": "005",
-        "lat": 32.684034,
-        "lng": -97.1325439,
+        "index": "039",
+        "lat": 39.95163,
+        "lng": -75.156878,
         "geocoded": true,
-        "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
+        "geocoded_address": "1001 Market St, Philadelphia, PA 19107",
+        "active": true
+    },
+    {
+        "code": "LWM",
+        "name": "Round1 Lakewood Center Mall",
+        "city": "Lakewood",
+        "state": "CA",
+        "address": "500 Lakewood Center Mall, Lakewood, CA 90712",
+        "cab_count": 2,
+        "index": "003",
+        "lat": 33.8503463,
+        "lng": -118.117191,
+        "geocoded": true,
+        "geocoded_address": "Lakewood, CA",
         "active": true
     }
 ]
