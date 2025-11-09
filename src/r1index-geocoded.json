@@ -11,7 +11,7 @@
     "lng": -97.1325439,
     "geocoded": true,
     "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
-    "active": false
+    "active": true
   },
   {
     "code": "ATC",
@@ -123,7 +123,7 @@
     "lng": -73.4807429,
     "geocoded": true,
     "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
-    "active": false
+    "active": true
   },
   {
     "code": "DBK",
@@ -221,7 +221,7 @@
     "lng": -79.8379748,
     "geocoded": true,
     "geocoded_address": "410 Four Seasons Town Centre, Greensboro, NC 27407",
-    "active": false
+    "active": true
   },
   {
     "code": "FVM",
@@ -249,7 +249,7 @@
     "lng": -83.29954,
     "geocoded": true,
     "geocoded_address": "4000 Baldwin Rd, Auburn Hills, MI 48326",
-    "active": false
+    "active": true
   },
   {
     "code": "GLM",
@@ -277,7 +277,7 @@
     "lng": -87.9891165,
     "geocoded": true,
     "geocoded_address": "6170 W Grand Ave, Gurnee, IL 60031",
-    "active": false
+    "active": true
   },
   {
     "code": "GVM",
@@ -347,7 +347,7 @@
     "lng": -115.1973085,
     "geocoded": true,
     "geocoded_address": "4300 Meadows Ln, Las Vegas, NV 89107",
-    "active": true
+    "active": false
   },
   {
     "code": "LVO",
@@ -361,7 +361,7 @@
     "lng": -115.1691447,
     "geocoded": true,
     "geocoded_address": "7400 Las Vegas Blvd S, Las Vegas, NV 89123",
-    "active": false
+    "active": true
   },
   {
     "code": "LWM",
@@ -501,7 +501,7 @@
     "lng": -117.065887,
     "geocoded": true,
     "geocoded_address": "3030 Plaza Bonita Rd, National City, CA 91950",
-    "active": false
+    "active": true
   },
   {
     "code": "PCC",
@@ -599,7 +599,7 @@
     "lng": -119.785268,
     "geocoded": true,
     "geocoded_address": "5000 Meadowood Mall Cir, Reno, NV 89502",
-    "active": false
+    "active": true
   },
   {
     "code": "RVM",
@@ -655,7 +655,7 @@
     "lng": -122.080796,
     "geocoded": true,
     "geocoded_address": "Hayward, CA",
-    "active": false
+    "active": true
   },
   {
     "code": "SRM",
@@ -711,7 +711,7 @@
     "lng": -122.0335624,
     "geocoded": true,
     "geocoded_address": "Concord, CA",
-    "active": false
+    "active": true
   },
   {
     "code": "SWP",
@@ -879,7 +879,7 @@
     "lng": -88.03518,
     "geocoded": true,
     "geocoded_address": "TBD",
-    "active": false
+    "active": true
   },
   {
     "code": "N/A",
@@ -893,7 +893,7 @@
     "lng": -93.242215,
     "geocoded": true,
     "geocoded_address": "342 East Broadway, Bloomington, MN 55425",
-    "active": false
+    "active": true
   },
   {
     "code": "N/A",
