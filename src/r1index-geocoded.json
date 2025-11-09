@@ -879,7 +879,7 @@
     "lng": -93.242215,
     "geocoded": true,
     "geocoded_address": "342 East Broadway, Bloomington, MN 55425",
-    "active": false
+    "active": true
   },
   {
     "code": "N/A",
