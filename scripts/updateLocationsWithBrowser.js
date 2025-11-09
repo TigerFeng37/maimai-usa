@@ -754,16 +754,19 @@ async function main() {
       console.log(`➕ Added new location: ${newLoc.name} with code ${newCode}`);
     });
     
-    // Update the data
-    let totalDeactivated = 0;
     let totalActivated = 0;
 
     const updatedData = jsonData.map(location => {
       const originalActiveState = location.active;
-      const newActiveState = activeLocationCodes.has(location.code);
+      const shouldBeActive = activeLocationCodes.has(location.code);
 
-      if (originalActiveState && !newActiveState) totalDeactivated++;
-      if (!originalActiveState && newActiveState) totalActivated++;
+      // A location, once active, should never be deactivated.
+      const newActiveState = originalActiveState || shouldBeActive;
+
+      if (!originalActiveState && newActiveState) {
+        totalActivated++;
+        console.log(`🟢 Activated: ${location.name} (${location.code})`);
+      }
 
       return {
         ...location,
@@ -774,21 +777,10 @@ async function main() {
     // Count changes
     const changes = {
       activated: totalActivated,
-      deactivated: totalDeactivated,
+      deactivated: 0,
       added: newLocations.length,
-      unchanged: jsonData.length - totalActivated - totalDeactivated - newLocations.length
+      unchanged: jsonData.length - totalActivated - newLocations.length
     };
-    
-    jsonData.forEach((location, index) => {
-      const wasActive = location.active;
-      const isActive = updatedData[index].active;
-      
-      if (wasActive && !isActive) {
-        console.log(`🔴 Deactivated: ${location.name} (${location.code})`);
-      } else if (!wasActive && isActive) {
-        console.log(`🟢 Activated: ${location.name} (${location.code})`);
-      }
-    });
     
     console.log(`\n📊 Update Summary:`);
     console.log(`   • Added: ${changes.added} locations`);
@@ -798,7 +790,7 @@ async function main() {
     console.log(`   • Total active: ${activeLocationCodes.size} locations\n`);
     
     // Write updated data back to file
-    if (changes.activated > 0 || changes.deactivated > 0 || changes.added > 0) {
+    if (changes.activated > 0 || changes.added > 0) {
       console.log('💾 Writing updated data to file...');
       await fs.writeFile(jsonPath, JSON.stringify(updatedData, null, 2));
       console.log('✅ Location data updated successfully!');

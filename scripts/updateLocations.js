@@ -334,10 +334,16 @@ async function main() {
     console.log(`\n🎯 Successfully matched ${activeLocationCodes.size} locations\n`);
     
     // Update the data
-    const updatedData = jsonData.map(location => ({
-      ...location,
-      active: activeLocationCodes.has(location.code)
-    }));
+    const updatedData = jsonData.map(location => {
+      const originalActiveState = location.active;
+      const shouldBeActive = activeLocationCodes.has(location.code);
+
+      // A location, once active, should never be deactivated.
+      return {
+        ...location,
+        active: originalActiveState || shouldBeActive
+      };
+    });
     
     // Count changes
     const changes = {
@@ -350,13 +356,10 @@ async function main() {
       const wasActive = location.active;
       const isActive = updatedData[index].active;
       
-      if (wasActive && !isActive) {
-        changes.deactivated++;
-        console.log(`🔴 Deactivated: ${location.name} (${location.code})`);
-      } else if (!wasActive && isActive) {
+      if (!wasActive && isActive) {
         changes.activated++;
         console.log(`🟢 Activated: ${location.name} (${location.code})`);
-      } else {
+      } else if (wasActive === isActive) {
         changes.unchanged++;
       }
     });
@@ -368,7 +371,7 @@ async function main() {
     console.log(`   • Total active: ${activeLocationCodes.size} locations\n`);
     
     // Write updated data back to file
-    if (changes.activated > 0 || changes.deactivated > 0) {
+    if (changes.activated > 0) {
       console.log('💾 Writing updated data to file...');
       await fs.writeFile(jsonPath, JSON.stringify(updatedData, null, 2));
       console.log('✅ Location data updated successfully!');
