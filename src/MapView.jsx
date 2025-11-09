@@ -171,52 +171,55 @@ function MapView() {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
           />
-          {locationsWithCoords.map((location) => (
-            <Marker
-              key={location.code}
-              position={[location.lat, location.lng]}
-              icon={location.active ? createActiveIcon(currentZoom) : createComingSoonIcon(currentZoom)}
-              clasName="dark:saturate-0"
-            >
-              <Popup className="dark:bg-gray-900 dark:text-white [&_.leaflet-popup-content-wrapper]:dark:bg-gray-900 [&_.leaflet-popup-content-wrapper]:dark:text-white [&_.leaflet-popup-tip]:dark:bg-gray-900 [&_.leaflet-popup-content]:dark:bg-gray-900">
-                <div className="py-2 min-w-[15rem] max-w-[20rem] dark:bg-gray-900">
-                  <div className="flex flex-row justify-between items-center mb-2">
-                    <div className="flex flex-row items-center gap-2">
-                    <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
-                    <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
-                    <span className={`text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-3xl flex flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
-                      <span className={`text-[1rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
+          {locationsWithCoords.flatMap((location, index) => {
+            const worldCopies = [-2, -1, 0, 1, 2];
+            return worldCopies.map(copyIndex => (
+              <Marker
+                key={`${location.code}-${index}-${copyIndex}`}
+                position={[location.lat, location.lng + (360 * copyIndex)]}
+                icon={location.active ? createActiveIcon(currentZoom) : createComingSoonIcon(currentZoom)}
+                clasName="dark:saturate-0"
+              >
+                <Popup className="dark:bg-gray-900 dark:text-white [&_.leaflet-popup-content-wrapper]:dark:bg-gray-900 [&_.leaflet-popup-content-wrapper]:dark:text-white [&_.leaflet-popup-tip]:dark:bg-gray-900 [&_.leaflet-popup-content]:dark:bg-gray-900">
+                  <div className="py-2 min-w-[15rem] max-w-[20rem] dark:bg-gray-900">
+                    <div className="flex flex-row justify-between items-center mb-2">
+                      <div className="flex flex-row items-center gap-2">
+                      <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
+                      <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
+                      <span className={`text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-3xl flex flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
+                        <span className={`text-[1rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
+                      </span>
+                    </div>
+                    <span className="text-sm font-mono font-light text-gray-500 dark:text-gray-400">
+                      #{location.index}
                     </span>
-                  </div>
-                  <span className="text-sm font-mono font-light text-gray-500 dark:text-gray-400">
-                    #{location.index}
-                  </span>
-                  </div>
-                  <h3 className="text-lg font-medium mb-2 dark:text-white">{location.name}</h3>
-                  <div className="flex flex-row items-center justify-between">
-                    <div className="flex flex-col justify-center items-start">
-                      <span className="text-4xl text-[#41BCCC]">{location.cab_count}</span>
-                      <span className="text-sm text-black dark:text-white">Cabinets</span>
+                    </div>
+                    <h3 className="text-lg font-medium mb-2 dark:text-white">{location.name}</h3>
+                    <div className="flex flex-row items-center justify-between">
+                      <div className="flex flex-col justify-center items-start">
+                        <span className="text-4xl text-[#41BCCC]">{location.cab_count}</span>
+                        <span className="text-sm text-black dark:text-white">Cabinets</span>
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 wrap-break-anywhere">{location.address}</p>
+                    
+                    {/* View Details Button */}
+                    <div>
+                      <button
+                        onClick={() => navigate(`/location/${location.code}`)}
+                        className="w-full flex items-center justify-between gap-2 px-3 py-2 bg-[#41BCCC] text-white rounded-md hover:bg-[#41BCCC]/90 transition-colors duration-200 text-sm font-medium"
+                      >
+                        View Details
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 wrap-break-anywhere">{location.address}</p>
-                  
-                  {/* View Details Button */}
-                  <div>
-                    <button
-                      onClick={() => navigate(`/location/${location.code}`)}
-                      className="w-full flex items-center justify-between gap-2 px-3 py-2 bg-[#41BCCC] text-white rounded-md hover:bg-[#41BCCC]/90 transition-colors duration-200 text-sm font-medium"
-                    >
-                      View Details
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </Popup>
-            </Marker>
-          ))}
+                </Popup>
+              </Marker>
+            ))
+          })}
         </MapContainer>
       </div>
     </div>
