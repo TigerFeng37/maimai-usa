@@ -459,7 +459,7 @@
     "lng": -121.6581414,
     "geocoded": true,
     "geocoded_address": "1600 Northridge Mall, Salinas, CA 93906",
-    "active": false
+    "active": true
   },
   {
     "code": "NRS",
@@ -711,7 +711,7 @@
     "lng": -122.0335624,
     "geocoded": true,
     "geocoded_address": "Concord, CA",
-    "active": false
+    "active": true
   },
   {
     "code": "SWP",
