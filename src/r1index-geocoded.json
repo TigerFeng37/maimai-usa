@@ -805,14 +805,14 @@
     "address": "1000 State Route 18, Edison, NJ 08837",
     "cab_count": "TBD",
     "index": "TBD",
-    "lat": 40.53833,
-    "lng": -74.37861,
+    "lat": 40.5474528,
+    "lng": -74.3369783,
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
     "active": false
   },
   {
-    "code": "GA-FLS",
+    "code": "N/A",
     "name": "Gatcha Flushing",
     "city": "Queens",
     "state": "NY",
@@ -826,7 +826,7 @@
     "active": false
   },
   {
-    "code": "GA-MPM",
+    "code": "N/A",
     "name": "Gatcha Edison",
     "city": "Edison",
     "state": "NJ",
@@ -840,7 +840,7 @@
     "active": false
   },
   {
-    "code": "GA-NTM",
+    "code": "N/A",
     "name": "Gatcha Natick Mall",
     "city": "Natick",
     "state": "NJ",
@@ -854,7 +854,7 @@
     "active": false
   },
   {
-    "code": "GA-ALS",
+    "code": "N/A",
     "name": "Gatcha Allston",
     "city": "Boston",
     "state": "MA",
@@ -868,7 +868,7 @@
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "XScape",
     "city": "Bloomington",
     "state": "MN",
@@ -882,7 +882,7 @@
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "South Point",
     "city": "Las Vegas",
     "state": "NV",
@@ -896,7 +896,7 @@
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "The Orleans",
     "city": "Las Vegas",
     "state": "NV",
@@ -910,7 +910,7 @@
     "active": false
   },
   {
-    "code": "GA-ALS",
+    "code": "N/A",
     "name": "H Mart Orlando",
     "city": "Orlando",
     "state": "FL",
@@ -924,7 +924,7 @@
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "H Mart Austin",
     "city": "Austin",
     "state": "TX",
@@ -938,21 +938,21 @@
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "Guam",
     "city": "Tamuning",
     "state": "GU",
     "address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
     "cab_count": 2,
     "index": "-",
-    "lat": 32.812119,
-    "lng": -96.741655,
+    "lat": 13.4928101,
+    "lng": 144.792646,
     "geocoded": true,
     "geocoded_address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "SF Japan Center",
     "city": "San Francisco",
     "state": "CA",
@@ -966,7 +966,7 @@
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "Japan Village",
     "city": "Brooklyn",
     "state": "NY",
@@ -980,7 +980,7 @@
     "active": false
   },
   {
-    "code": "-",
+    "code": "N/A",
     "name": "Little Tokyo",
     "city": "Los Angeles",
     "state": "CA",
