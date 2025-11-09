@@ -819,8 +819,8 @@
     "address": "137-19 41st Ave, Ste. 101, Queens, NY 11354",
     "cab_count": 2,
     "index": "-",
-    "lat": 40.7564071,
-    "lng": -73.909187,
+    "lat": 40.7572609,
+    "lng": -73.8374267,
     "geocoded": true,
     "geocoded_address": "137-19 41st Ave, Queens, NY 11354",
     "active": false
@@ -833,8 +833,8 @@
     "address": "1000 State Route 18, Edison, NJ 08837",
     "cab_count": 2,
     "index": "-",
-    "lat": 40.53833,
-    "lng": -74.37861,
+    "lat": 40.5482083,
+    "lng": -74.3399639,
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
     "active": false
