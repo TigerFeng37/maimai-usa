@@ -162,7 +162,7 @@ function ListView() {
             <h2 className="text-xl font-regular min-h-16 mt-2 leading-tight">{location.name}</h2>
             <div className="flex flex-col items-start">
               <span className="text-4xl text-[#41BCCC]">{location.cab_count}</span>
-              <span className="text-sm text-black dark:text-white">Cabinets</span>
+              <span className="text-sm text-black dark:text-white">Cabinet(s)</span>
             </div>
             <span className="text-xs text-gray-500 mt-auto">{location.address}</span>
             <span className={`md:hidden w-fit text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-xl flex flex-row items-center gap-1 mt-2`}>{location.active ? 'Active' : 'Coming Soon'}

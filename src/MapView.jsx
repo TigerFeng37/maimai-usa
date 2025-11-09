@@ -198,7 +198,7 @@ function MapView() {
                     <div className="flex flex-row items-center justify-between">
                       <div className="flex flex-col justify-center items-start">
                         <span className="text-4xl text-[#41BCCC]">{location.cab_count}</span>
-                        <span className="text-sm text-black dark:text-white">Cabinets</span>
+                        <span className="text-sm text-black dark:text-white">Cabinet(s)</span>
                       </div>
                     </div>
                     <p className="text-xs text-gray-500 dark:text-gray-400 wrap-break-anywhere">{location.address}</p>
