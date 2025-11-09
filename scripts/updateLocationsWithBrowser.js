@@ -130,131 +130,63 @@ async function fetchAllNetLocationsWithBrowser() {
       
       // Get the full page text
       const fullText = document.body.textContent || document.body.innerText || '';
-      console.log('Page text length:', fullText.length);
-      console.log('Contains ROUND1:', fullText.includes('ROUND1'));
       
-      // Strategy 1: Parse the specific ALL.Net format
-      // Look for the pattern: "ROUND1 [NAME] [ADDRESS] GoogleMapで見る Details"
+      // Look for the pattern: "[NAME]\n[ADDRESS]\nGoogleMap..."
       const lines = fullText.split('\n').map(line => line.trim()).filter(line => line);
       
-      // Debug: Show all lines containing ROUND1
-      const round1Lines = lines.filter(line => line.includes('ROUND1'));
-      console.log(`Found ${round1Lines.length} lines containing ROUND1:`);
-      round1Lines.forEach((line, i) => {
-        console.log(`  ${i + 1}: ${line}`);
-      });
+      // Debug: Show some lines for context
+      console.log(`Parsing ${lines.length} lines of text...`);
       
-      // Also check for 'SOUTHLAND' specifically
-      const southlandLines = lines.filter(line => line.includes('SOUTHLAND'));
-      console.log(`\n🔍 Lines containing SOUTHLAND: ${southlandLines.length}`);
-      southlandLines.forEach((line, i) => {
-        console.log(`  SOUTHLAND ${i + 1}: ${line}`);
-      });
-      
-      // Check expected count from website
-      const locationCountText = fullText.match(/（(\d+)\s+locations?）/);
-      if (locationCountText) {
-        console.log(`\n📊 Website says: ${locationCountText[1]} locations expected`);
-      }
-      
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i];
+      for (let i = 0; i < lines.length - 1; i++) {
+        const currentLine = lines[i];
+        const nextLine = lines[i + 1];
         
-        // Look for lines that start with ROUND1 (location name lines)
-        if (line.startsWith('ROUND1')) {
-          console.log('Found ROUND1 line:', line);
+        // Heuristic for a location entry:
+        // - The current line is the name (not an address, not "GoogleMap", not a number)
+        // - The next line looks like an address (contains numbers and a ZIP code)
+        const isProbablyName = !/^\d/.test(currentLine) && !currentLine.includes('GoogleMap') && !/\d{5}/.test(currentLine) && currentLine.length > 3;
+        const isProbablyAddress = /\d/.test(nextLine) && /,/.test(nextLine) && /\d{5}/.test(nextLine);
+        
+        if (isProbablyName && isProbablyAddress) {
+          console.log(`Potential Match Found:`);
+          console.log(`  Name: ${currentLine}`);
+          console.log(`  Address: ${nextLine}`);
           
-          // The next line should be the address
-          if (i + 1 < lines.length) {
-            const nextLine = lines[i + 1];
+          const addressMatch = nextLine.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
+          if (addressMatch) {
+            locations.push({
+              name: currentLine.trim(),
+              address: nextLine.trim(),
+              city: addressMatch[1].trim(),
+              state: addressMatch[2].trim(),
+            });
+            console.log(`  --> Extracted: ${currentLine.trim()} in ${addressMatch[1].trim()}, ${addressMatch[2].trim()}`);
             
-            // Check if next line looks like an address (contains numbers and commas)
-            if (/\d+.*,.*\d{5}/.test(nextLine)) {
-              console.log('Found address line:', nextLine);
-              
-              locations.push({
-                name: line.trim(),
-                address: nextLine.trim()
-              });
-              
-              console.log(`Extracted: ${line.trim()} - ${nextLine.trim()}`);
-            }
+            // Skip the next line since it's been processed as an address
+            i++;
           }
         }
       }
       
-      // Strategy 2: Alternative parsing for different line formats
+      // If the primary strategy failed, try to find ROUND1 locations as a fallback
       if (locations.length === 0) {
-        console.log('Strategy 1 failed, trying alternative parsing...');
-        
-        // Look for lines starting with "* ROUND1"
-        for (const line of lines) {
-          if (line.startsWith('* ROUND1') || line.includes('ROUND1')) {
-            console.log('Alternative format line:', line.substring(0, 100));
-            
-            // Try different patterns
-            const patterns = [
-              // Pattern: "* ROUND1 NAME ADDRESS GoogleMapで見る Details"
-              /\*?\s*ROUND1\s+(.+?)\s+(\d+[^G]+?)(?:GoogleMapで見る|Details)/,
-              // Pattern: "ROUND1 NAME ADDRESS"
-              /ROUND1\s+(.+?)\s+(\d+[^,]+(?:,[^,]+){2,}\s*\d{5})/,
-            ];
-            
-            for (const pattern of patterns) {
-              const match = line.match(pattern);
-              if (match) {
-                let name = match[1].trim();
-                let address = match[2].trim();
-                
-                if (!name.startsWith('ROUND1')) {
-                  name = `ROUND1 ${name}`;
-                }
-                
-                const addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
+        console.log('Primary strategy failed, falling back to ROUND1-specific search...');
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
+          if (line.startsWith('ROUND1')) {
+            if (i + 1 < lines.length) {
+              const nextLine = lines[i + 1];
+              if (/\d+.*,.*\d{5}/.test(nextLine)) {
+                const addressMatch = nextLine.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
                 if (addressMatch) {
                   locations.push({
-                    name: name,
-                    address: address,
+                    name: line.trim(),
+                    address: nextLine.trim(),
                     city: addressMatch[1].trim(),
                     state: addressMatch[2].trim()
                   });
-                  
-                  console.log(`Alternative parsed: ${name} in ${addressMatch[1].trim()}, ${addressMatch[2].trim()}`);
                 }
-              }
-            }
-          }
-        }
-      }
-      
-      // Strategy 3: Look in the raw HTML for structured data
-      if (locations.length === 0) {
-        console.log('Both strategies failed, examining HTML structure...');
-        
-        // Look for list items or other structured elements
-        const listItems = document.querySelectorAll('li, p, div');
-        for (const item of listItems) {
-          const text = item.textContent || '';
-          if (text.includes('ROUND1') && text.includes('GoogleMapで見る')) {
-            console.log('Found structured element:', text.substring(0, 100));
-            
-            const match = text.match(/ROUND1\s+(.+?)\s+(\d+[^G]+?)(?:GoogleMapで見る)/);
-            if (match) {
-              let name = match[1].trim();
-              let address = match[2].trim();
-              
-              if (!name.startsWith('ROUND1')) {
-                name = `ROUND1 ${name}`;
-              }
-              
-              const addressMatch = address.match(/,\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
-              if (addressMatch) {
-                locations.push({
-                  name: name,
-                  address: address,
-                  city: addressMatch[1].trim(),
-                  state: addressMatch[2].trim()
-                });
+                i++; // Skip address line
               }
             }
           }
@@ -275,9 +207,9 @@ async function fetchAllNetLocationsWithBrowser() {
         console.log(`${i + 1}. ${loc.name} - ${loc.city}, ${loc.state}`);
       });
       
-      // If we didn't find 8 locations, save the page content for debugging
-      if (uniqueLocations.length < 8) {
-        console.log(`⚠️  Only found ${uniqueLocations.length} locations, expected 8`);
+      // If we didn't find any locations, save the page content for debugging
+      if (uniqueLocations.length === 0) {
+        console.log(`⚠️  No locations found.`);
         console.log(`💾 Saving page content for manual inspection...`);
         
         // Return the full page content along with locations for debugging
@@ -285,8 +217,6 @@ async function fetchAllNetLocationsWithBrowser() {
           locations: uniqueLocations,
           debugInfo: {
             fullText: fullText.substring(0, 5000), // First 5000 chars
-            round1Lines: round1Lines,
-            southlandLines: southlandLines
           }
         };
       }
@@ -301,14 +231,9 @@ async function fetchAllNetLocationsWithBrowser() {
       actualLocations = locations.locations;
       console.log('\n🔍 DEBUG INFO:');
       console.log(`Full text preview: ${locations.debugInfo.fullText.substring(0, 500)}...`);
-      console.log(`ROUND1 lines found: ${locations.debugInfo.round1Lines.length}`);
-      console.log(`SOUTHLAND lines found: ${locations.debugInfo.southlandLines.length}`);
       
-      if (locations.debugInfo.southlandLines.length > 0) {
-        console.log('SOUTHLAND lines:');
-        locations.debugInfo.southlandLines.forEach((line, i) => {
-          console.log(`  ${i + 1}: ${line}`);
-        });
+      if (locations.debugInfo.fullText.length > 500) {
+        console.log('...');
       }
       
       // Save to file for manual inspection
@@ -691,54 +616,84 @@ function normalizeAddress(address) {
     .toLowerCase();
 }
 
+/**
+ * Generates a unique 3-letter code for a new location.
+ * Tries to use the first letter of the first three words of the name.
+ * Handles collisions by appending a number.
+ * @param {string} name - The name of the location.
+ * @param {string[]} existingCodes - An array of existing location codes.
+ * @returns {string} A unique 3-letter (or more) code.
+ */
+function generateLocationCode(name, existingCodes) {
+  // Sanitize name by removing common terms like "Round1" or "Arcade"
+  const sanitizedName = name
+    .toLowerCase()
+    .replace(/round1|arcade|entertainment|center|mall|bowl/g, '')
+    .trim();
+  
+  const words = sanitizedName.split(/\s+/).filter(Boolean);
+  let baseCode = (words.map(w => w[0]).join('') || 'NLC').substring(0, 3).toUpperCase();
+  
+  let finalCode = baseCode;
+  let counter = 1;
+  
+  // Ensure the generated code is unique
+  while (existingCodes.includes(finalCode)) {
+    // If base code is 3 letters, shorten to 2 to make space for a number
+    if (baseCode.length > 2) {
+      baseCode = baseCode.substring(0, 2);
+    }
+    finalCode = `${baseCode}${counter}`;
+    counter++;
+  }
+  
+  return finalCode;
+}
+
 function matchLocations(allNetLocations, jsonLocations) {
   const activeMatches = new Set();
-  
+  const newFoundLocations = [];
+  const matchedJsonCodes = new Set(); // Track which existing locations have been matched
+
   for (const allNetLocation of allNetLocations) {
     let matchedLocation = null;
-    
-    // Extract zip code from scraped address
+
     const zipMatch = allNetLocation.address.match(/\b(\d{5})$/);
     const scrapedZip = zipMatch ? zipMatch[1] : null;
-    
-    // Strategy 1: Try to match by ZIP code (most reliable)
+
+    // Strategy 1: Match by ZIP code if available and not already matched
     if (scrapedZip) {
-      matchedLocation = jsonLocations.find(jsonLocation => 
-        jsonLocation.address.includes(scrapedZip)
-      );
-      
-      if (matchedLocation) {
-        activeMatches.add(matchedLocation.code);
+      const potentialMatches = jsonLocations.filter(loc => loc.address.includes(scrapedZip) && !matchedJsonCodes.has(loc.code));
+      if (potentialMatches.length === 1) {
+        matchedLocation = potentialMatches[0];
         console.log(`✅ Matched by ZIP ${scrapedZip}: ${allNetLocation.name} -> ${matchedLocation.name} (${matchedLocation.code})`);
-        continue;
-      } else {
-        console.log(`⚠️  No ZIP match found for ${scrapedZip}: ${allNetLocation.name}, trying name match...`);
       }
-    } else {
-      console.log(`⚠️  No zip found for: ${allNetLocation.name} - ${allNetLocation.address}, trying name match...`);
     }
-    
-    // Strategy 2: FAILSAFE - Try to match by location name
-    // This handles cases where zip parsing failed or zip-based match didn't work
-    const normalizedScrapedName = normalizeLocationName(allNetLocation.name);
-    
-    matchedLocation = jsonLocations.find(jsonLocation => {
-      const normalizedJsonName = normalizeLocationName(jsonLocation.name);
-      
-      // Check if names match (fuzzy match - one contains the other)
-      return normalizedJsonName.includes(normalizedScrapedName) || 
-             normalizedScrapedName.includes(normalizedJsonName);
-    });
+
+    // Strategy 2: Match by name if ZIP fails or is ambiguous
+    if (!matchedLocation) {
+      const normalizedScrapedName = normalizeLocationName(allNetLocation.name);
+      const potentialMatches = jsonLocations.filter(loc => {
+        if (matchedJsonCodes.has(loc.code)) return false;
+        const normalizedJsonName = normalizeLocationName(loc.name);
+        return normalizedJsonName.includes(normalizedScrapedName) || normalizedScrapedName.includes(normalizedJsonName);
+      });
+      if (potentialMatches.length === 1) {
+        matchedLocation = potentialMatches[0];
+        console.log(`✅ Matched by NAME: ${allNetLocation.name} -> ${matchedLocation.name} (${matchedLocation.code})`);
+      }
+    }
     
     if (matchedLocation) {
       activeMatches.add(matchedLocation.code);
-      console.log(`✅ FAILSAFE: Matched by NAME: ${allNetLocation.name} -> ${matchedLocation.name} (${matchedLocation.code})`);
+      matchedJsonCodes.add(matchedLocation.code);
     } else {
-      console.log(`❌ No match found (neither ZIP nor name): ${allNetLocation.name}`);
+      console.log(`✨ New location found: ${allNetLocation.name}`);
+      newFoundLocations.push(allNetLocation);
     }
   }
   
-  return activeMatches;
+  return { activeLocationCodes: activeMatches, newLocations: newFoundLocations };
 }
 
 /**
@@ -764,22 +719,64 @@ async function main() {
     const allNetLocations = await fetchAllNetLocationsWithBrowser();
     console.log(`📍 Found ${allNetLocations.length} active locations\n`);
     
-    // Match locations
+    // Match locations and identify new ones
     console.log('🔍 Matching locations...');
-    const activeLocationCodes = matchLocations(allNetLocations, jsonData);
-    console.log(`\n🎯 Successfully matched ${activeLocationCodes.size} locations\n`);
+    const { activeLocationCodes, newLocations } = matchLocations(allNetLocations, jsonData);
+    console.log(`\n🎯 Successfully matched ${activeLocationCodes.size} existing locations`);
+    if (newLocations.length > 0) {
+      console.log(`✨ Found ${newLocations.length} new locations:\n`);
+      newLocations.forEach(loc => console.log(`   • ${loc.name} - ${loc.address}`));
+    }
+    console.log('');
+
+    // Add new locations to the dataset
+    const existingCodes = jsonData.map(loc => loc.code);
+    newLocations.forEach(newLoc => {
+      const newCode = generateLocationCode(newLoc.name, existingCodes.concat(jsonData.map(l => l.code)));
+      
+      jsonData.push({
+        code: newCode,
+        name: newLoc.name,
+        city: newLoc.city,
+        state: newLoc.state,
+        address: newLoc.address,
+        cab_count: 1, // Default to 1, can be adjusted manually
+        index: `new_${newCode.toLowerCase()}`,
+        lat: null,
+        lng: null,
+        geocoded: false,
+        geocoded_address: null,
+        active: true
+      });
+      
+      // Add the new code to the active list
+      activeLocationCodes.add(newCode);
+      console.log(`➕ Added new location: ${newLoc.name} with code ${newCode}`);
+    });
     
     // Update the data
-    const updatedData = jsonData.map(location => ({
-      ...location,
-      active: activeLocationCodes.has(location.code)
-    }));
+    let totalDeactivated = 0;
+    let totalActivated = 0;
+
+    const updatedData = jsonData.map(location => {
+      const originalActiveState = location.active;
+      const newActiveState = activeLocationCodes.has(location.code);
+
+      if (originalActiveState && !newActiveState) totalDeactivated++;
+      if (!originalActiveState && newActiveState) totalActivated++;
+
+      return {
+        ...location,
+        active: newActiveState,
+      };
+    });
     
     // Count changes
     const changes = {
-      activated: 0,
-      deactivated: 0,
-      unchanged: 0
+      activated: totalActivated,
+      deactivated: totalDeactivated,
+      added: newLocations.length,
+      unchanged: jsonData.length - totalActivated - totalDeactivated - newLocations.length
     };
     
     jsonData.forEach((location, index) => {
@@ -787,24 +784,21 @@ async function main() {
       const isActive = updatedData[index].active;
       
       if (wasActive && !isActive) {
-        changes.deactivated++;
         console.log(`🔴 Deactivated: ${location.name} (${location.code})`);
       } else if (!wasActive && isActive) {
-        changes.activated++;
         console.log(`🟢 Activated: ${location.name} (${location.code})`);
-      } else {
-        changes.unchanged++;
       }
     });
     
     console.log(`\n📊 Update Summary:`);
+    console.log(`   • Added: ${changes.added} locations`);
     console.log(`   • Activated: ${changes.activated} locations`);
     console.log(`   • Deactivated: ${changes.deactivated} locations`);
     console.log(`   • Unchanged: ${changes.unchanged} locations`);
     console.log(`   • Total active: ${activeLocationCodes.size} locations\n`);
     
     // Write updated data back to file
-    if (changes.activated > 0 || changes.deactivated > 0) {
+    if (changes.activated > 0 || changes.deactivated > 0 || changes.added > 0) {
       console.log('💾 Writing updated data to file...');
       await fs.writeFile(jsonPath, JSON.stringify(updatedData, null, 2));
       console.log('✅ Location data updated successfully!');

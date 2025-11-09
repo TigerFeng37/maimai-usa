@@ -123,10 +123,14 @@ jobs:
               currentData.forEach(currentLoc => {
                 const prevLoc = previousMap.get(currentLoc.code);
                 
-                // Check if location was inactive before and is now active
-                if (currentLoc.active && prevLoc && !prevLoc.active) {
+                // Check if location was inactive before and is now active, or if it's a new location
+                if (currentLoc.active && (!prevLoc || !prevLoc.active)) {
                   newlyActivated.add(currentLoc.code);
-                  console.log(`  ✨ Newly activated: ${currentLoc.code} - ${currentLoc.name}`);
+                  if (prevLoc) {
+                    console.log(`  ✨ Newly activated: ${currentLoc.code} - ${currentLoc.name}`);
+                  } else {
+                    console.log(`  ⭐ New location added: ${currentLoc.code} - ${currentLoc.name}`);
+                  }
                 }
               });
             } catch (error) {
