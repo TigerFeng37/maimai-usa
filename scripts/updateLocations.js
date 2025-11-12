@@ -48,54 +48,13 @@ async function fetchAllNetLocations() {
     const html = await response.text();
     return parseAllNetHTML(html);
   } catch (error) {
-    console.warn('⚠️  Failed to fetch from ALL.Net website:', error.message);
-    console.log('📋 Using fallback active locations from search results...');
+    console.error('❌ CRITICAL: Failed to fetch from ALL.Net website:', error.message);
+    console.error('   Cannot proceed with update without reliable data source.');
+    console.error('   Please check if the ALL.Net website is accessible or has changed.\n');
     
-    // Fallback to known active locations from the web search
-    return [
-      {
-        name: "ROUND1 PUENTE HILLS MALL",
-        address: "1600 S Azusa Ave. Suite 285, City of Industry, CA 91748",
-        city: "City of Industry",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 MORENO VALLEY MALL", 
-        address: "22500 Town Circle Suite 2030, Moreno Valley, CA 92553",
-        city: "Moreno Valley",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 LAKEWOOD MALL",
-        address: "401 Lakewood Ctr. Mall, Lakewood, CA 90712", 
-        city: "Lakewood",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 MAIN PLACE MALL",
-        address: "2800 N. Main St. Suite 1100, Santa Ana, CA 92705",
-        city: "Santa Ana", 
-        state: "CA"
-      },
-      {
-        name: "ROUND1 PROMENADE TEMECULA",
-        address: "40710 Winchester Road, Suite 100, Temecula, CA 92591",
-        city: "Temecula",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 SOUTHLAND MALL", 
-        address: "545 Southland Mall Dr. Hayward,CA 94545",
-        city: "Hayward",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 BURBANK TOWN CENTER",
-        address: "201 E Magnolia Blvd, Suite 145,Burbank, CA 91502",
-        city: "Burbank",
-        state: "CA"
-      }
-    ];
+    // DO NOT use fallback data - it's too risky and causes false activations
+    // Instead, fail the update and alert the maintainers
+    throw new Error('ALL.Net fetch failed - aborting update to prevent data corruption');
   }
 }
 
@@ -140,55 +99,14 @@ function parseAllNetHTML(html) {
     }
   }
   
-  // If parsing failed, return fallback data
+  // If parsing failed, throw error instead of using stale fallback data
   if (locations.length === 0) {
-    console.log('⚠️  HTML parsing failed, using fallback data');
-    return [
-      {
-        name: "ROUND1 PUENTE HILLS MALL",
-        address: "1600 S Azusa Ave. Suite 285, City of Industry, CA 91748",
-        city: "City of Industry",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 MORENO VALLEY MALL", 
-        address: "22500 Town Circle Suite 2030, Moreno Valley, CA 92553",
-        city: "Moreno Valley",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 LAKEWOOD MALL",
-        address: "401 Lakewood Ctr. Mall, Lakewood, CA 90712", 
-        city: "Lakewood",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 MAIN PLACE MALL",
-        address: "2800 N. Main St. Suite 1100, Santa Ana, CA 92705",
-        city: "Santa Ana", 
-        state: "CA"
-      },
-      {
-        name: "ROUND1 PROMENADE TEMECULA",
-        address: "40710 Winchester Road, Suite 100, Temecula, CA 92591",
-        city: "Temecula",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 SOUTHLAND MALL", 
-        address: "545 Southland Mall Dr. Hayward,CA 94545",
-        city: "Hayward",
-        state: "CA"
-      },
-      {
-        name: "ROUND1 BURBANK TOWN CENTER",
-        address: "201 E Magnolia Blvd, Suite 145,Burbank, CA 91502",
-        city: "Burbank",
-        state: "CA"
-      }
-    ];
+    console.error('❌ HTML parsing failed - no locations found in response');
+    console.error('   The ALL.Net website structure may have changed.');
+    throw new Error('Failed to parse ANY locations from ALL.Net HTML');
   }
   
+  console.log(`✅ Successfully parsed ${locations.length} locations from ALL.Net`);
   return locations;
 }
 
@@ -276,7 +194,7 @@ function matchLocations(allNetLocations, jsonLocations) {
         }
       }
       
-      if (score > highestScore && score >= 70) { // Minimum confidence threshold
+      if (score > highestScore && score >= 95) { // Minimum confidence threshold (raised from 70 to 95)
         highestScore = score;
         bestMatch = jsonLocation;
       }
@@ -288,20 +206,9 @@ function matchLocations(allNetLocations, jsonLocations) {
     } else {
       console.log(`⚠️  No high-confidence match for: ${allNetLocation.name} in ${allNetLocation.city}, ${allNetLocation.state}`);
       
-      // FAILSAFE: Try simple name-based match as last resort
-      const normalizedScrapedName = normalizeLocationName(allNetLocation.name);
-      const nameMatch = jsonLocations.find(jsonLocation => {
-        const normalizedJsonName = normalizeLocationName(jsonLocation.name);
-        return normalizedJsonName.includes(normalizedScrapedName) || 
-               normalizedScrapedName.includes(normalizedJsonName);
-      });
-      
-      if (nameMatch) {
-        activeMatches.add(nameMatch.code);
-        console.log(`✅ FAILSAFE: Matched by name only: ${allNetLocation.name} -> ${nameMatch.name} (${nameMatch.code})`);
-      } else {
-        console.log(`❌ No match found (even by name): ${allNetLocation.name}`);
-      }
+      // DISABLED: Removed dangerous failsafe that could cause false matches
+      // Only match locations with high confidence scores (95+)
+      console.log(`❌ No match found: ${allNetLocation.name} - Skipping to avoid false positives`);
     }
   }
   
@@ -333,15 +240,26 @@ async function main() {
     const activeLocationCodes = matchLocations(allNetLocations, jsonData);
     console.log(`\n🎯 Successfully matched ${activeLocationCodes.size} locations\n`);
     
+    // SAFETY CHECK: Ensure we have a reasonable number of matches
+    // If we matched too few locations, abort to avoid mass deactivation
+    const MIN_EXPECTED_ACTIVE = 40; // Round1 has ~40+ active maimai locations in the US
+    if (activeLocationCodes.size < MIN_EXPECTED_ACTIVE) {
+      console.error(`\n⚠️  SAFETY CHECK FAILED!`);
+      console.error(`   Only matched ${activeLocationCodes.size} locations, expected at least ${MIN_EXPECTED_ACTIVE}`);
+      console.error(`   This could indicate a scraping failure or website change.`);
+      console.error(`   Aborting update to prevent mass deactivation.\n`);
+      process.exit(1);
+    }
+    
     // Update the data
+    // IMPORTANT: We now allow deactivation if a location is no longer on ALL.Net
+    // However, we require explicit confirmation for deactivation by checking
+    // if we have a reasonable number of active locations
     const updatedData = jsonData.map(location => {
-      const originalActiveState = location.active;
       const shouldBeActive = activeLocationCodes.has(location.code);
-
-      // A location, once active, should never be deactivated.
       return {
         ...location,
-        active: originalActiveState || shouldBeActive
+        active: shouldBeActive
       };
     });
     
@@ -359,7 +277,10 @@ async function main() {
       if (!wasActive && isActive) {
         changes.activated++;
         console.log(`🟢 Activated: ${location.name} (${location.code})`);
-      } else if (wasActive === isActive) {
+      } else if (wasActive && !isActive) {
+        changes.deactivated++;
+        console.log(`🔴 Deactivated: ${location.name} (${location.code})`);
+      } else {
         changes.unchanged++;
       }
     });
@@ -370,8 +291,16 @@ async function main() {
     console.log(`   • Unchanged: ${changes.unchanged} locations`);
     console.log(`   • Total active: ${activeLocationCodes.size} locations\n`);
     
+    // SAFETY CHECK: Alert if mass deactivation is about to happen
+    if (changes.deactivated > 5) {
+      console.error(`\n⚠️  WARNING: About to deactivate ${changes.deactivated} locations!`);
+      console.error(`   This is unusual and may indicate a problem with data fetching.`);
+      console.error(`   Please review the changes carefully before proceeding.\n`);
+      // Don't abort, but make it very visible
+    }
+    
     // Write updated data back to file
-    if (changes.activated > 0) {
+    if (changes.activated > 0 || changes.deactivated > 0) {
       console.log('💾 Writing updated data to file...');
       await fs.writeFile(jsonPath, JSON.stringify(updatedData, null, 2));
       console.log('✅ Location data updated successfully!');
@@ -384,6 +313,12 @@ async function main() {
     } else {
       console.log('ℹ️  No changes detected, file not updated');
     }
+    
+    // Final summary
+    console.log(`\n✅ Update process completed successfully!`);
+    console.log(`   Changes made: ${changes.activated + changes.deactivated}`);
+    console.log(`   Total locations tracked: ${jsonData.length}`);
+    console.log(`   Currently active: ${updatedData.filter(l => l.active).length}\n`);
     
   } catch (error) {
     console.error('❌ Error updating location data:', error);

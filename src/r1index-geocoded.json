@@ -12,7 +12,7 @@
     "lng": -97.1325439,
     "geocoded": true,
     "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
-    "active": true
+    "active": false
   },
   {
     "code": "ATC",
@@ -132,7 +132,7 @@
     "lng": -73.4807429,
     "geocoded": true,
     "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
-    "active": true
+    "active": false
   },
   {
     "code": "DBK",
@@ -231,7 +231,7 @@
     "lng": -79.8379748,
     "geocoded": true,
     "geocoded_address": "410 Four Seasons Town Centre, Greensboro, NC 27407",
-    "active": true
+    "active": false
   },
   {
     "code": "FVM",
@@ -259,7 +259,7 @@
     "lng": -83.29954,
     "geocoded": true,
     "geocoded_address": "4000 Baldwin Rd, Auburn Hills, MI 48326",
-    "active": true
+    "active": false
   },
   {
     "code": "GLM",
@@ -287,7 +287,7 @@
     "lng": -87.9891165,
     "geocoded": true,
     "geocoded_address": "6170 W Grand Ave, Gurnee, IL 60031",
-    "active": true
+    "active": false
   },
   {
     "code": "GVM",
@@ -371,7 +371,7 @@
     "lng": -115.1691447,
     "geocoded": true,
     "geocoded_address": "7400 Las Vegas Blvd S, Las Vegas, NV 89123",
-    "active": true
+    "active": false
   },
   {
     "code": "LWM",
@@ -511,7 +511,7 @@
     "lng": -117.065887,
     "geocoded": true,
     "geocoded_address": "3030 Plaza Bonita Rd, National City, CA 91950",
-    "active": true
+    "active": false
   },
   {
     "code": "PCC",
@@ -609,7 +609,7 @@
     "lng": -119.785268,
     "geocoded": true,
     "geocoded_address": "5000 Meadowood Mall Cir, Reno, NV 89502",
-    "active": true
+    "active": false
   },
   {
     "code": "RVM",
@@ -665,7 +665,7 @@
     "lng": -122.080796,
     "geocoded": true,
     "geocoded_address": "Hayward, CA",
-    "active": true
+    "active": false
   },
   {
     "code": "SRM",
@@ -721,7 +721,7 @@
     "lng": -122.0335624,
     "geocoded": true,
     "geocoded_address": "Concord, CA",
-    "active": true
+    "active": false
   },
   {
     "code": "SWP",
