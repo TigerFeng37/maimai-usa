@@ -819,7 +819,7 @@
     "lng": -74.3369783,
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -833,7 +833,7 @@
     "lng": -73.8374267,
     "geocoded": true,
     "geocoded_address": "137-19 41st Ave, Queens, NY 11354",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -847,7 +847,7 @@
     "lng": -74.3394276,
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -861,7 +861,7 @@
     "lng": -71.33906,
     "geocoded": true,
     "geocoded_address": "1255 Worcester St, Natick, MA 01760",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -875,7 +875,7 @@
     "lng": -71.12541,
     "geocoded": true,
     "geocoded_address": "TBD",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -917,7 +917,7 @@
     "lng": -115.172215,
     "geocoded": true,
     "geocoded_address": "9777 S. Las Vegas Blvd, Las Vegas, NV 89183",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -931,7 +931,7 @@
     "lng": -115.152778,
     "geocoded": true,
     "geocoded_address": "4150 Paradise Rd, Las Vegas, NV 89169",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -945,7 +945,7 @@
     "lng": -81.483738,
     "geocoded": true,
     "geocoded_address": "7501 W Colonial Dr, Orlando, FL 32818",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -959,7 +959,7 @@
     "lng": -97.800942,
     "geocoded": true,
     "geocoded_address": "11301 Lakeline Blvd suite 124, Austin, TX 78717",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -973,7 +973,7 @@
     "lng": 144.792646,
     "geocoded": true,
     "geocoded_address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -987,7 +987,7 @@
     "lng": -122.409418,
     "geocoded": true,
     "geocoded_address": "1581 Webster St #225 San Francisco, CA 94115",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -1001,7 +1001,7 @@
     "lng": -73.964803,
     "geocoded": true,
     "geocoded_address": "934 3rd Avenue Brooklyn, NY 11232",
-    "active": true
+    "active": false
   },
   {
     "code": "N/A",
@@ -1015,6 +1015,20 @@
     "lng": -118.242769,
     "geocoded": true,
     "geocoded_address": "319 E 2nd St, Los Angeles, CA 90012",
-    "active": true
+    "active": false
+  },
+  {
+    "code": "N/A",
+    "name": "Ikigai Arcade",
+    "city": "Pittsburgh",
+    "state": "PA",
+    "address": "5738 Baum Blvd, Pittsburgh, PA 15206",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 40.4586569,
+    "lng": -79.9323794,
+    "geocoded": true,
+    "geocoded_address": "5738 Baum Blvd, Pittsburgh, PA 15206",
+    "active": false
   }
 ]
