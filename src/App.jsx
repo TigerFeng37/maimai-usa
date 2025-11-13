@@ -5,6 +5,10 @@ import ListView from './ListView'
 import MapView from './MapView'
 import DetailView from './DetailView'
 import Footer from './components/Footer'
+import MaintenancePage from './components/MaintenancePage'
+
+// Toggle this to enable/disable maintenance mode
+const MAINTENANCE_MODE = true
 
 // Transition wrapper component
 function TransitionWrapper({ children }) {
@@ -44,6 +48,11 @@ function AppContent() {
 }
 
 function App() {
+  // If maintenance mode is enabled, show maintenance page
+  if (MAINTENANCE_MODE) {
+    return <MaintenancePage />
+  }
+
   return (
     <Router basename="/">
       <AppContent />
