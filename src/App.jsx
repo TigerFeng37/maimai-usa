@@ -8,7 +8,7 @@ import Footer from './components/Footer'
 import MaintenancePage from './components/MaintenancePage'
 
 // Toggle this to enable/disable maintenance mode
-const MAINTENANCE_MODE = true
+const MAINTENANCE_MODE = false
 
 // Transition wrapper component
 function TransitionWrapper({ children }) {
@@ -39,7 +39,7 @@ function AppContent() {
           <Route path="/" element={<Navigate to="/map" replace />} />
           <Route path="/list" element={<ListView />} />
           <Route path="/map" element={<MapView />} />
-          <Route path="/location/:locationCode" element={<DetailView />} />
+          <Route path="/location/:storeId" element={<DetailView />} />
         </Routes>
       </TransitionWrapper>
       <Footer isMapView={isMapView} />

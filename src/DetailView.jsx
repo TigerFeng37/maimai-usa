@@ -38,18 +38,18 @@ const comingSoonIcon = new L.Icon({
   });
 
 function DetailView() {
-  const { locationCode } = useParams()
+  const { storeId } = useParams()
   const navigate = useNavigate()
   const [location, setLocation] = useState(null)
   useEffect(() => {
-    const foundLocation = data.find(loc => loc.code === locationCode)
+    const foundLocation = data.find(loc => loc.storeid === storeId)
     setLocation(foundLocation)
     
     // If location not found, redirect back to list
     if (!foundLocation) {
       navigate('/list')
     }
-  }, [locationCode, navigate])
+  }, [storeId, navigate])
 
   const handleBack = () => {
     // Use View Transitions API if supported
@@ -80,19 +80,38 @@ function DetailView() {
   }
 
   const getStandardHours = (location) => {
-    if (!location) return ''
+    if (!location || !location.hours) return ''
     
-    // Return standard Round1 hours since CORS proxy services are unreliable
-    // Most Round1 locations follow similar hours, with some variations
-    return "Daily 10:00 AM - 2:00 AM"
+    // Return hours from JSON data
+    return location.hours
   }
 
-  const getContactInfo = () => {
-    // Standard Round1 customer support
-    return {
-      phone: "855-772-6636",
-      website: "round1usa.com"
-    }
+  const formatHours = (hoursString) => {
+    if (!hoursString) return null
+    
+    // Split by newline and format each line
+    const lines = hoursString.split('\n').filter(line => line.trim())
+    
+    return lines.map((line, index) => {
+      // Extract day and time range
+      const match = line.match(/^(\w+day)\s+(.+)$/i)
+      if (match) {
+        const day = match[1]
+        const time = match[2]
+        return (
+          <div key={index} className="flex justify-between items-start py-1.5 border-b border-gray-100 dark:border-gray-800 last:border-0">
+            <span className="font-medium text-gray-900 dark:text-white">{day}</span>
+            <span className="text-gray-700 dark:text-gray-300 ml-4 text-right">{time}</span>
+          </div>
+        )
+      }
+      // Fallback if format doesn't match
+      return (
+        <div key={index} className="py-1.5 border-b border-gray-100 dark:border-gray-800 last:border-0">
+          <span className="text-gray-900 dark:text-white">{line}</span>
+        </div>
+      )
+    })
   }
 
   if (!location) {
@@ -187,14 +206,18 @@ function DetailView() {
             <div>
                 <div className="flex flex-row justify-between items-center gap-2 mb-2 w-full">
                     <div className="flex flex-row items-center gap-2">
-                        <span className="text-sm font-medium text-black dark:text-white px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
+                        {location.code !== "N/A" && (
+                          <span className="text-sm font-medium text-black dark:text-white px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
+                        )}
                         <span className="text-sm text-gray-500 px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
                         <span className={`text-sm text-black dark:text-white py-1 px-3 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50'} rounded-3xl flex flex-row items-center gap-2`}>
                             {location.active ? 'Active' : 'Coming Soon'}
                             <span className={`text-xs ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                         </span>
                     </div>
-                    <span className="text-sm font-mono font-light text-gray-500">#{location.index}</span>
+                    {location.index !== "-" && (
+                      <span className="text-sm font-mono font-light text-gray-500">#{location.index}</span>
+                    )}
                 </div>
               <h1 className="text-3xl font-regular text-black dark:text-white">{location.name}</h1>
               <p className="text-gray-600 dark:text-gray-400 text-md   ">{location.city}, {location.state}</p>
@@ -219,20 +242,10 @@ function DetailView() {
             
             <div>
               <div className="mb-4">
-                <h3 className="text-xs font-medium text-gray-700 dark:text-gray-300">Hours of Operation</h3>
-                <p className="text-gray-900 dark:text-white text-lg">{getStandardHours(location)}</p>
-                <p className="text-xs text-gray-500 mt-1">
-                  Standard hours - Check{' '}
-                  <a 
-                    href={generateRound1URL(location)} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-blue-500 hover:text-blue-800 underline"
-                  >
-                    official website
-                  </a>
-                  {' '}for current hours
-                </p>
+                <h3 className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-3">Hours of Operation</h3>
+                <div className="text-base">
+                  {formatHours(getStandardHours(location))}
+                </div>
               </div>
               
               <div className="mb-4">
@@ -240,19 +253,19 @@ function DetailView() {
                 <div>
                   <p className="text-gray-900 dark:text-white">
                     <span className="font-medium">Phone:</span> 
-                    <a href={`tel:${getContactInfo().phone}`} className="ml-2 text-blue-500 hover:text-blue-800">
-                      {getContactInfo().phone}
+                    <a href={`tel:${location.phone}`} className="ml-2 text-blue-500 hover:text-blue-800">
+                      {location.phone}
                     </a>
                   </p>
                   <p className="text-gray-900 dark:text-white">
-                    <span className="font-medium">Website:</span> 
+                    <span className="font-medium">Official Website:</span> 
                     <a 
-                      href={generateRound1URL(location)} 
+                      href={location.website} 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="ml-2 text-blue-500 hover:text-blue-800"
                     >
-                      View Official Website ↗
+                      {location.website} ↗
                     </a>
                   </p>
                 </div>

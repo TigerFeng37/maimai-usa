@@ -113,14 +113,14 @@ function ListView() {
     setSelectedCabCount(null)
   }
 
-  const handleLocationClick = (locationCode) => {
+  const handleLocationClick = (storeId) => {
     // Use View Transitions API if supported
     if ('startViewTransition' in document) {
       document.startViewTransition(() => {
-        navigate(`/location/${locationCode}`)
+        navigate(`/location/${storeId}`)
       })
     } else {
-      navigate(`/location/${locationCode}`)
+      navigate(`/location/${storeId}`)
     }
   }
 
@@ -146,18 +146,22 @@ function ListView() {
         {sortedData.map((location) => (
           <div 
             className="p-4 border-b border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-[18rem] md:min-h-0 cursor-pointer bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 transition-colors duration-200 text-black dark:text-white" 
-            key={location.code}
-            onClick={() => handleLocationClick(location.code)}
+            key={location.storeid}
+            onClick={() => handleLocationClick(location.storeid)}
           >
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row items-start gap-2">
-                <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
+                {location.code !== "N/A" && (
+                  <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
+                )}
                 <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
                 <span className={`hidden md:flex text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-3xl flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                   <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                 </span>
               </div>
-              <span className="text-sm font-mono font-light text-gray-500">{`#${location.index}`}</span>
+              {location.index !== "-" && (
+                <span className="text-sm font-mono font-light text-gray-500">{`#${location.index}`}</span>
+              )}
             </div>
             <h2 className="text-xl font-regular min-h-16 mt-2 leading-tight">{location.name}</h2>
             <div className="flex flex-col items-start">

@@ -12,7 +12,10 @@
     "lng": -97.1325439,
     "geocoded": true,
     "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
-    "active": false
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(817) 855-4941",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "ATC",
@@ -27,7 +30,10 @@
     "lng": -112.2212309,
     "geocoded": true,
     "geocoded_address": "7700 W Arrowhead Towne Center, Glendale, AZ",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(602) 805-7616",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "BTC",
@@ -42,7 +48,10 @@
     "lng": -118.311551,
     "geocoded": true,
     "geocoded_address": "201 E Magnolia Blvd, Burbank, CA 91502",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(818) 333-5859",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "BWM",
@@ -57,7 +66,10 @@
     "lng": -73.5286572,
     "geocoded": true,
     "geocoded_address": "358 N Broadway, Hicksville, NY 11801",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 10:00 AM - 12:00 AM\nTuesday 10:00 AM - 12:00 AM\nWednesday 10:00 AM - 12:00 AM\nThursday 10:00 AM - 12:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
+    "phone": "(516) 595-2080",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "CCM",
@@ -72,7 +84,10 @@
     "lng": -106.5722559,
     "geocoded": true,
     "geocoded_address": "6600 Menaul Blvd NE, Albuquerque, NM 87110",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(505) 510-4988",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "CHF",
@@ -87,7 +102,10 @@
     "lng": -111.8989071,
     "geocoded": true,
     "geocoded_address": "3111 W Chandler Blvd, Chandler, AZ 85226",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(623) 473-0889",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "CLM",
@@ -102,7 +120,10 @@
     "lng": -84.4680708,
     "geocoded": true,
     "geocoded_address": "2860 Cumberland Mall, Atlanta, GA 30339",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(404) 254-6060",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "CRG",
@@ -117,7 +138,10 @@
     "lng": -74.3707953,
     "geocoded": true,
     "geocoded_address": "1 Galleria Dr, Middletown, NY 10941",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(845) 378-1100",
+    "website": "https://www.round1usa.com/menu"
   },
   {
     "code": "DBF",
@@ -132,7 +156,10 @@
     "lng": -73.4807429,
     "geocoded": true,
     "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
-    "active": false
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(475) 204-3141",
+    "website": "https://round1usa.com/"
   },
   {
     "code": "DBK",
@@ -147,7 +174,10 @@
     "lng": -95.2621553,
     "geocoded": true,
     "geocoded_address": "Humble, TX",
-    "active": true
+    "active": true,
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(346) 662-1256",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "DFM",
@@ -161,7 +191,11 @@
     "lng": -75.09774,
     "geocoded": true,
     "geocoded_address": "1750 Deptford Center Rd, Deptford Township, NJ 08096",
-    "active": true
+    "active": true,
+    "storeid": "19645",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(856) 879-9070",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "ESC",
@@ -175,7 +209,11 @@
     "lng": -121.81848,
     "geocoded": true,
     "geocoded_address": "2200 Eastridge Loop, San Jose, CA 95122",
-    "active": true
+    "active": true,
+    "storeid": "21247",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(408) 513-8290",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "EXM",
@@ -189,7 +227,11 @@
     "lng": -75.622268,
     "geocoded": true,
     "geocoded_address": "172 Exton Square Pkwy, Exton, PA",
-    "active": true
+    "active": true,
+    "storeid": "20784",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(484) 252-2819",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "FDP",
@@ -203,7 +245,11 @@
     "lng": -75.156878,
     "geocoded": true,
     "geocoded_address": "1001 Market St, Philadelphia, PA 19107",
-    "active": true
+    "active": true,
+    "storeid": "19972",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(267) 857-0007",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "FFC",
@@ -217,7 +263,11 @@
     "lng": -84.0566596,
     "geocoded": true,
     "geocoded_address": "2727 Fairfield Commons, Beavercreek, OH 45431",
-    "active": true
+    "active": true,
+    "storeid": "19989",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(937) 986-1696",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "FSM",
@@ -231,7 +281,11 @@
     "lng": -79.8379748,
     "geocoded": true,
     "geocoded_address": "410 Four Seasons Town Centre, Greensboro, NC 27407",
-    "active": false
+    "active": true,
+    "storeid": "20487",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(336) 645-5887",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "FVM",
@@ -245,7 +299,11 @@
     "lng": -88.2145192,
     "geocoded": true,
     "geocoded_address": "195 Fox Valley Center, Aurora, IL 60504",
-    "active": true
+    "active": true,
+    "storeid": "20724",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(331) 208-9270",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "GLC",
@@ -259,7 +317,11 @@
     "lng": -83.29954,
     "geocoded": true,
     "geocoded_address": "4000 Baldwin Rd, Auburn Hills, MI 48326",
-    "active": false
+    "active": true,
+    "storeid": "20569",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(248) 464-6492",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "GLM",
@@ -273,7 +335,11 @@
     "lng": -81.3611059,
     "geocoded": true,
     "geocoded_address": "7850 Mentor Ave, Mentor, OH 44060",
-    "active": true
+    "active": true,
+    "storeid": "20402",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(440) 701-6799",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "GUR",
@@ -287,7 +353,11 @@
     "lng": -87.9891165,
     "geocoded": true,
     "geocoded_address": "6170 W Grand Ave, Gurnee, IL 60031",
-    "active": false
+    "active": true,
+    "storeid": "18878",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(224) 538-6242",
+    "website": "https://round1usa.com/"
   },
   {
     "code": "GVM",
@@ -301,7 +371,11 @@
     "lng": -97.0428635,
     "geocoded": true,
     "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
-    "active": true
+    "active": true,
+    "storeid": "20972",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(817) 873-7981",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "GWM",
@@ -315,7 +389,11 @@
     "lng": -96.6369813,
     "geocoded": true,
     "geocoded_address": "6100 O St, Lincoln, NE 68505",
-    "active": true
+    "active": true,
+    "storeid": "20165",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(402) 480-6336",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "HYM",
@@ -329,7 +407,11 @@
     "lng": -72.6410822,
     "geocoded": true,
     "geocoded_address": "50 Holyoke St, Holyoke, MA 01040",
-    "active": true
+    "active": true,
+    "storeid": "20120",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(413) 409-5090",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "JSG",
@@ -343,7 +425,11 @@
     "lng": -74.1716045,
     "geocoded": true,
     "geocoded_address": "651 Kapkowski Rd, Elizabeth, NJ 07201",
-    "active": true
+    "active": true,
+    "storeid": "18717",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(908) 316-0262",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "LAS",
@@ -357,7 +443,11 @@
     "lng": -115.1973085,
     "geocoded": true,
     "geocoded_address": "4300 Meadows Ln, Las Vegas, NV 89107",
-    "active": true
+    "active": true,
+    "storeid": "20009",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(702) 956-6333",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "LVO",
@@ -371,7 +461,11 @@
     "lng": -115.1691447,
     "geocoded": true,
     "geocoded_address": "7400 Las Vegas Blvd S, Las Vegas, NV 89123",
-    "active": false
+    "active": true,
+    "storeid": "18976",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(702) 405-1020",
+    "website": "http://www.round1usa.com/"
   },
   {
     "code": "LWM",
@@ -385,7 +479,11 @@
     "lng": -118.117191,
     "geocoded": true,
     "geocoded_address": "Lakewood, CA",
-    "active": true
+    "active": true,
+    "storeid": "22693",
+    "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 10:00 AM - 12:00 AM\nTuesday 10:00 AM - 12:00 AM\nWednesday 10:00 AM - 12:00 AM\nThursday 10:00 AM - 12:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
+    "phone": "(562) 408-2937",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "MCM",
@@ -399,7 +497,11 @@
     "lng": -80.0983248,
     "geocoded": true,
     "geocoded_address": "5800 Peach St, Erie, PA 16509",
-    "active": true
+    "active": true,
+    "storeid": "20228",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(814) 813-1730",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "MEM",
@@ -413,7 +515,11 @@
     "lng": -70.3365511,
     "geocoded": true,
     "geocoded_address": "364 Maine Mall Rd, South Portland, ME 04106",
-    "active": true
+    "active": true,
+    "storeid": "20344",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(207) 466-1200",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "MPM",
@@ -427,7 +533,11 @@
     "lng": -117.869038,
     "geocoded": true,
     "geocoded_address": "2800 N Main St, Santa Ana, CA 92705",
-    "active": true
+    "active": true,
+    "storeid": "21347",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(714) 619-6840",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "MVJ",
@@ -441,7 +551,11 @@
     "lng": -117.6691164,
     "geocoded": true,
     "geocoded_address": "555 The Shops at Mission Viejo, Mission Viejo, CA 92691",
-    "active": true
+    "active": true,
+    "storeid": "18927",
+    "hours": "Sunday 10:00 AM - 11:00 PM\nMonday 10:00 AM - 11:00 PM\nTuesday 10:00 AM - 11:00 PM\nWednesday 10:00 AM - 11:00 PM\nThursday 10:00 AM - 11:00 PM\nFriday 10:00 AM - 11:00 PM\nSaturday 10:00 AM - 11:00 PM",
+    "phone": "(949) 373-7955",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "MVM",
@@ -454,8 +568,12 @@
     "lat": 33.938685,
     "lng": -117.271425,
     "geocoded": true,
-    "geocoded_address": "555 The Shops at Mission Viejo, Mission Viejo, CA 92691",
-    "active": true
+    "geocoded_address": "22500 Town Circle Suite 2030, Moreno Valley, CA 92553",
+    "active": true,
+    "storeid": "22694",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(951) 697-0260",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "NRM",
@@ -469,7 +587,11 @@
     "lng": -121.6581414,
     "geocoded": true,
     "geocoded_address": "1600 Northridge Mall, Salinas, CA 93906",
-    "active": true
+    "active": true,
+    "storeid": "20227",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(831) 287-3848",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "NRS",
@@ -483,7 +605,11 @@
     "lng": -87.8107611,
     "geocoded": true,
     "geocoded_address": "7501 W Cermak Rd, North Riverside, IL 60546",
-    "active": true
+    "active": true,
+    "storeid": "20164",
+    "hours": "Sunday 10:00 AM - 1:00 AM\nMonday 10:00 AM - 1:00 AM\nTuesday 10:00 AM - 1:00 AM\nWednesday 10:00 AM - 1:00 AM\nThursday 10:00 AM - 1:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
+    "phone": "(708) 762-3113",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "NSM",
@@ -497,7 +623,11 @@
     "lng": -98.496303,
     "geocoded": true,
     "geocoded_address": "7400 San Pedro Ave, San Antonio, TX 78216",
-    "active": true
+    "active": true,
+    "storeid": "19132",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(210) 448-2030",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "PBO",
@@ -511,7 +641,11 @@
     "lng": -117.065887,
     "geocoded": true,
     "geocoded_address": "3030 Plaza Bonita Rd, National City, CA 91950",
-    "active": false
+    "active": true,
+    "storeid": "18879",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(619) 773-2789",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "PCC",
@@ -525,7 +659,11 @@
     "lng": -76.3390136,
     "geocoded": true,
     "geocoded_address": "142 Park City Center, Lancaster, PA 17601",
-    "active": true
+    "active": true,
+    "storeid": "19508",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(717) 803-8980",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "PHM",
@@ -539,7 +677,11 @@
     "lng": -117.926751,
     "geocoded": true,
     "geocoded_address": "1600 S Azusa Ave, City of Industry, CA 91748",
-    "active": true
+    "active": true,
+    "storeid": "22695",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(626) 964-5356",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "PLM",
@@ -553,7 +695,11 @@
     "lng": -80.3089242,
     "geocoded": true,
     "geocoded_address": "12055 Pines Blvd, Pembroke Pines, FL 33026",
-    "active": true
+    "active": true,
+    "storeid": "19226",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(754) 216-7404",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "PMM",
@@ -567,7 +713,11 @@
     "lng": -77.29633,
     "geocoded": true,
     "geocoded_address": "2700 Potomac Mills Cir, Woodbridge, VA 22192",
-    "active": true
+    "active": true,
+    "storeid": "19683",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(571) 554-8040",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "PPM",
@@ -581,7 +731,11 @@
     "lng": -110.863724,
     "geocoded": true,
     "geocoded_address": "5950 E Broadway Blvd, Tucson, AZ 85711",
-    "active": true
+    "active": true,
+    "storeid": "20010",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(520) 485-4288",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "QSM",
@@ -595,7 +749,11 @@
     "lng": -97.5583996,
     "geocoded": true,
     "geocoded_address": "2501 W Memorial Rd, Oklahoma City, OK 73134",
-    "active": true
+    "active": true,
+    "storeid": "19461",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(405) 896-9515",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "RNO",
@@ -609,7 +767,11 @@
     "lng": -119.785268,
     "geocoded": true,
     "geocoded_address": "5000 Meadowood Mall Cir, Reno, NV 89502",
-    "active": false
+    "active": false,
+    "storeid": "20041",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(775) 393-1244",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "RVM",
@@ -623,7 +785,11 @@
     "lng": -121.2666443,
     "geocoded": true,
     "geocoded_address": "1911 Galleria Blvd, Roseville, CA 95678",
-    "active": true
+    "active": true,
+    "storeid": "19225",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(916) 751-3181",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "SCM",
@@ -637,7 +803,11 @@
     "lng": -122.2559156,
     "geocoded": true,
     "geocoded_address": "Tukwila, WA",
-    "active": true
+    "active": true,
+    "storeid": "20980",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(206) 243-2787",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "SHM",
@@ -651,7 +821,11 @@
     "lng": -122.2967446,
     "geocoded": true,
     "geocoded_address": "3500 S Meridian, Puyallup, WA 98373",
-    "active": true
+    "active": true,
+    "storeid": "19224",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(253) 446-5678",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "SLM",
@@ -665,7 +839,11 @@
     "lng": -122.080796,
     "geocoded": true,
     "geocoded_address": "Hayward, CA",
-    "active": false
+    "active": true,
+    "storeid": "20062",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(510) 300-6677",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "SRM",
@@ -679,7 +857,11 @@
     "lng": -88.0045914,
     "geocoded": true,
     "geocoded_address": "5200 S 76th St, Greendale, WI 53129",
-    "active": true
+    "active": true,
+    "storeid": "20139",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(414) 409-6781",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "STC",
@@ -693,7 +875,11 @@
     "lng": -111.8949297,
     "geocoded": true,
     "geocoded_address": "10450 S State St, Sandy, UT",
-    "active": true
+    "active": true,
+    "storeid": "20229",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(385) 434-1300",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "STG",
@@ -707,7 +893,11 @@
     "lng": -122.475874,
     "geocoded": true,
     "geocoded_address": "3251 20th Ave, San Francisco, CA 94132",
-    "active": true
+    "active": true,
+    "storeid": "18766",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(415) 230-3977",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "SVM",
@@ -721,7 +911,11 @@
     "lng": -122.0335624,
     "geocoded": true,
     "geocoded_address": "Concord, CA",
-    "active": false
+    "active": true,
+    "storeid": "20877",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(925) 826-1860",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "SWP",
@@ -735,7 +929,11 @@
     "lng": -105.0951717,
     "geocoded": true,
     "geocoded_address": "8501 W Bowles Ave, Littleton, CO 80123",
-    "active": true
+    "active": true,
+    "storeid": "20768",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(720) 643-2746",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "TES",
@@ -749,7 +947,11 @@
     "lng": -97.2470472,
     "geocoded": true,
     "geocoded_address": "7700 E Kellogg Dr, Wichita, KS 67207",
-    "active": true
+    "active": true,
+    "storeid": "19757",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(316) 500-2909",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "TMP",
@@ -763,7 +965,11 @@
     "lng": -117.1531122,
     "geocoded": true,
     "geocoded_address": "40710 Winchester Rd, Temecula, CA 92591",
-    "active": true
+    "active": true,
+    "storeid": "20119",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(951) 225-6133",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "TTC",
@@ -777,7 +983,11 @@
     "lng": -76.6003485,
     "geocoded": true,
     "geocoded_address": "825 Dulaney Valley Rd, Ste. 1190, Towson, MD 21204",
-    "active": true
+    "active": true,
+    "storeid": "19988",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(443) 846-0345",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "VCM",
@@ -791,7 +1001,11 @@
     "lng": -122.5825581,
     "geocoded": true,
     "geocoded_address": "8800 NE Vancouver Mall Dr, Vancouver, WA 98662",
-    "active": true
+    "active": true,
+    "storeid": "19642",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(564) 888-2515",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "VRC",
@@ -805,7 +1019,11 @@
     "lng": -123.1071148,
     "geocoded": true,
     "geocoded_address": "600 Valley River Center, Eugene, OR 97401",
-    "active": true
+    "active": true,
+    "storeid": "19873",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(541) 600-4840",
+    "website": "http://round1usa.com/"
   },
   {
     "code": "N/A",
@@ -819,7 +1037,9 @@
     "lng": -74.3369783,
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
-    "active": true
+    "active": false,
+    "storeid": "18534",
+    "website": "https://www.round1usa.com/"
   },
   {
     "code": "N/A",
@@ -827,13 +1047,17 @@
     "city": "Queens",
     "state": "NY",
     "address": "137-19 41st Ave, Ste. 101, Queens, NY 11354",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 40.7572609,
     "lng": -73.8374267,
     "geocoded": true,
     "geocoded_address": "137-19 41st Ave, Queens, NY 11354",
-    "active": true
+    "active": false,
+    "storeid": "gatcha-flushing",
+    "hours": "Sunday 11:00 AM - 12:00 AM\nMonday 11:00 AM - 12:00 AM\nTuesday 11:00 AM - 12:00 AM\nWednesday 11:00 AM - 12:00 AM\nThursday 11:00 AM - 12:00 AM\nFriday 11:00 AM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
+    "phone": "(347) 438-1080",
+    "website": "https://www.gatcha.us/"
   },
   {
     "code": "N/A",
@@ -841,13 +1065,17 @@
     "city": "Edison",
     "state": "NJ",
     "address": "1000 State Route 18, Edison, NJ 08837",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 40.5474953,
     "lng": -74.3394276,
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
-    "active": true
+    "active": false,
+    "storeid": "gatcha-edison",
+    "hours": "Sunday 12:00 PM - 6:00 PM\nMonday 11:00 AM - 8:00 PM\nTuesday 11:00 AM - 8:00 PM\nWednesday 11:00 AM - 8:00 PM\nThursday 11:00 AM - 8:00 PM\nFriday 11:00 AM - 9:00 PM\nSaturday 11:00 AM - 9:00 PM",
+    "phone": "(908) 384-9228",
+    "website": "https://www.gatcha.us/"
   },
   {
     "code": "N/A",
@@ -855,13 +1083,14 @@
     "city": "Natick",
     "state": "NJ",
     "address": "1255 Worcester St, Natick, MA 01760",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 42.28283,
     "lng": -71.33906,
     "geocoded": true,
     "geocoded_address": "1255 Worcester St, Natick, MA 01760",
-    "active": true
+    "active": false,
+    "storeid": "gatcha-natick"
   },
   {
     "code": "N/A",
@@ -869,13 +1098,14 @@
     "city": "Boston",
     "state": "MA",
     "address": "TBD",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 42.33821,
     "lng": -71.12541,
     "geocoded": true,
     "geocoded_address": "TBD",
-    "active": true
+    "active": false,
+    "storeid": "gatcha-allston"
   },
   {
     "code": "N/A",
@@ -889,7 +1119,11 @@
     "lng": -88.03518,
     "geocoded": true,
     "geocoded_address": "TBD",
-    "active": true
+    "active": true,
+    "storeid": "18528",
+    "hours": "Sunday 11:00 AM - 10:00 PM\nMonday 11:00 AM - 10:00 PM\nTuesday 11:00 AM - 10:00 PM\nWednesday 11:00 AM - 10:00 PM\nThursday 11:00 AM - 10:00 PM\nFriday 11:00 AM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
+    "phone": "(847) 805-0257",
+    "website": "http://enterrium.info/"
   },
   {
     "code": "N/A",
@@ -903,7 +1137,11 @@
     "lng": -93.242215,
     "geocoded": true,
     "geocoded_address": "342 East Broadway, Bloomington, MN 55425",
-    "active": true
+    "active": true,
+    "storeid": "18518",
+    "hours": "Sunday 11:00 AM - 7:00 PM\nMonday 11:00 AM - 9:00 PM\nTuesday 11:00 AM - 9:00 PM\nWednesday 11:00 AM - 9:00 PM\nThursday 11:00 AM - 9:00 PM\nFriday 10:00 AM - 9:00 PM\nSaturday 10:00 AM - 9:00 PM",
+    "phone": "(952) 854-1252",
+    "website": "https://www.mallofamerica.com/directory/xscape"
   },
   {
     "code": "N/A",
@@ -911,13 +1149,17 @@
     "city": "Las Vegas",
     "state": "NV",
     "address": "9777 S. Las Vegas Blvd, Las Vegas, NV 89183",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 36.112217,
     "lng": -115.172215,
     "geocoded": true,
     "geocoded_address": "9777 S. Las Vegas Blvd, Las Vegas, NV 89183",
-    "active": true
+    "active": false,
+    "storeid": "18519",
+    "hours": "Sunday 12:00 AM - Open 24 hours",
+    "phone": "(866) 791-7626",
+    "website": "https://www.southpointcasino.com/"
   },
   {
     "code": "N/A",
@@ -931,7 +1173,11 @@
     "lng": -115.152778,
     "geocoded": true,
     "geocoded_address": "4150 Paradise Rd, Las Vegas, NV 89169",
-    "active": true
+    "active": true,
+    "storeid": "18520",
+    "hours": "Sunday 11:00 AM - 10:00 PM\nMonday 11:00 AM - 10:00 PM\nTuesday 11:00 AM - 10:00 PM\nWednesday 11:00 AM - 10:00 PM\nThursday 11:00 AM - 10:00 PM\nFriday 11:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
+    "phone": "(702) 853-2337",
+    "website": "https://www.hofbrauhauslasvegas.com/"
   },
   {
     "code": "N/A",
@@ -939,13 +1185,17 @@
     "city": "Orlando",
     "state": "FL",
     "address": "7501 W Colonial Dr, Orlando, FL 32818",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 28.553234,
     "lng": -81.483738,
     "geocoded": true,
     "geocoded_address": "7501 W Colonial Dr, Orlando, FL 32818",
-    "active": true
+    "active": false,
+    "storeid": "18521",
+    "hours": "Sunday 9:00 AM - 10:00 PM\nMonday 9:00 AM - 10:00 PM\nTuesday 9:00 AM - 10:00 PM\nWednesday 9:00 AM - 10:00 PM\nThursday 9:00 AM - 10:00 PM\nFriday 9:00 AM - 10:00 PM\nSaturday 9:00 AM - 10:00 PM",
+    "phone": "(407) 853-8010",
+    "website": "https://www.hmart.com/store/orlando-fl-32818/67336882-b0db-453f-b173-89d63c2af774"
   },
   {
     "code": "N/A",
@@ -953,13 +1203,17 @@
     "city": "Austin",
     "state": "TX",
     "address": "11301 Lakeline Blvd suite 124, Austin, TX 78717",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 30.482507,
     "lng": -97.800942,
     "geocoded": true,
     "geocoded_address": "11301 Lakeline Blvd suite 124, Austin, TX 78717",
-    "active": true
+    "active": false,
+    "storeid": "18522",
+    "hours": "Sunday 8:00 AM - 10:00 PM\nMonday 8:00 AM - 10:00 PM\nTuesday 8:00 AM - 10:00 PM\nWednesday 8:00 AM - 10:00 PM\nThursday 8:00 AM - 10:00 PM\nFriday 8:00 AM - 10:00 PM\nSaturday 8:00 AM - 10:00 PM",
+    "phone": "(737) 717-6900",
+    "website": "http://www.hmart.com/"
   },
   {
     "code": "N/A",
@@ -967,13 +1221,14 @@
     "city": "Tamuning",
     "state": "GU",
     "address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 13.4928101,
     "lng": 144.792646,
     "geocoded": true,
     "geocoded_address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
-    "active": true
+    "active": false,
+    "storeid": "18523"
   },
   {
     "code": "N/A",
@@ -981,13 +1236,17 @@
     "city": "San Francisco",
     "state": "CA",
     "address": "1581 Webster St #225 San Francisco, CA 94115",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 37.788566,
     "lng": -122.409418,
     "geocoded": true,
     "geocoded_address": "1581 Webster St #225 San Francisco, CA 94115",
-    "active": true
+    "active": false,
+    "storeid": "18524",
+    "hours": "Sunday 8:30 AM - 10:00 PM\nMonday 8:30 AM - 11:00 PM\nTuesday 8:30 AM - 11:00 PM\nWednesday 8:30 AM - 11:00 PM\nThursday 8:30 AM - 11:00 PM\nFriday 8:30 AM - 11:00 PM\nSaturday 8:30 AM - 11:00 PM",
+    "phone": "(415) 440-1171",
+    "website": "https://www.sfjapantown.org/japan-center-malls/"
   },
   {
     "code": "N/A",
@@ -1001,7 +1260,11 @@
     "lng": -73.964803,
     "geocoded": true,
     "geocoded_address": "934 3rd Avenue Brooklyn, NY 11232",
-    "active": true
+    "active": false,
+    "storeid": "18525",
+    "hours": "Sunday 11:00 AM - 8:00 PM\nMonday 11:00 AM - 8:00 PM\nTuesday 11:00 AM - 8:00 PM\nWednesday 11:00 AM - 8:00 PM\nThursday 11:00 AM - 8:00 PM\nFriday 11:00 AM - 9:00 PM\nSaturday 11:00 AM - 9:00 PM",
+    "phone": "(347) 584-4578",
+    "website": "https://japanvillage.com/"
   },
   {
     "code": "N/A",
@@ -1009,13 +1272,14 @@
     "city": "Los Angeles",
     "state": "CA",
     "address": "319 E 2nd St, Los Angeles, CA 90012",
-    "cab_count": 2,
+    "cab_count": "TBD",
     "index": "-",
     "lat": 34.048284,
     "lng": -118.242769,
     "geocoded": true,
     "geocoded_address": "319 E 2nd St, Los Angeles, CA 90012",
-    "active": true
+    "active": false,
+    "storeid": "18526"
   },
   {
     "code": "N/A",
@@ -1029,6 +1293,10 @@
     "lng": -79.9323794,
     "geocoded": true,
     "geocoded_address": "5738 Baum Blvd, Pittsburgh, PA 15206",
-    "active": true
+    "active": false,
+    "storeid": "ikigai-arcade",
+    "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
+    "phone": "(412) 573-1234",
+    "website": "https://www.ikigaiarcade.com/"
   }
 ]

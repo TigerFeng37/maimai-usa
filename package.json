@@ -11,11 +11,14 @@
     "update-locations": "node scripts/updateLocations.js",
     "update-locations-browser": "node scripts/updateLocationsWithBrowser.js",
     "debug-website": "node scripts/debugWebsite.js",
-    "find-missing-location": "node scripts/findMissingLocation.js"
+    "find-missing-location": "node scripts/findMissingLocation.js",
+    "scrape-store-hours": "node scripts/scrapeStoreHours.js",
+    "fetch-store-hours-api": "node scripts/fetchStoreHoursFromPlacesAPI.js"
   },
   "dependencies": {
     "@carbon/icons-react": "^11.68.0",
     "@tailwindcss/vite": "^4.1.13",
+    "cheerio": "^1.1.2",
     "leaflet": "^1.9.4",
     "node-fetch": "^3.3.2",
     "react": "^19.1.1",
