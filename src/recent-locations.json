@@ -1,34 +1,6 @@
 [
     {
         "code": "N/A",
-        "name": "Enterrium",
-        "city": "Schaumburg",
-        "state": "IL",
-        "address": "2 Woodfield Mall Unit A, Schaumburg, IL 60173",
-        "cab_count": 1,
-        "index": "-",
-        "lat": 42.04582,
-        "lng": -88.03518,
-        "geocoded": true,
-        "geocoded_address": "TBD",
-        "active": true
-    },
-    {
-        "code": "N/A",
-        "name": "XScape",
-        "city": "Bloomington",
-        "state": "MN",
-        "address": "342 East Broadway, Bloomington, MN 55425",
-        "cab_count": 1,
-        "index": "-",
-        "lat": 44.8548653,
-        "lng": -93.242215,
-        "geocoded": true,
-        "geocoded_address": "342 East Broadway, Bloomington, MN 55425",
-        "active": true
-    },
-    {
-        "code": "N/A",
         "name": "The Orleans",
         "city": "Las Vegas",
         "state": "NV",
