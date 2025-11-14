@@ -16,13 +16,13 @@ function RecentsBanner() {
     
     return (
         <>
-            <div className="flex flex-col md:flex-row items-start gap-2 py-2 px-4 w-full">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 py-2 px-4 w-full">
                 <span className="text-sm text-gray-500">Recently Activated</span>
-                <div className="w-full md:w-fit flex flex-col md:flex-row items-start gap-1 md:gap-2 justify-start">
+                <div className="w-full md:w-fit flex flex-row items-start gap-2 justify-start overflow-x-auto">
                     {locationsWithStoreId.map((location) => (
-                        <a key={location.storeid} className="w-full md:w-fit text-sm font-medium text-black dark:text-white flex flex-row items-center gap-1 justify-between md:justify-start" onClick={() => navigate(`/location/${location.storeid}`)} href={`/location/${location.storeid}`}>
+                        <a key={location.storeid} className="group min-w-fit text-nowrap text-sm font-medium text-black dark:text-white px-3 md:px-2 py-1.5 md:py-1 bg-gray-50 dark:bg-gray-800 rounded-md flex flex-row items-center gap-1 justify-between md:justify-start hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200" onClick={() => navigate(`/location/${location.storeid}`)} href={`/location/${location.storeid}`}>
                             {location.name}
-                            <span className="text-sm text-gray-500 md:hidden">→</span>
+                            <span className="text-sm text-[#41BCCC] md:text-gray-500 md:group-hover:text-[#41BCCC] transition-colors duration-200">→</span>
                         </a>
                     ))}
                 </div>

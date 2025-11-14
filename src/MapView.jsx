@@ -187,7 +187,7 @@ function MapView() {
                       {location.code !== "N/A" && (
                         <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
                       )}
-                      <span className="text-sm text-gray-500 py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
+                      <span className="text-sm text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.state}</span>
                       <span className={`text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-3xl flex flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                         <span className={`text-[1rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                       </span>
