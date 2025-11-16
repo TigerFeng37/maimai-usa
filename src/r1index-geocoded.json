@@ -1298,5 +1298,20 @@
     "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
     "phone": "(412) 573-1234",
     "website": "https://www.ikigaiarcade.com/"
+  },
+  {
+    "code": "N/A",
+    "name": "Arcadia",
+    "city": "West Palm Beach",
+    "state": "FL",
+    "address": "2885D N Military Trail, West Palm Beach, FL 33409",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 26.7201052,
+    "lng": -80.1122579,
+    "geocoded": true,
+    "geocoded_address": "2885D N Military Trail, West Palm Beach, FL 33409",
+    "active": false,
+    "storeid": "arcadia"
   }
 ]
