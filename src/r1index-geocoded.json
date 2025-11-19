@@ -767,7 +767,7 @@
     "lng": -119.785268,
     "geocoded": true,
     "geocoded_address": "5000 Meadowood Mall Cir, Reno, NV 89502",
-    "active": false,
+    "active": true,
     "storeid": "20041",
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(775) 393-1244",
