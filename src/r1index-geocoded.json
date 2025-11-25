@@ -1155,7 +1155,7 @@
     "lng": -115.172215,
     "geocoded": true,
     "geocoded_address": "9777 S. Las Vegas Blvd, Las Vegas, NV 89183",
-    "active": false,
+    "active": true,
     "storeid": "18519",
     "hours": "Sunday 12:00 AM - Open 24 hours",
     "phone": "(866) 791-7626",
