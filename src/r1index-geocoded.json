@@ -1119,7 +1119,7 @@
     "lng": -88.03518,
     "geocoded": true,
     "geocoded_address": "TBD",
-    "active": false,
+    "active": true,
     "storeid": "18528",
     "hours": "Sunday 11:00 AM - 10:00 PM\nMonday 11:00 AM - 10:00 PM\nTuesday 11:00 AM - 10:00 PM\nWednesday 11:00 AM - 10:00 PM\nThursday 11:00 AM - 10:00 PM\nFriday 11:00 AM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
     "phone": "(847) 805-0257",
