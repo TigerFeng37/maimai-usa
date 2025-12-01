@@ -1315,5 +1315,23 @@
     "storeid": "arcadia",
     "hours": "Sunday 9:00 AM - 9:00 PM\nMonday 9:00 AM - 9:00 PM\nTuesday 9:00 AM - 9:00 PM\nWednesday 9:00 AM - 9:00 PM\nThursday 9:00 AM - 9:00 PM\nFriday 9:00 AM - 9:00 PM\nSaturday 9:00 AM - 9:00 PM",
     "phone": "(305) 302-9158"
-  }
+  },
+  {
+    "code": "N/A",
+    "name": "GameWorks",
+    "city": "Seattle",
+    "state": "WA",
+    "address": "1511 7th Ave, Seattle, WA 98101",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 47.6117917,
+    "lng": -122.3338358,
+    "geocoded": true,
+    "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
+    "active": false,
+    "storeid": "18511",
+    "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
+    "phone": "(425) 307-8070"
+  },
+  
 ]
