@@ -1089,8 +1089,7 @@
     "lng": -71.33906,
     "geocoded": true,
     "geocoded_address": "1255 Worcester St, Natick, MA 01760",
-    "active": false,
-    "storeid": "gatcha-natick"
+    "active": false
   },
   {
     "code": "N/A",
@@ -1217,7 +1216,7 @@
   },
   {
     "code": "N/A",
-    "name": "Guam",
+    "name": "Village of Donki",
     "city": "Tamuning",
     "state": "GU",
     "address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
@@ -1228,7 +1227,10 @@
     "geocoded": true,
     "geocoded_address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
     "active": false,
-    "storeid": "18523"
+    "storeid": "18523",
+    "hours": "Sunday 7:00 AM - 1:00 AM\nMonday 7:00 AM - 1:00 AM\nTuesday 7:00 AM - 1:00 AM\nWednesday 7:00 AM - 1:00 AM\nThursday 7:00 AM - 1:00 AM\nFriday 7:00 AM - 1:00 AM\nSaturday 7:00 AM - 1:00 AM",
+    "phone": "(671) 969-1430",
+    "website": "https://www.villageofdonki.com/"
   },
   {
     "code": "N/A",

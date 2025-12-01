@@ -7,6 +7,8 @@ import data from './r1index-geocoded.json';
 import Navbar from './components/Navbar';
 import FilterBar from './components/FilterBar';
 import RecentsBanner from './components/RecentsBanner';
+import BookmarkPanel from './components/BookmarkPanel';
+import FavoriteButton from './components/FavoriteButton';
 import './mapStyles.css';
 
 // Fix for default markers in React-Leaflet
@@ -181,7 +183,7 @@ function MapView() {
                 clasName="dark:saturate-0"
               >
                 <Popup className="dark:bg-gray-900 dark:text-white [&_.leaflet-popup-content-wrapper]:dark:bg-gray-900 [&_.leaflet-popup-content-wrapper]:dark:text-white [&_.leaflet-popup-tip]:dark:bg-gray-900 [&_.leaflet-popup-content]:dark:bg-gray-900">
-                  <div className="py-2 min-w-[15rem] max-w-[20rem] dark:bg-gray-900">
+                  <div className="py-2 min-w-[18rem] max-w-[25rem] dark:bg-gray-900">
                     <div className="flex flex-row justify-between items-center mb-2">
                       <div className="flex flex-row items-center gap-2">
                       {location.code !== "N/A" && (
@@ -192,11 +194,7 @@ function MapView() {
                         <span className={`text-[1rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                       </span>
                     </div>
-                    {location.index !== "-" && (
-                      <span className="text-sm font-mono font-light text-gray-500 dark:text-gray-400">
-                        #{location.index}
-                      </span>
-                    )}
+                    <FavoriteButton storeId={location.storeid} />
                     </div>
                     <h3 className="text-lg font-medium mb-2 dark:text-white">{location.name}</h3>
                     <div className="flex flex-row items-center justify-between">
@@ -226,6 +224,9 @@ function MapView() {
           })}
         </MapContainer>
       </div>
+      
+      {/* Bookmark Panel - Permanently displayed */}
+      <BookmarkPanel />
     </div>
   );
 }

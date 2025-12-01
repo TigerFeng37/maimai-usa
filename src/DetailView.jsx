@@ -5,6 +5,10 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import data from './r1index-geocoded.json'
 import Navbar from './components/Navbar'
+import Forum from './components/Forum'
+import FavoriteButton from './components/FavoriteButton'
+import { createPost } from './utils/forumApi'
+import { getCurrentUser, loginWithDiscord } from './utils/authApi'
 
 // Fix for default markers in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -41,6 +45,13 @@ function DetailView() {
   const { storeId } = useParams()
   const navigate = useNavigate()
   const [location, setLocation] = useState(null)
+  const [showReportModal, setShowReportModal] = useState(false)
+  const [selectedIssues, setSelectedIssues] = useState([])
+  const [description, setDescription] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [user, setUser] = useState(null)
+
   useEffect(() => {
     const foundLocation = data.find(loc => loc.storeid === storeId)
     setLocation(foundLocation)
@@ -50,6 +61,24 @@ function DetailView() {
       navigate('/list')
     }
   }, [storeId, navigate])
+
+  useEffect(() => {
+    loadUser()
+  }, [])
+
+  const loadUser = async () => {
+    const currentUser = await getCurrentUser()
+    setUser(currentUser)
+  }
+
+  // Reset form when modal closes
+  useEffect(() => {
+    if (!showReportModal) {
+      setSelectedIssues([])
+      setDescription('')
+      setSubmitSuccess(false)
+    }
+  }, [showReportModal])
 
   const handleBack = () => {
     // Use View Transitions API if supported
@@ -112,6 +141,60 @@ function DetailView() {
         </div>
       )
     })
+  }
+
+  // Issue types for reporting
+  const issueTypes = [
+    'Broken Parts',
+    'Offline',
+    'Screen Issues',
+    'Sound Problems',
+    'Card Reader Issues',
+    'Button Problems',
+    'Other'
+  ]
+
+  const toggleIssue = (issue) => {
+    setSelectedIssues(prev => 
+      prev.includes(issue) 
+        ? prev.filter(i => i !== issue)
+        : [...prev, issue]
+    )
+  }
+
+  const handleSubmitReport = async () => {
+    if (selectedIssues.length === 0) {
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      // Create new report as a forum post (reports can be submitted anonymously)
+      await createPost({
+        type: 'report',
+        issues: [...selectedIssues],
+        description: description.trim(),
+        storeId: storeId,
+        storeName: location.name,
+        address: location.address,
+        city: location.city,
+        state: location.state,
+      })
+
+      setIsSubmitting(false)
+      setSubmitSuccess(true)
+      // Trigger forum refresh
+      window.dispatchEvent(new Event('forum-refresh'))
+      setTimeout(() => {
+        setShowReportModal(false)
+      }, 1500)
+    } catch (error) {
+      console.error('Error submitting report:', error)
+      setIsSubmitting(false)
+      const errorMessage = error.message || 'Failed to submit report'
+      alert(errorMessage)
+    }
   }
 
   if (!location) {
@@ -215,9 +298,12 @@ function DetailView() {
                             <span className={`text-xs ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                         </span>
                     </div>
-                    {location.index !== "-" && (
-                      <span className="text-sm font-mono font-light text-gray-500">#{location.index}</span>
-                    )}
+                    <div className="flex items-center gap-2">
+                      {location.index !== "-" && (
+                        <span className="text-sm font-mono font-light text-gray-500">#{location.index}</span>
+                      )}
+                      <FavoriteButton storeId={location.storeid} />
+                    </div>
                 </div>
               <h1 className="text-3xl font-regular text-black dark:text-white">{location.name}</h1>
               <p className="text-gray-600 dark:text-gray-400 text-md   ">{location.city}, {location.state}</p>
@@ -275,6 +361,19 @@ function DetailView() {
                 <p className="text-gray-900 dark:text-white text-lg">{location.address}</p>
               </div>
             </div>
+            
+            {/* Report Issue Button */}
+            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <button
+                onClick={() => setShowReportModal(true)}
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200"
+              >
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                Report Issue
+              </button>
+            </div>
           </div>
 
           {/* Map */}
@@ -316,7 +415,117 @@ function DetailView() {
             </div>
           </div>
         </div>
+
+        {/* Unified Forum & Status Feed */}
+        {location && (
+          <Forum storeId={location.storeid} locationName={location.name} />
+        )}
       </div>
+
+      {/* Report Issue Modal */}
+      {showReportModal && (
+        <div 
+          className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-black bg-opacity-50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              setShowReportModal(false)
+            }
+          }}
+        >
+          <div className="bg-white dark:bg-gray-900 rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  Report Issue
+                </h2>
+                <button
+                  onClick={() => setShowReportModal(false)}
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+                >
+                  <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                Please select the issue(s) you encountered with the cabinets at this location. Your report is anonymous.
+              </p>
+
+              {submitSuccess ? (
+                <div className="text-center py-8">
+                  <div className="mb-4">
+                    <svg className="mx-auto w-16 h-16 text-green-500" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                    Report Submitted!
+                  </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    Your email client should open with the report details. Thank you for reporting!
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                      Select Issue Type(s) *
+                    </label>
+                    <div className="space-y-2">
+                      {issueTypes.map((issue) => (
+                        <label
+                          key={issue}
+                          className="flex items-center p-3 border border-gray-200 dark:border-gray-700 rounded-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedIssues.includes(issue)}
+                            onChange={() => toggleIssue(issue)}
+                            className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
+                          />
+                          <span className="ml-3 text-sm text-gray-900 dark:text-white">
+                            {issue}
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-6">
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      Additional Details (Optional)
+                    </label>
+                    <textarea
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
+                      placeholder="Please provide any additional information about the issue..."
+                      rows={4}
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                    />
+                  </div>
+
+                  <div className="flex gap-3">
+                    <button
+                      onClick={() => setShowReportModal(false)}
+                      className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleSubmitReport}
+                      disabled={selectedIssues.length === 0 || isSubmitting}
+                      className="flex-1 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? 'Submitting...' : 'Submit Report'}
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
