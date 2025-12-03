@@ -44,6 +44,11 @@ function requireAuth(req, res, next) {
   }
 }
 
+// GET /api/forum - Health check endpoint
+router.get('/', (req, res) => {
+  res.json({ status: 'ok', service: 'forum', timestamp: new Date().toISOString() })
+})
+
 // GET /api/forum/posts - Get all posts (with optional filtering)
 router.get('/posts', async (req, res) => {
   try {
