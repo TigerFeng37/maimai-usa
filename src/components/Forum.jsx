@@ -146,7 +146,7 @@ function Forum({ storeId, locationName }) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 border-t-0 mt-0 md:mt-0">
+    <div className="hidden bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 border-t-0 mt-0 md:mt-0">
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
@@ -160,9 +160,10 @@ function Forum({ storeId, locationName }) {
                 setShowCreateModal(true)
               }
             }}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            className="px-3 py-1 flex flex-row items-center gap-0.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
           >
-            New Post
+            <span className="text-md ml-[-0.25rem]"><svg aria-label="Add" width="20" height="20" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><path d="M15 9.5H10.5V5a.5.5 0 0 0-1 0v4.5H5a.5.5 0 0 0 0 1h4.5V15a.5.5 0 0 0 1 0V10.5H15a.5.5 0 0 0 0-1z" fill="currentColor"></path></svg></span>
+            <span className="text-md">New Post</span>
           </button>
         </div>
 

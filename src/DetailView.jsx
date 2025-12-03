@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { MapContainer, TileLayer, Marker } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -9,6 +9,7 @@ import Forum from './components/Forum'
 import FavoriteButton from './components/FavoriteButton'
 import { createPost } from './utils/forumApi'
 import { getCurrentUser, loginWithDiscord } from './utils/authApi'
+import { getPeopleCount, updatePeopleCount } from './utils/peopleCountApi'
 
 // Fix for default markers in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -51,6 +52,35 @@ function DetailView() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
   const [user, setUser] = useState(null)
+  const [peopleCount, setPeopleCount] = useState(0)
+  const [tempPeopleCount, setTempPeopleCount] = useState(0)
+  const [isUpdatingPeopleCount, setIsUpdatingPeopleCount] = useState(false)
+  const [isLoadingPeopleCount, setIsLoadingPeopleCount] = useState(true)
+  const [lastUpdated, setLastUpdated] = useState(null)
+  const [updatedBy, setUpdatedBy] = useState(null)
+  
+  // Refs for polling to avoid dependency issues
+  const peopleCountRef = useRef(peopleCount)
+  const tempPeopleCountRef = useRef(tempPeopleCount)
+  const isUpdatingRef = useRef(isUpdatingPeopleCount)
+  const userRef = useRef(user)
+
+  // Keep refs in sync with state
+  useEffect(() => {
+    peopleCountRef.current = peopleCount
+  }, [peopleCount])
+
+  useEffect(() => {
+    tempPeopleCountRef.current = tempPeopleCount
+  }, [tempPeopleCount])
+
+  useEffect(() => {
+    isUpdatingRef.current = isUpdatingPeopleCount
+  }, [isUpdatingPeopleCount])
+
+  useEffect(() => {
+    userRef.current = user
+  }, [user])
 
   useEffect(() => {
     const foundLocation = data.find(loc => loc.storeid === storeId)
@@ -65,6 +95,153 @@ function DetailView() {
   useEffect(() => {
     loadUser()
   }, [])
+
+  useEffect(() => {
+    if (location && location.storeid) {
+      loadPeopleCount()
+    }
+  }, [location])
+
+  // Real-time polling for people count updates
+  useEffect(() => {
+    if (!location || !location.storeid) return
+
+    // Polling interval: 5 seconds
+    const POLL_INTERVAL = 5000
+    let pollInterval = null
+
+    const pollPeopleCount = async () => {
+      try {
+        // Skip polling if currently updating to avoid race conditions
+        if (isUpdatingRef.current) return
+
+        const data = await getPeopleCount(location.storeid)
+        const newCount = data.count || 0
+        const currentCount = peopleCountRef.current
+        const currentTempCount = tempPeopleCountRef.current
+        const currentUser = userRef.current
+        
+        // Only update if count has changed
+        if (newCount !== currentCount) {
+          setPeopleCount(newCount)
+          // Update tempPeopleCount only if user is not logged in or not currently editing
+          if (!currentUser || currentTempCount === currentCount) {
+            setTempPeopleCount(newCount)
+          }
+        }
+        
+        // Always update lastUpdated and updatedBy from API response
+        if (data.lastUpdated !== undefined) {
+          setLastUpdated(data.lastUpdated)
+        }
+        if (data.updatedBy !== undefined) {
+          setUpdatedBy(data.updatedBy)
+        }
+      } catch (error) {
+        // Silently fail on polling errors to avoid console spam
+        console.debug('Polling error (non-critical):', error)
+      }
+    }
+
+    // Start polling
+    pollInterval = setInterval(pollPeopleCount, POLL_INTERVAL)
+
+    // Cleanup on unmount or when location changes
+    return () => {
+      if (pollInterval) {
+        clearInterval(pollInterval)
+      }
+    }
+  }, [location?.storeid])
+
+  const loadPeopleCount = async () => {
+    if (!location || !location.storeid) return
+    
+    try {
+      setIsLoadingPeopleCount(true)
+      const data = await getPeopleCount(location.storeid)
+      setPeopleCount(data.count || 0)
+      setTempPeopleCount(data.count || 0)
+      setLastUpdated(data.lastUpdated || null)
+      setUpdatedBy(data.updatedBy || null)
+    } catch (error) {
+      console.error('Error loading people count:', error)
+      setPeopleCount(0)
+      setTempPeopleCount(0)
+      setLastUpdated(null)
+      setUpdatedBy(null)
+    } finally {
+      setIsLoadingPeopleCount(false)
+    }
+  }
+
+  const handleUpdatePeopleCount = async () => {
+    if (!user || !location || !location.storeid) return
+    
+    try {
+      setIsUpdatingPeopleCount(true)
+      const data = await updatePeopleCount(location.storeid, tempPeopleCount)
+      setPeopleCount(data.count)
+      setTempPeopleCount(data.count)
+      setLastUpdated(data.lastUpdated || null)
+      setUpdatedBy(data.updatedBy || null)
+    } catch (error) {
+      console.error('Error updating people count:', error)
+      alert(error.message || 'Failed to update people count')
+      // Reset to current count on error
+      setTempPeopleCount(peopleCount)
+    } finally {
+      setIsUpdatingPeopleCount(false)
+    }
+  }
+
+  const incrementPeopleCount = () => {
+    setTempPeopleCount(prev => prev + 1)
+  }
+
+  const decrementPeopleCount = () => {
+    setTempPeopleCount(prev => Math.max(0, prev - 1))
+  }
+
+  // Format timestamp to readable format (e.g., "10:35 PM Today")
+  const formatLastUpdated = (timestamp) => {
+    if (!timestamp) return null
+    
+    try {
+      const date = new Date(timestamp)
+      const now = new Date()
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+      const updateDate = new Date(date.getFullYear(), date.getMonth(), date.getDate())
+      
+      // Format time
+      const hours = date.getHours()
+      const minutes = date.getMinutes()
+      const ampm = hours >= 12 ? 'PM' : 'AM'
+      const displayHours = hours % 12 || 12
+      const displayMinutes = minutes.toString().padStart(2, '0')
+      const timeString = `${displayHours}:${displayMinutes} ${ampm}`
+      
+      // Check if today
+      if (updateDate.getTime() === today.getTime()) {
+        return `${timeString} Today`
+      }
+      
+      // Check if yesterday
+      const yesterday = new Date(today)
+      yesterday.setDate(yesterday.getDate() - 1)
+      if (updateDate.getTime() === yesterday.getTime()) {
+        return `${timeString} Yesterday`
+      }
+      
+      // Otherwise show date
+      const month = date.toLocaleString('en-US', { month: 'short' })
+      const day = date.getDate()
+      return `${timeString} ${month} ${day}`
+    } catch (error) {
+      console.error('Error formatting timestamp:', error)
+      return null
+    }
+  }
 
   const loadUser = async () => {
     const currentUser = await getCurrentUser()
@@ -151,6 +328,7 @@ function DetailView() {
     'Sound Problems',
     'Card Reader Issues',
     'Button Problems',
+    'Arcade Closed',
     'Other'
   ]
 
@@ -302,7 +480,7 @@ function DetailView() {
                       {location.index !== "-" && (
                         <span className="text-sm font-mono font-light text-gray-500">#{location.index}</span>
                       )}
-                      <FavoriteButton storeId={location.storeid} />
+                      {user && <FavoriteButton storeId={location.storeid} />}
                     </div>
                 </div>
               <h1 className="text-3xl font-regular text-black dark:text-white">{location.name}</h1>
@@ -310,13 +488,108 @@ function DetailView() {
             </div>
           </div>
           
-          {/* Cabinet count */}
-          <div className="flex flex-col items-start mt-8">
-            <span className="text-4xl font-light text-[#41BCCC]">{location.cab_count}</span>
-            <span className="text-sm text-black dark:text-white">Cabinet(s)</span>
+          <div className={`flex flex-row items-start gap-2 md:gap-1.5 mt-8 ${!location.active ? 'flex-col' : ''}`}>
+            {/* Cabinet count */}
+            <div className={`flex flex-col items-start ${location.active ? 'w-1/3 md:w-full' : 'w-full'}`}>
+              <span className="text-4xl font-light text-[#41BCCC]">{location.cab_count}</span>
+              <span className="text-sm text-black dark:text-white">Cabinet(s)</span>
+            </div>
+
+            {/* People Count Section - Visible to all, editable only for logged-in users - Only show for active locations */}
+            {location.active && (
+            <div className="pl-4 border-l border-gray-200 dark:border-gray-700 w-full">
+              <div className="flex flex-col gap-0">
+                {user ? (
+                  <div className="flex flex-row items-center gap-2 mb-1">
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={decrementPeopleCount}
+                        disabled={isUpdatingPeopleCount || tempPeopleCount === 0}
+                        className="w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        aria-label="Decrease count"
+                      >
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M19 13H5v-2h14v2z"/>
+                        </svg>
+                      </button>
+                      <div className="flex-1 text-center">
+                        {isLoadingPeopleCount ? (
+                          <span className="text-4xl font-light text-[#41BCCC]">...</span>
+                        ) : (
+                          <span className="text-4xl font-light text-[#41BCCC]">{tempPeopleCount}</span>
+                        )}
+                      </div>
+                      <button
+                        onClick={incrementPeopleCount}
+                        disabled={isUpdatingPeopleCount}
+                        className="w-10 h-10 flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        aria-label="Increase count"
+                      >
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                        </svg>
+                      </button>
+                    </div>
+                    <button
+                      onClick={handleUpdatePeopleCount}
+                      disabled={isUpdatingPeopleCount || isLoadingPeopleCount || tempPeopleCount === peopleCount}
+                      className="max-w-32 px-4 py-2 bg-[#41BCCC] text-white rounded-md hover:bg-[#3598a8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                    >
+                      {isUpdatingPeopleCount ? 'Updating...' : 'Submit'}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-start">
+                    {isLoadingPeopleCount ? (
+                      <span className="text-4xl font-light text-[#41BCCC]">...</span>
+                    ) : (
+                      <span className="text-4xl font-light text-[#41BCCC]">{peopleCount}</span>
+                    )}
+                  </div>
+                )}
+                <span className="text-sm text-black dark:text-white">
+                  Current Players
+                </span>
+                
+                {/* Last updated info */}
+                {lastUpdated && updatedBy && (
+                  <div className="flex items-center gap-2 mt-2 pt-2 border-t border-gray-100 dark:border-gray-800">
+                    <div className="flex items-center gap-2 flex-1">
+                      {updatedBy.avatar ? (
+                        <img
+                          src={updatedBy.avatar}
+                          alt={updatedBy.username}
+                          className="w-6 h-6 rounded-full object-cover"
+                          onError={(e) => {
+                            e.target.style.display = 'none'
+                            const fallback = e.target.nextSibling
+                            if (fallback && fallback.classList) {
+                              fallback.classList.remove('hidden')
+                            }
+                          }}
+                        />
+                      ) : null}
+                      <div className={`w-6 h-6 rounded-full bg-gray-300 dark:bg-gray-600 flex items-center justify-center ${updatedBy.avatar ? 'hidden' : ''}`}>
+                        <span className="text-xs text-gray-600 dark:text-gray-300 font-medium">
+                          {updatedBy.username ? updatedBy.username.charAt(0).toUpperCase() : '?'}
+                        </span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                          Updated by {updatedBy.username || 'Unknown'}
+                        </span>
+                        <span className="text-xs text-gray-500 dark:text-gray-500">
+                          {formatLastUpdated(lastUpdated)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            )}
           </div>
         </div>
-
         {/* Top Map Banner */}
         
 
@@ -349,7 +622,9 @@ function DetailView() {
                       href={location.website} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="ml-2 text-blue-500 hover:text-blue-800"
+                      className="ml-2 text-blue-500 hover:text-blue-800 inline-block max-w-xs truncate align-middle"
+                      title={location.website}
+                      style={{ maxWidth: '200px', verticalAlign: 'middle' }}
                     >
                       {location.website} ↗
                     </a>
@@ -366,7 +641,7 @@ function DetailView() {
             <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
               <button
                 onClick={() => setShowReportModal(true)}
-                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-200"
+                className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
@@ -405,7 +680,7 @@ function DetailView() {
                 href={generateMapsURL(location)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-800 transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
@@ -482,7 +757,7 @@ function DetailView() {
                             type="checkbox"
                             checked={selectedIssues.includes(issue)}
                             onChange={() => toggleIssue(issue)}
-                            className="w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500"
+                            className="w-4 h-4 accent-[#41BCCC] border-gray-300 rounded focus:ring-[#41BCCC]"
                           />
                           <span className="ml-3 text-sm text-gray-900 dark:text-white">
                             {issue}
@@ -501,7 +776,7 @@ function DetailView() {
                       onChange={(e) => setDescription(e.target.value)}
                       placeholder="Please provide any additional information about the issue..."
                       rows={4}
-                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                      className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#41BCCC] focus:border-transparent"
                     />
                   </div>
 
@@ -515,7 +790,7 @@ function DetailView() {
                     <button
                       onClick={handleSubmitReport}
                       disabled={selectedIssues.length === 0 || isSubmitting}
-                      className="flex-1 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Submitting...' : 'Submit Report'}
                     </button>

@@ -197,6 +197,205 @@ async function fetchAllNetLocations(alreadyActiveStoreIds) {
 }
 
 /**
+ * Fetches location details from ALL.Net shop page for a given store ID
+ * @param {Function} fetch - Fetch function
+ * @param {Function} cheerio - Cheerio function
+ * @param {string} storeId - Store ID to fetch details for
+ * @returns {Promise<Object|null>} Location details or null if not found
+ */
+async function fetchLocationDetails(fetch, cheerio, storeId) {
+  const SHOP_URL = `https://location.am-all.net/alm/shop?gm=98&astep=1009&sid=${storeId}&lang=en`;
+  
+  try {
+    const response = await fetch(SHOP_URL, {
+      headers: {
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'User-Agent': 'Mozilla/5.0 (compatible; maimai-usa-updater/1.0)',
+        'Accept-Language': 'en-US,en;q=0.9',
+      }
+    });
+    
+    if (!response.ok) {
+      return null;
+    }
+    
+    const html = await response.text();
+    const $ = cheerio.load(html);
+    
+    // Extract location name
+    const name = $('.shop_name, h1, .store_name').first().text().trim() || 
+                 $('title').text().replace(/ - ALL.Net.*/, '').trim();
+    
+    // Extract address
+    const addressText = $('.shop_address, .address, .store_address').first().text().trim() ||
+                       $('body').text().match(/\d+[^,]+,\s*[^,]+,\s*[A-Z]{2}\s*\d{5}/)?.[0] || '';
+    
+    if (!name || !addressText) {
+      return null;
+    }
+    
+    // Parse address to extract city and state
+    const addressMatch = addressText.match(/^(.+?),\s*([^,]+),\s*([A-Z]{2})\s*(\d{5})/);
+    if (!addressMatch) {
+      return null;
+    }
+    
+    const [, streetAddress, city, state, zip] = addressMatch;
+    
+    return {
+      name: name,
+      address: addressText,
+      city: city.trim(),
+      state: state.trim(),
+      storeid: storeId
+    };
+  } catch (error) {
+    console.warn(`⚠️  Failed to fetch details for store ID ${storeId}: ${error.message}`);
+    return null;
+  }
+}
+
+/**
+ * Updates recent-locations.json with newly activated locations
+ * @param {Array} newlyActivatedLocations - Array of location objects that were just activated
+ */
+async function updateRecentLocations(newlyActivatedLocations) {
+  if (newlyActivatedLocations.length === 0) {
+    return;
+  }
+  
+  try {
+    const recentLocationsPath = path.join(__dirname, '../src/recent-locations.json');
+    
+    // Read existing recent locations
+    let recentLocations = [];
+    try {
+      const existingData = await fs.readFile(recentLocationsPath, 'utf8');
+      recentLocations = JSON.parse(existingData);
+    } catch (error) {
+      // File doesn't exist or is invalid, start with empty array
+      recentLocations = [];
+    }
+    
+    // Create a set of existing storeids to avoid duplicates
+    const existingStoreIds = new Set(
+      recentLocations.map(loc => String(loc.storeid || ''))
+    );
+    
+    // Add newly activated locations (only if not already in the list)
+    let addedCount = 0;
+    for (const location of newlyActivatedLocations) {
+      const storeIdStr = String(location.storeid || '');
+      if (storeIdStr && !existingStoreIds.has(storeIdStr)) {
+        // Prepare location data for recent-locations.json
+        const recentLocation = {
+          code: location.code || 'N/A',
+          name: location.name,
+          city: location.city,
+          state: location.state,
+          address: location.address || location.geocoded_address || '',
+          cab_count: location.cab_count || 'TBD',
+          index: location.index || '-',
+          lat: location.lat || null,
+          lng: location.lng || null,
+          geocoded: location.geocoded || false,
+          geocoded_address: location.geocoded_address || location.address || '',
+          active: true,
+          storeid: location.storeid,
+          hours: location.hours || null,
+          phone: location.phone || null,
+          website: location.website || null
+        };
+        
+        recentLocations.push(recentLocation);
+        existingStoreIds.add(storeIdStr);
+        addedCount++;
+      }
+    }
+    
+    // Keep only the most recent 10 locations (or adjust as needed)
+    if (recentLocations.length > 10) {
+      recentLocations = recentLocations.slice(-10);
+    }
+    
+    // Write updated recent locations
+    await fs.writeFile(recentLocationsPath, JSON.stringify(recentLocations, null, 2));
+    console.log(`📝 Updated recent-locations.json: Added ${addedCount} newly activated location(s)`);
+  } catch (error) {
+    console.warn(`⚠️  Failed to update recent-locations.json: ${error.message}`);
+  }
+}
+
+/**
+ * Cross-references existing storeids with remote source and finds missing locations
+ * @param {Function} fetch - Fetch function
+ * @param {Function} cheerio - Cheerio function
+ * @param {Array} activeStoreIds - Array of active store IDs from remote source
+ * @param {Array} jsonLocations - Current locations in JSON file
+ * @returns {Promise<Array>} Array of new locations found on remote but not in JSON
+ */
+async function findMissingLocations(fetch, cheerio, activeStoreIds, jsonLocations) {
+  console.log('\n🔍 Cross-referencing storeids with remote source to find missing locations...');
+  
+  // Create a set of existing storeids in JSON
+  const existingStoreIds = new Set(
+    jsonLocations
+      .filter(loc => loc.storeid)
+      .map(loc => String(loc.storeid))
+  );
+  
+  // Find store IDs that are active on remote but not in JSON
+  const missingStoreIds = activeStoreIds.filter(sid => {
+    const sidStr = String(sid);
+    return !existingStoreIds.has(sidStr);
+  });
+  
+  if (missingStoreIds.length === 0) {
+    console.log('✅ All active store IDs from remote source are already in JSON file');
+    return [];
+  }
+  
+  console.log(`📋 Found ${missingStoreIds.length} store ID(s) on remote source not in JSON:`);
+  missingStoreIds.forEach(sid => console.log(`   • Store ID: ${sid}`));
+  
+  // Fetch details for missing locations
+  const newLocations = [];
+  for (const storeId of missingStoreIds) {
+    console.log(`\n🔍 Fetching details for missing store ID: ${storeId}...`);
+    const details = await fetchLocationDetails(fetch, cheerio, storeId);
+    
+    if (details) {
+      // Create a new location entry
+      const newLocation = {
+        code: 'N/A',
+        name: details.name,
+        city: details.city,
+        state: details.state,
+        address: details.address,
+        cab_count: 'TBD',
+        index: '-',
+        lat: null,
+        lng: null,
+        geocoded: false,
+        geocoded_address: null,
+        active: true,
+        storeid: storeId
+      };
+      
+      newLocations.push(newLocation);
+      console.log(`✅ Found new location: ${details.name} (${details.city}, ${details.state})`);
+    } else {
+      console.warn(`⚠️  Could not fetch details for store ID ${storeId}`);
+    }
+    
+    // Add a small delay to avoid overwhelming the server
+    await new Promise(resolve => setTimeout(resolve, 500));
+  }
+  
+  return newLocations;
+}
+
+/**
  * Matches store IDs with JSON data locations
  * Uses sid (storeid) for exact matching
  * Ensures strict string comparison to avoid type mismatches
@@ -298,6 +497,36 @@ async function main() {
     console.log('🌐 Fetching active stores from ALL.Net main page...');
     const activeStoreIds = await fetchAllNetLocations(alreadyActiveStoreIds);
     console.log(`📍 Found ${activeStoreIds.length} active stores on ALL.Net main page\n`);
+    
+    // Load fetch and cheerio for cross-referencing
+    let fetch, cheerio;
+    try {
+      fetch = (await import('node-fetch')).default;
+    } catch (importError) {
+      const { execSync } = await import('child_process');
+      execSync('npm install node-fetch@3', { stdio: 'inherit' });
+      fetch = (await import('node-fetch')).default;
+    }
+    
+    try {
+      const cheerioModule = await import('cheerio');
+      cheerio = cheerioModule.default || cheerioModule;
+    } catch (importError) {
+      const { execSync } = await import('child_process');
+      execSync('npm install cheerio', { stdio: 'inherit' });
+      const cheerioModule = await import('cheerio');
+      cheerio = cheerioModule.default || cheerioModule;
+    }
+    
+    // Cross-reference existing storeids with remote source to find missing locations
+    const newLocations = await findMissingLocations(fetch, cheerio, activeStoreIds, jsonData);
+    
+    // Add new locations to jsonData
+    if (newLocations.length > 0) {
+      console.log(`\n➕ Adding ${newLocations.length} new location(s) to JSON data...`);
+      jsonData.push(...newLocations);
+      console.log(`✅ Total locations in JSON: ${jsonData.length}\n`);
+    }
     
     // Match locations
     console.log('🔍 Matching active store IDs with JSON data...');
@@ -464,12 +693,15 @@ async function main() {
     console.log(`   • ⚠️  Note: Having storeid in JSON does NOT activate a location`);
     console.log(`   • ⚠️  Only locations with buttons on the main page are activated\n`);
     
-    // Count changes
+    // Count changes and track newly activated locations
     const changes = {
       activated: 0,
       deactivated: 0,
-      unchanged: 0
+      unchanged: 0,
+      added: newLocations.length
     };
+    
+    const newlyActivatedLocations = [];
     
     jsonData.forEach((location, index) => {
       const wasActive = location.active;
@@ -491,6 +723,8 @@ async function main() {
           process.exit(1);
         }
         console.log(`🟢 Activated: ${location.name} (${location.code}) - Store ID: ${location.storeid} ✓`);
+        // Track newly activated location for recent-locations.json
+        newlyActivatedLocations.push(updatedData[index]);
       } else if (wasActive && !isActive) {
         changes.deactivated++;
         console.log(`🔴 Deactivated: ${location.name} (${location.code}) - Store ID: ${location.storeid}`);
@@ -500,6 +734,7 @@ async function main() {
     });
     
     console.log(`\n📊 Update Summary:`);
+    console.log(`   • Added: ${changes.added} new locations (from remote source)`);
     console.log(`   • Activated: ${changes.activated} locations (matched store IDs)`);
     console.log(`   • Deactivated: ${changes.deactivated} locations (not found on main page)`);
     console.log(`   • Unchanged: ${changes.unchanged} locations`);
@@ -507,7 +742,7 @@ async function main() {
     console.log(`   • Note: Only locations with storeid can be activated\n`);
     
     // Write updated data back to file
-    if (changes.activated > 0 || changes.deactivated > 0) {
+    if (changes.activated > 0 || changes.deactivated > 0 || changes.added > 0) {
       console.log('💾 Writing updated data to file...');
       await fs.writeFile(jsonPath, JSON.stringify(updatedData, null, 2));
       console.log('✅ Location data updated successfully!');
@@ -517,6 +752,11 @@ async function main() {
       const backupPath = path.join(__dirname, `../src/r1index-geocoded-backup-${timestamp}.json`);
       await fs.writeFile(backupPath, JSON.stringify(jsonData, null, 2));
       console.log(`🔐 Backup created: ${path.basename(backupPath)}`);
+      
+      // Update recent-locations.json with newly activated locations
+      if (newlyActivatedLocations.length > 0) {
+        await updateRecentLocations(newlyActivatedLocations);
+      }
     } else {
       console.log('ℹ️  No changes detected, file not updated');
     }

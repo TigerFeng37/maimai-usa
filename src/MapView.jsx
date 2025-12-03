@@ -9,6 +9,7 @@ import FilterBar from './components/FilterBar';
 import RecentsBanner from './components/RecentsBanner';
 import BookmarkPanel from './components/BookmarkPanel';
 import FavoriteButton from './components/FavoriteButton';
+import { getCurrentUser } from './utils/authApi';
 import './mapStyles.css';
 
 // Fix for default markers in React-Leaflet
@@ -77,8 +78,23 @@ function MapView() {
   const [selectedActive, setSelectedActive] = useState(null);
   const [filteredData, setFilteredData] = useState(data);
   const [currentZoom, setCurrentZoom] = useState(window.innerWidth >= 768 ? 5 : 3);
+  const [user, setUser] = useState(null);
   
   const uniqueStates = [...new Set(data.map(location => location.state))].sort();
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const loadUser = async () => {
+    try {
+      const currentUser = await getCurrentUser();
+      setUser(currentUser);
+    } catch (error) {
+      console.error('Error loading user:', error);
+      setUser(null);
+    }
+  };
 
   useEffect(() => {
     let filtered = data;
@@ -194,7 +210,7 @@ function MapView() {
                         <span className={`text-[1rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                       </span>
                     </div>
-                    <FavoriteButton storeId={location.storeid} />
+                    {user && <FavoriteButton storeId={location.storeid} />}
                     </div>
                     <h3 className="text-lg font-medium mb-2 dark:text-white">{location.name}</h3>
                     <div className="flex flex-row items-center justify-between">

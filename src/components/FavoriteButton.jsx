@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { addFavorite, removeFavorite, isFavorited } from '../utils/favoritesApi'
 import { getCurrentUser } from '../utils/authApi'
 
-function FavoriteButton({ storeId, className = '' }) {
+function FavoriteButton({ storeId, className = '', small = false }) {
   const [favorited, setFavorited] = useState(false)
   const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null)
@@ -72,7 +72,7 @@ function FavoriteButton({ storeId, className = '' }) {
   if (loading) {
     return (
       <button
-        className={`p-2 ${className}`}
+        className={`${small ? "p-0.5" : "p-2"} ${className}`}
         disabled
       >
         <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" className="text-gray-400">
@@ -85,7 +85,7 @@ function FavoriteButton({ storeId, className = '' }) {
   return (
     <button
       onClick={handleToggle}
-      className={`p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors ${className}`}
+      className={`${small ? "p-0.5" : "p-2"} hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors ${className}`}
       title={favorited ? 'Remove from Favorites' : 'Add to Favorites'}
     >
       <svg 

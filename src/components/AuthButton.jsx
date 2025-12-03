@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getCurrentUser, loginWithDiscord, logout } from '../utils/authApi'
 import { Logout } from '@carbon/icons-react'
+import discordIcon from '../assets/discord.svg'
 
 function AuthButton() {
   const [user, setUser] = useState(null)
@@ -55,10 +56,10 @@ function AuthButton() {
         </div>
         <button
           onClick={handleLogout}
-          className="px-2 py-1.5 text-sm bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+          className="flex flex-row items-center gap-1 px-2 py-1.5 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
         >
+          <Logout size={16} />
           <span className="hidden md:block">Logout</span>
-          <span className="md:hidden"><Logout size={16} /></span>
         </button>
       </div>
     )
@@ -67,9 +68,10 @@ function AuthButton() {
   return (
     <button
       onClick={handleLogin}
-      className="inline-flex items-center gap-2 px-4 py-2 bg-[#5865F2] text-white rounded-md hover:bg-[#4752C4] transition-colors"
+      className="inline-flex items-center gap-2 px-2 py-1 bg-[#5865F2] text-white rounded-md hover:bg-[#4752C4] transition-colors"
     >
-      Login with Discord
+      <img src={discordIcon} alt="Discord" className="w-4 h-4 top-[.1rem]" />
+      <span className="text-md">Login</span>
     </button>
   )
 }

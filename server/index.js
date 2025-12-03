@@ -10,6 +10,7 @@ import reportsRouter from './routes/reports.js'
 import authRouter from './routes/auth.js'
 import forumRouter from './routes/forum.js'
 import favoritesRouter from './routes/favorites.js'
+import peopleCountRouter from './routes/peopleCount.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -65,6 +66,7 @@ app.use('/auth', authRouter)
 app.use('/api/reports', reportsRouter)
 app.use('/api/forum', forumRouter)
 app.use('/api/favorites', favoritesRouter)
+app.use('/api/peopleCount', peopleCountRouter)
 
 // Get current user
 app.get('/api/user', (req, res) => {

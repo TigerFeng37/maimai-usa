@@ -62,8 +62,8 @@ jobs:
           exit 1
         fi
         
-        # Check if there are any changes
-        if git diff --quiet src/r1index-geocoded.json; then
+        # Check if there are any changes in location data files
+        if git diff --quiet src/r1index-geocoded.json src/recent-locations.json; then
           echo "changes_detected=false" >> $GITHUB_OUTPUT
           echo "ℹ️ No changes detected in location data"
         else
@@ -83,7 +83,7 @@ jobs:
         git config --local user.name "GitHub Action"
         
         # Add and commit changes
-        git add src/r1index-geocoded.json
+        git add src/r1index-geocoded.json src/recent-locations.json
         
         # Create commit message with summary
         COMMIT_MSG="🤖 Automated location data update - $(date '+%Y-%m-%d %H:%M:%S UTC')"

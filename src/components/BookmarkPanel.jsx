@@ -1,18 +1,43 @@
-import { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { getFavorites } from '../utils/favoritesApi'
 import { getPosts } from '../utils/forumApi'
 import { getTodayHours } from '../utils/hoursUtils'
+import { getCurrentUser } from '../utils/authApi'
+import { getPeopleCount } from '../utils/peopleCountApi'
 import data from '../r1index-geocoded.json'
 import FavoriteButton from './FavoriteButton'
 
 function BookmarkPanel() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [favorites, setFavorites] = useState([])
   const [locations, setLocations] = useState([])
   const [loading, setLoading] = useState(true)
   const [latestPosts, setLatestPosts] = useState({})
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const [user, setUser] = useState(null)
+  const [checkingAuth, setCheckingAuth] = useState(true)
+  const [newPostCount, setNewPostCount] = useState(0)
+  const [newPostsByStore, setNewPostsByStore] = useState({})
+  const [peopleCounts, setPeopleCounts] = useState({})
+  const locationsRef = useRef([])
+  const prevPathRef = useRef('')
+
+  // Helper function to get last viewed timestamp for a store
+  const getLastViewedTimestamp = (storeId) => {
+    const key = `lastViewedPost_${storeId}`
+    const timestamp = localStorage.getItem(key)
+    return timestamp ? new Date(timestamp).getTime() : 0
+  }
+
+  // Helper function to update last viewed timestamp for a store
+  const updateLastViewedTimestamp = (storeId, timestamp) => {
+    const key = `lastViewedPost_${storeId}`
+    if (timestamp) {
+      localStorage.setItem(key, new Date(timestamp).toISOString())
+    }
+  }
 
   const loadFavorites = useCallback(async () => {
     setLoading(true)
@@ -23,20 +48,45 @@ function BookmarkPanel() {
       // Get location data for favorites
       const favoriteLocations = data.filter(loc => favoriteIds.includes(loc.storeid))
       setLocations(favoriteLocations)
+      locationsRef.current = favoriteLocations
 
-      // Load latest posts for each favorite
+      // Load latest posts for each favorite and check for new posts
       const postsMap = {}
+      let newCount = 0
+      const countsMap = {}
+
       for (const location of favoriteLocations) {
         try {
+          // Load latest post
           const postsData = await getPosts({ storeId: location.storeid, limit: 1 })
           if (postsData.posts && postsData.posts.length > 0) {
-            postsMap[location.storeid] = postsData.posts[0]
+            const latestPost = postsData.posts[0]
+            postsMap[location.storeid] = latestPost
+
+            // Check if this is a new post (created after last viewed time)
+            const lastViewed = getLastViewedTimestamp(location.storeid)
+            const postTime = new Date(latestPost.createdAt).getTime()
+            if (postTime > lastViewed) {
+              newCount++
+            }
+          }
+
+          // Load people count
+          try {
+            const peopleData = await getPeopleCount(location.storeid)
+            countsMap[location.storeid] = peopleData.count || 0
+          } catch (error) {
+            console.error(`Error loading people count for ${location.storeid}:`, error)
+            countsMap[location.storeid] = 0
           }
         } catch (error) {
           console.error(`Error loading posts for ${location.storeid}:`, error)
         }
       }
+
       setLatestPosts(postsMap)
+      setNewPostCount(newCount)
+      setPeopleCounts(countsMap)
     } catch (error) {
       console.error('Error loading favorites:', error)
     } finally {
@@ -45,7 +95,22 @@ function BookmarkPanel() {
   }, [])
 
   useEffect(() => {
-    loadFavorites()
+    const checkUserAndLoadFavorites = async () => {
+      setCheckingAuth(true)
+      try {
+        const currentUser = await getCurrentUser()
+        setUser(currentUser)
+        if (currentUser) {
+          loadFavorites()
+        }
+      } catch (error) {
+        console.error('Error checking user:', error)
+        setUser(null)
+      } finally {
+        setCheckingAuth(false)
+      }
+    }
+    checkUserAndLoadFavorites()
   }, [loadFavorites])
 
   // Listen for favorite changes
@@ -59,6 +124,66 @@ function BookmarkPanel() {
       window.removeEventListener('favorite-changed', handleFavoriteChange)
     }
   }, [loadFavorites])
+
+  // Listen for forum view events to update last viewed timestamps
+  useEffect(() => {
+    const handleForumView = (event) => {
+      const { storeId, latestPostTime } = event.detail || {}
+      if (storeId && latestPostTime) {
+        updateLastViewedTimestamp(storeId, latestPostTime)
+        // Reload favorites to update badge count
+        loadFavorites()
+      }
+    }
+
+    window.addEventListener('forum-viewed', handleForumView)
+    return () => {
+      window.removeEventListener('forum-viewed', handleForumView)
+    }
+  }, [loadFavorites])
+
+  // Reload favorites when returning from detail view to update badge count
+  useEffect(() => {
+    const currentPath = location.pathname
+    const wasOnDetailPage = prevPathRef.current.startsWith('/location/')
+    const isOnDetailPage = currentPath.startsWith('/location/')
+    
+    // If user navigated from detail page to map/list view, reload favorites
+    if (user && wasOnDetailPage && !isOnDetailPage) {
+      loadFavorites()
+    }
+    
+    prevPathRef.current = currentPath
+  }, [location.pathname, user, loadFavorites])
+
+  // Periodically refresh people counts for active locations
+  useEffect(() => {
+    if (!user || locations.length === 0) return
+
+    const refreshPeopleCounts = async () => {
+      const currentLocations = locationsRef.current
+      const countsMap = {}
+      
+      await Promise.all(
+        currentLocations.map(async (location) => {
+          try {
+            const peopleData = await getPeopleCount(location.storeid)
+            countsMap[location.storeid] = peopleData.count || 0
+          } catch (error) {
+            console.error(`Error refreshing people count for ${location.storeid}:`, error)
+            // On error, keep existing count (will be merged below)
+          }
+        })
+      )
+      
+      // Merge new counts with existing ones (preserve counts on error)
+      setPeopleCounts(prevCounts => ({ ...prevCounts, ...countsMap }))
+    }
+
+    // Refresh every 30 seconds
+    const interval = setInterval(refreshPeopleCounts, 30000)
+    return () => clearInterval(interval)
+  }, [user, locations])
 
   const formatPostTime = (timestamp) => {
     const date = new Date(timestamp)
@@ -75,26 +200,42 @@ function BookmarkPanel() {
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
   }
 
+  // Hide component if user is not logged in
+  if (checkingAuth) {
+    return null
+  }
+
+  if (!user) {
+    return null
+  }
+
   return (
-    <div className="fixed bottom-16 right-4 z-[1000] w-[calc(100%-2rem)] md:w-96 max-h-[calc(100vh-8rem)] flex flex-col">
+    <div className="fixed bottom-22 md:bottom-16 md:right-4 z-[1000] w-full md:w-96 max-h-[60vh] md:max-h-[calc(100vh-8rem)] flex flex-col">
       {/* Panel */}
-      <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-xl overflow-hidden flex flex-col max-h-full">
-        <div className="sticky top-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-2 px-4 flex items-center justify-between z-10">
+      <div className="bg-white dark:bg-gray-900 border-0 md:border border-gray-200 dark:border-gray-700 rounded-none shadow-none md:shadow-xl overflow-hidden flex flex-col max-h-full">
+        <div className="sticky top-0 bg-white dark:bg-gray-900 border-y md:border-b border-gray-200 dark:border-gray-700 py-2 px-2 flex items-center justify-between z-10 group">
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors flex items-center justify-between gap-2 w-full"
+            className="px-2 py-1 group-hover:bg-gray-100 dark:group-hover:bg-gray-800 rounded-md transition-colors flex items-center justify-between gap-2 w-full"
             title={isCollapsed ? 'Expand' : 'Collapse'}
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+            <div className="flex items-center gap-2">
+              <span className="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
                 Bookmarked Locations
-            </h2>
+              </span>
+              {newPostCount > 0 && (
+                <span className="inline-flex items-center justify-center min-w-[1.5rem] h-6 px-2 bg-[#41BCCC] text-white text-xs font-semibold rounded-full">
+                  {newPostCount}
+                </span>
+              )}
+            </div>
             <svg 
               width="20" 
               height="20" 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
-              className={`transition-transform ${isCollapsed ? 'rotate-180' : ''}`}
+              className={`transition-transform ${isCollapsed ? '' : 'rotate-180'}`}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
@@ -103,7 +244,7 @@ function BookmarkPanel() {
 
         {!isCollapsed && (
           <div className="overflow-y-auto flex-1">
-            <div className="p-4">
+            <div className="p-0">
               {loading ? (
                 <div className="flex items-center justify-center py-12">
                   <div className="text-gray-500 dark:text-gray-400">Loading...</div>
@@ -117,7 +258,7 @@ function BookmarkPanel() {
                   <p className="text-sm text-gray-400 dark:text-gray-500">Click on a location on the map, then click the bookmark button to add it to your bookmarks</p>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-4 grid grid-cols-2 divide-x divide-gray-200 dark:divide-gray-700">
                   {locations.map((location) => {
                     const todayHours = getTodayHours(location.hours)
                     const latestPost = latestPosts[location.storeid]
@@ -125,88 +266,102 @@ function BookmarkPanel() {
                     return (
                       <div
                         key={location.storeid}
-                        className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer"
+                        className="border-b border-r border-gray-200 dark:border-gray-700 p-4 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors cursor-pointer mb-0"
                         onClick={() => {
+                          // Update last viewed timestamp when navigating to location
+                          if (latestPosts[location.storeid]) {
+                            updateLastViewedTimestamp(location.storeid, latestPosts[location.storeid].createdAt)
+                            // Immediately update the badge state for this store
+                            setNewPostsByStore(prev => ({ ...prev, [location.storeid]: false }))
+                            setNewPostCount(prev => Math.max(0, prev - 1))
+                          }
                           navigate(`/location/${location.storeid}`)
                         }}
                       >
                         {/* Header */}
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="flex-1">
-                            <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">
-                              {location.name}
-                            </h3>
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
-                              {location.city}, {location.state}
-                            </p>
-                          </div>
-                          <div className="flex items-center gap-1 ml-2">
-                            {location.code !== "N/A" && (
-                              <span className="text-xs font-medium text-black dark:text-white px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md">
-                                {location.code}
+                        <div className="flex flex-row items-start justify-between mb-2">
+                          <div className="flex flex-col items-start flex-1">
+                            <div className="flex flex-row items-center gap-1">
+                              {location.code !== "N/A" && (
+                                <span className="text-xs font-medium text-black dark:text-white px-2 py-1 bg-gray-100 dark:bg-gray-800 rounded-md">
+                                  {location.code}
+                                </span>
+                              )}
+                              <span className={`text-xs px-2 py-1 rounded-full ${location.active ? 'bg-[#41BCCC]/20 text-[#41BCCC]' : 'bg-gray-100 dark:bg-gray-800 text-gray-500'}`}>
+                                {location.active ? 'Active' : 'Coming Soon'}
                               </span>
-                            )}
-                            <span className={`text-xs px-2 py-1 rounded-full ${location.active ? 'bg-[#41BCCC]/20 text-[#41BCCC]' : 'bg-gray-100 dark:bg-gray-800 text-gray-500'}`}>
-                              {location.active ? 'Active' : 'Coming Soon'}
-                            </span>
+                              {newPostsByStore[location.storeid] && (
+                                <span className="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 bg-[#41BCCC] text-white text-xs font-semibold rounded-full">
+                                  1
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex-1 flex items-center gap-2">
+                              <h3 className="text-md font-medium text-gray-900 dark:text-white mt-2 leading-snug">
+                                {location.name}
+                              </h3>
+                              {newPostsByStore[location.storeid] && (
+                                <span className="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 bg-[#41BCCC] text-white text-xs font-semibold rounded-full mt-2">
+                                  1
+                                </span>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
+                                {location.city}, {location.state}
+                              </p>
+                            </div>
                           </div>
-                          <FavoriteButton storeId={location.storeid} />
+                          <FavoriteButton storeId={location.storeid} small={true} />
                         </div>
 
                         {/* Today's Hours */}
                         {todayHours && (
                           <div className="mb-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="flex items-center gap-2 text-sm">
-                              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                              </svg>
-                              <span className="text-gray-700 dark:text-gray-300 font-medium">Today:</span>
+                            <div className="flex flex-col items-start gap-0 text-sm">
+                              <div className="flex flex-row items-center gap-1">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <span className="text-gray-700 dark:text-gray-300 font-medium">Today</span>
+                              </div>
                               <span className="text-gray-900 dark:text-white">{todayHours}</span>
                             </div>
                           </div>
-                        )}
-
-                        {/* Latest Post */}
-                        {latestPost && (
-                          <div className="mb-3 pb-3 border-b border-gray-200 dark:border-gray-700">
-                            <div className="flex items-start gap-2">
-                              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" className="text-gray-500 dark:text-gray-400 mt-0.5">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                              </svg>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1">
-                                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300">
-                                    {latestPost.type === 'report' ? 'Issue Report' : 'Latest Update'}
-                                  </span>
-                                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                                    {formatPostTime(latestPost.createdAt)}
-                                  </span>
-                                </div>
-                                <p className="text-sm text-gray-900 dark:text-white line-clamp-2">
-                                  {latestPost.title || latestPost.content?.substring(0, 100) || 'No content'}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        )}
+                          )}
 
                         {/* Quick Access Link */}
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600 dark:text-gray-400">
-                            {location.cab_count} Cabinet(s)
+                        <div className="flex items-center justify-between bottom-0">
+                          <span className="text-sm">
+                            <span className="font-medium text-black dark:text-white">{peopleCounts[location.storeid] !== undefined ? peopleCounts[location.storeid] : '...'}</span>
+                            <span className="text-gray-600 dark:text-gray-400"> Current Player(s)</span>
                           </span>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation()
-                              navigate(`/location/${location.storeid}`)
-                            }}
-                            className="text-sm text-[#41BCCC] hover:text-[#41BCCC]/80 font-medium flex items-center gap-1"
-                          >
-                            View Details
-                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                          </button>
+                          <div className="flex items-center gap-2">
+                            {newPostsByStore[location.storeid] && (
+                              <span className="inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 bg-[#41BCCC] text-white text-xs font-semibold rounded-full">
+                                1
+                              </span>
+                            )}
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                // Update last viewed timestamp when navigating to location
+                                if (latestPosts[location.storeid]) {
+                                  updateLastViewedTimestamp(location.storeid, latestPosts[location.storeid].createdAt)
+                                  // Immediately update the badge state for this store
+                                  setNewPostsByStore(prev => ({ ...prev, [location.storeid]: false }))
+                                  setNewPostCount(prev => Math.max(0, prev - 1))
+                                }
+                                navigate(`/location/${location.storeid}`)
+                              }}
+                              className="text-sm text-[#41BCCC] hover:text-[#41BCCC]/80 font-medium flex items-center gap-1"
+                            >
+                              {/* <span className="hidden md:block">View Details</span> */}
+                              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     )
