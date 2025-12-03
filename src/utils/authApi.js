@@ -1,8 +1,8 @@
 // API configuration
 // Note: Auth routes are at /auth, not /api/auth
 // So we need the base server URL, not the API base URL
-const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL || import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || 'http://localhost:3001'
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api'
+const SERVER_BASE_URL = import.meta.env.VITE_SERVER_BASE_URL || import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || 'http://maimai-usa-production.up.railway.app'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://maimai-usa-production.up.railway.app/api'
 
 /**
  * Get current authenticated user
