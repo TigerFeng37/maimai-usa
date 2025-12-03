@@ -30,7 +30,7 @@ async function ensureDataDir() {
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'https://maimaiusa.com/',
   credentials: true
 }))
 app.use(express.json())
@@ -38,7 +38,7 @@ app.use(express.json())
 // Session configuration
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'your-secret-key-change-this-in-production',
+    secret: process.env.SESSION_SECRET || 'JOrSYA96DTub6PQS7TzJfH6F4r+yZxF1iPvSmX2Tdq4=',
     resave: false,
     saveUninitialized: true, // Changed to true to save session even if uninitialized
     cookie: {
@@ -84,9 +84,9 @@ async function startServer() {
   // Log configuration for debugging
   console.log('🔧 Server Configuration:')
   console.log(`   PORT: ${PORT}`)
-  console.log(`   NODE_ENV: ${process.env.NODE_ENV || 'development'}`)
-  console.log(`   FRONTEND_URL: ${process.env.FRONTEND_URL || 'http://localhost:5173'}`)
-  console.log(`   DISCORD_CALLBACK_URL: ${process.env.DISCORD_CALLBACK_URL || 'http://localhost:3001/auth/discord/callback'}`)
+  console.log(`   NODE_ENV: ${process.env.NODE_ENV || 'production'}`)
+  console.log(`   FRONTEND_URL: ${process.env.FRONTEND_URL || 'https://maimaiusa.com/'}`)
+  console.log(`   DISCORD_CALLBACK_URL: ${process.env.DISCORD_CALLBACK_URL || 'https://maimai-usa-production.up.railway.app/auth/discord/callback'}`)
   console.log(`   DISCORD_CLIENT_ID: ${process.env.DISCORD_CLIENT_ID ? '✅ Set' : '❌ Missing'}`)
   console.log(`   DISCORD_CLIENT_SECRET: ${process.env.DISCORD_CLIENT_SECRET ? '✅ Set' : '❌ Missing'}`)
   console.log(`   📁 Data directory: ${DATA_DIR}`)

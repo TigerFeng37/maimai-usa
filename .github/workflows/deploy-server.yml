@@ -14,14 +14,12 @@ on:
   workflow_dispatch:
     inputs:
       deploy_target:
-        description: '部署目标 (vps, railway, render)'
+        description: 'Deployment target (railway)'
         required: true
-        default: 'vps'
+        default: 'railway'
         type: choice
         options:
-          - vps
           - railway
-          - render
 
 permissions:
   contents: read
@@ -55,24 +53,9 @@ jobs:
         railway up --detach
         echo "✅ Railway deployment triggered"
 
-  # Render 部署 (通过 Render API)
-  deploy-render:
-    if: github.event.inputs.deploy_target == 'render'
-    runs-on: ubuntu-latest
-    name: Deploy to Render
-    
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    
-    - name: Trigger Render deployment
-      run: |
-        curl -X POST "https://api.render.com/deploy/srv/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}"
-        echo "✅ Render deployment triggered"
-
   # 部署总结
   deployment-summary:
-    needs: [deploy-vps, deploy-railway, deploy-render]
+    needs: [deploy-railway]
     if: always()
     runs-on: ubuntu-latest
     name: Deployment Summary
@@ -87,14 +70,6 @@ jobs:
         echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         
-        if [ "${{ needs.deploy-vps.result }}" = "success" ]; then
-          echo "✅ VPS deployment: successful" >> $GITHUB_STEP_SUMMARY
-        elif [ "${{ needs.deploy-vps.result }}" = "skipped" ]; then
-          echo "⏭️ VPS deployment: skipped" >> $GITHUB_STEP_SUMMARY
-        else
-          echo "❌ VPS deployment: failed" >> $GITHUB_STEP_SUMMARY
-        fi
-        
         if [ "${{ needs.deploy-railway.result }}" = "success" ]; then
           echo "✅ Railway deployment: successful" >> $GITHUB_STEP_SUMMARY
         elif [ "${{ needs.deploy-railway.result }}" = "skipped" ]; then
@@ -102,13 +77,4 @@ jobs:
         else
           echo "❌ Railway deployment: failed" >> $GITHUB_STEP_SUMMARY
         fi
-        
-        if [ "${{ needs.deploy-render.result }}" = "success" ]; then
-          echo "✅ Render deployment: successful" >> $GITHUB_STEP_SUMMARY
-        elif [ "${{ needs.deploy-render.result }}" = "skipped" ]; then
-          echo "⏭️ Render deployment: skipped" >> $GITHUB_STEP_SUMMARY
-        else
-          echo "❌ Render deployment: failed" >> $GITHUB_STEP_SUMMARY
-        fi
-
 
