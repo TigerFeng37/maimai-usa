@@ -30,25 +30,25 @@ router.get(
     passport.authenticate('discord', (err, user, info) => {
       if (err) {
         console.error('Discord authentication error:', err)
-        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+        const frontendUrl = process.env.FRONTEND_URL || 'http://maimaiusa.com/'
         return res.redirect(`${frontendUrl}?auth_error=${encodeURIComponent(err.message || 'Authentication failed')}`)
       }
       
       if (!user) {
         console.error('Discord authentication failed: No user returned', info)
-        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+        const frontendUrl = process.env.FRONTEND_URL || 'http://maimaiusa.com/'
         return res.redirect(`${frontendUrl}?auth_error=Authentication failed`)
       }
 
       req.logIn(user, (loginErr) => {
         if (loginErr) {
           console.error('Login error:', loginErr)
-          const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+          const frontendUrl = process.env.FRONTEND_URL || 'http://maimaiusa.com/'
           return res.redirect(`${frontendUrl}?auth_error=${encodeURIComponent(loginErr.message || 'Login failed')}`)
         }
 
         // Get returnTo from state parameter or session
-        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:5173'
+        const frontendUrl = process.env.FRONTEND_URL || 'http://maimaiusa.com/'
         let returnTo = '/'
         
         // Try to get from state parameter first (more reliable)
