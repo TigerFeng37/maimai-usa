@@ -2,6 +2,12 @@
 
 在推送到 GitHub 并部署到生产环境之前，请完成以下检查：
 
+## ⚠️ 重要提示
+
+**GitHub Actions 会自动部署前端到 Cloudflare Pages。**
+
+**✅ 好消息：项目已包含服务器自动部署工作流！** 你可以配置自动部署服务器，或使用平台的内置自动部署功能。详细说明请查看 `SERVER_DEPLOYMENT.md`。
+
 ## 🔒 1. 安全性检查
 
 ### 环境变量和敏感信息
@@ -67,6 +73,18 @@ git add src/utils/peopleCountApi.js
 
 - [ ] **`GITHUB_TOKEN`** - 通常自动提供，但确保有 `contents: write` 权限
 
+### 服务器自动部署 Secrets（如果使用 VPS）
+如果使用 VPS 并通过 GitHub Actions 自动部署，需要配置：
+
+- [ ] **`SERVER_HOST`** - 服务器 IP 或域名
+- [ ] **`SERVER_USER`** - SSH 用户名
+- [ ] **`SERVER_SSH_KEY`** - SSH 私钥（完整内容）
+- [ ] **`SERVER_PATH`** - 项目路径（可选，默认：`/var/www/maimai-usa`）
+- [ ] **`SERVER_PORT`** - SSH 端口（可选，默认：`22`）
+- [ ] **`SERVER_HEALTH_CHECK_URL`** - 健康检查 URL（可选）
+
+详细配置步骤请查看 `SERVER_DEPLOYMENT.md`。
+
 ### 工作流权限
 - [ ] 确认工作流文件中的权限设置正确：
   ```yaml
@@ -103,6 +121,27 @@ git add src/utils/peopleCountApi.js
 - [ ] 在 [Discord Developer Portal](https://discord.com/developers/applications) 中添加生产环境回调 URL
 - [ ] 确保同时保留开发和生产环境的回调 URL（可以同时存在）
 
+## 🖥️ 4.5. 服务器部署配置
+
+- [ ] **选择服务器部署方式**
+  - VPS + PM2（使用 GitHub Actions 自动部署）⭐
+  - Railway（内置自动部署）
+  - Render（内置自动部署）
+  - 其他平台
+
+- [ ] **如果使用 VPS + GitHub Actions**
+  - 配置 GitHub Secrets（见上方）
+  - 在服务器上安装 Node.js 和 PM2
+  - 首次手动部署服务器
+  - 测试自动部署功能
+
+- [ ] **如果使用 Railway/Render**
+  - 连接 GitHub 仓库
+  - 配置环境变量
+  - 确认自动部署已启用
+
+详细步骤请查看 `SERVER_DEPLOYMENT.md`。
+
 ## 🏗️ 5. 构建和部署配置
 
 ### Vite 配置
@@ -124,7 +163,7 @@ git add src/utils/peopleCountApi.js
 - [ ] 确认输出目录：`dist`
 - [ ] 确认 Node.js 版本（建议 18+）
 
-## 📝 6. 代码质量检查
+## 📝 7. 代码质量检查
 
 ### Linting
 - [ ] 运行 linting 检查：
@@ -140,7 +179,7 @@ git add src/utils/peopleCountApi.js
 - [ ] 测试人数统计功能（如果已实现）
 - [ ] 测试位置数据更新
 
-## 🔍 7. 最终检查
+## 🔍 8. 最终检查
 
 ### Git 状态
 - [ ] 检查是否有未提交的更改：
@@ -186,6 +225,7 @@ git add src/utils/peopleCountApi.js
 
 ## 📚 相关文档
 
+- `SERVER_DEPLOYMENT.md` - **服务器部署指南（重要！）**
 - `DEPLOYMENT_PROD.md` - 详细的生产环境设置指南
 - `PROD_ENV_QUICKREF.md` - 生产环境变量快速参考
 - `DEPLOYMENT.md` - 部署指南

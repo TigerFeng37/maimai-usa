@@ -1,0 +1,114 @@
+name: Deploy Server
+
+# 自动部署后端服务器到生产环境
+# 当 server/ 目录或相关配置文件更改时触发
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'server/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-server.yml'
+  workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: '部署目标 (vps, railway, render)'
+        required: true
+        default: 'vps'
+        type: choice
+        options:
+          - vps
+          - railway
+          - render
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-railway:
+    if: github.event.inputs.deploy_target == 'railway'
+    runs-on: ubuntu-latest
+    name: Deploy to Railway
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Railway CLI
+      run: |
+        curl -fsSL https://railway.app/install.sh | sh
+        echo "$HOME/.railway/bin" >> $GITHUB_PATH
+    
+    - name: Authenticate with Railway
+      env:
+        RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      run: |
+        railway login --token $RAILWAY_TOKEN
+    
+    - name: Deploy to Railway
+      env:
+        RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
+      run: |
+        railway link $RAILWAY_PROJECT_ID
+        railway up --detach
+        echo "✅ Railway deployment triggered"
+
+  # Render 部署 (通过 Render API)
+  deploy-render:
+    if: github.event.inputs.deploy_target == 'render'
+    runs-on: ubuntu-latest
+    name: Deploy to Render
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Trigger Render deployment
+      run: |
+        curl -X POST "https://api.render.com/deploy/srv/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}"
+        echo "✅ Render deployment triggered"
+
+  # 部署总结
+  deployment-summary:
+    needs: [deploy-vps, deploy-railway, deploy-render]
+    if: always()
+    runs-on: ubuntu-latest
+    name: Deployment Summary
+    
+    steps:
+    - name: Create summary
+      run: |
+        echo "## 🚀 Server deployment summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Deployment time**: $(date '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+        echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        if [ "${{ needs.deploy-vps.result }}" = "success" ]; then
+          echo "✅ VPS deployment: successful" >> $GITHUB_STEP_SUMMARY
+        elif [ "${{ needs.deploy-vps.result }}" = "skipped" ]; then
+          echo "⏭️ VPS deployment: skipped" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ VPS deployment: failed" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ "${{ needs.deploy-railway.result }}" = "success" ]; then
+          echo "✅ Railway deployment: successful" >> $GITHUB_STEP_SUMMARY
+        elif [ "${{ needs.deploy-railway.result }}" = "skipped" ]; then
+          echo "⏭️ Railway deployment: skipped" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ Railway deployment: failed" >> $GITHUB_STEP_SUMMARY
+        fi
+        
+        if [ "${{ needs.deploy-render.result }}" = "success" ]; then
+          echo "✅ Render deployment: successful" >> $GITHUB_STEP_SUMMARY
+        elif [ "${{ needs.deploy-render.result }}" = "skipped" ]; then
+          echo "⏭️ Render deployment: skipped" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "❌ Render deployment: failed" >> $GITHUB_STEP_SUMMARY
+        fi
+
+
