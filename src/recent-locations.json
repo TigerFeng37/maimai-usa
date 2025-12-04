@@ -15,5 +15,22 @@
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070"
+  },
+  {
+    "code": "N/A",
+    "name": "Arcadia",
+    "city": "West Palm Beach",
+    "state": "FL",
+    "address": "2885D N Military Trail, West Palm Beach, FL 33409",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 26.7201052,
+    "lng": -80.1122579,
+    "geocoded": true,
+    "geocoded_address": "2885D N Military Trail, West Palm Beach, FL 33409",
+    "active": true,
+    "storeid": "arcadia",
+    "hours": "Sunday 9:00 AM - 9:00 PM\nMonday 9:00 AM - 9:00 PM\nTuesday 9:00 AM - 9:00 PM\nWednesday 9:00 AM - 9:00 PM\nThursday 9:00 AM - 9:00 PM\nFriday 9:00 AM - 9:00 PM\nSaturday 9:00 AM - 9:00 PM",
+    "phone": "(305) 302-9158"
   }
 ]
