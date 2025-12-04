@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { ChevronDown } from '@carbon/icons-react'
 import { getFavorites } from '../utils/favoritesApi'
 import { getPosts } from '../utils/forumApi'
 import { getTodayHours } from '../utils/hoursUtils'
@@ -234,16 +235,10 @@ function BookmarkPanel() {
                 </span>
               )}
             </div>
-            <svg 
-              width="20" 
-              height="20" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
+            <ChevronDown 
+              size={20}
               className={`transition-transform ${isCollapsed ? 'rotate-180' : ''}`}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
+            />
           </button>
         </div>
 
