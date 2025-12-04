@@ -237,7 +237,7 @@ function BookmarkPanel() {
             </div>
             <ChevronDown 
               size={20}
-              className={`transition-transform ${isCollapsed ? 'rotate-180' : ''}`}
+              className={`transition-transform ${isCollapsed ? 'rotate-180' : ''} text-gray-500 dark:text-gray-200`}
             />
           </button>
         </div>
