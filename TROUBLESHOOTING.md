@@ -1,5 +1,163 @@
 # Troubleshooting Guide
 
+## Railway Connection Timeout Issues
+
+### Problem: `ERR_CONNECTION_TIMED_OUT` when accessing Railway URL
+
+**Symptoms:**
+- Browser shows: "This site can't be reached"
+- Error: `ERR_CONNECTION_TIMED_OUT`
+- URL: `maimai-usa-production.up.railway.app` (or similar)
+
+### Solution Steps:
+
+#### 1. Check Railway Service Status
+
+1. **Log into Railway Dashboard**: https://railway.app
+2. **Select your project** → **Select your service**
+3. **Check the "Deployments" tab**:
+   - Look for the latest deployment
+   - Check if it shows "Active" (green) or "Failed" (red)
+   - If failed, click on it to see error logs
+
+#### 2. Check Service Logs
+
+1. In Railway Dashboard, go to your service
+2. Click on **"Logs"** tab
+3. Look for:
+   - `🚀 API server running on http://localhost:PORT`
+   - Any error messages (red text)
+   - Startup configuration logs
+
+**Common log issues:**
+- `Error: Cannot find module` → Missing dependencies
+- `Error: listen EADDRINUSE` → Port conflict
+- `Error: ENOENT` → Missing files or directories
+
+#### 3. Verify Service is Running
+
+1. In Railway Dashboard → **Settings** → **Networking**
+2. Check if a **Public Domain** is generated
+3. The domain should be active (not paused)
+
+#### 4. Check Environment Variables
+
+In Railway Dashboard → **Variables** tab, verify:
+
+| Variable | Required | Example |
+|----------|----------|---------|
+| `NODE_ENV` | Yes | `production` |
+| `PORT` | No* | Railway auto-assigns |
+| `DISCORD_CLIENT_ID` | Yes | Your Discord app ID |
+| `DISCORD_CLIENT_SECRET` | Yes | Your Discord app secret |
+| `DISCORD_CALLBACK_URL` | Yes | `https://your-service.up.railway.app/auth/discord/callback` |
+| `FRONTEND_URL` | Yes | Your frontend domain |
+| `SESSION_SECRET` | Yes | Generated secret |
+
+*Note: Railway automatically sets `PORT`, but you can override it if needed.
+
+#### 5. Check Build and Start Commands
+
+In Railway Dashboard → **Settings** → **Build & Deploy**:
+
+- **Build Command**: Leave empty (server doesn't need build)
+- **Start Command**: `npm run server`
+- **Root Directory**: `/` (or leave empty)
+
+#### 6. Verify Package.json Scripts
+
+Make sure `package.json` has:
+```json
+{
+  "scripts": {
+    "server": "node server/index.js"
+  }
+}
+```
+
+#### 7. Check Health Check Endpoint
+
+The service should respond to health checks:
+```bash
+curl https://your-service.up.railway.app/health
+```
+
+Expected response:
+```json
+{"status":"ok","timestamp":"2024-01-01T00:00:00.000Z"}
+```
+
+#### 8. Common Issues and Fixes
+
+**Issue: Service shows "Failed" deployment**
+- Check logs for error messages
+- Verify all dependencies are in `package.json`
+- Ensure `node` version matches `.nvmrc` or `engines.node` in `package.json`
+
+**Issue: Service is "Paused"**
+- Railway pauses services after inactivity (free tier)
+- Click "Settings" → "Unpause" or redeploy
+
+**Issue: Domain not accessible**
+- Check if domain is generated in **Settings** → **Networking**
+- Verify the domain matches your `DISCORD_CALLBACK_URL`
+- Railway domains are HTTPS by default (no port needed)
+
+**Issue: Port configuration**
+- Railway automatically assigns a port via `process.env.PORT`
+- Don't hardcode port numbers in URLs
+- Remove `:3001` or any port from callback URLs
+
+**Issue: Service starts but times out**
+- Check if server is listening on `0.0.0.0` (Railway requirement)
+- Verify `app.listen(PORT)` uses the PORT from environment
+- Check firewall/network settings (usually not needed on Railway)
+
+#### 9. Redeploy the Service
+
+If all else fails:
+
+1. **Manual Redeploy**:
+   - Railway Dashboard → **Deployments** → **Redeploy**
+   - Or push a new commit to trigger auto-deploy
+
+2. **Check Deployment Logs**:
+   - Watch the deployment process
+   - Look for build/start errors
+
+#### 10. Verify Railway Configuration
+
+Check `railway.json` (if present):
+```json
+{
+  "deploy": {
+    "startCommand": "npm run server",
+    "healthcheckPath": "/health",
+    "healthcheckTimeout": 100
+  }
+}
+```
+
+### Quick Checklist
+
+- [ ] Service is "Active" (not paused or failed)
+- [ ] Latest deployment succeeded
+- [ ] Logs show server started successfully
+- [ ] Public domain is generated and active
+- [ ] Environment variables are set correctly
+- [ ] `DISCORD_CALLBACK_URL` matches Railway domain (no port)
+- [ ] Health check endpoint responds
+- [ ] Start command is `npm run server`
+
+### Still Having Issues?
+
+1. **Check Railway Status**: https://status.railway.app
+2. **View Full Logs**: Railway Dashboard → Logs tab
+3. **Test Locally**: Run `npm run server` locally to verify it works
+4. **Contact Railway Support**: If service should be running but isn't
+
+---
+
 ## Discord OAuth2 Callback Issues
 
 ### Problem: Callback URL doesn't redirect after Discord login
