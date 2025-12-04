@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { getPosts, createPost, reactToPost, deletePost, updatePost } from '../utils/forumApi'
 import { getCurrentUser, loginWithDiscord } from '../utils/authApi'
+import { TrashCan } from '@carbon/icons-react'
 
 function Forum({ storeId, locationName }) {
   const [posts, setPosts] = useState([])
@@ -146,13 +147,14 @@ function Forum({ storeId, locationName }) {
   }
 
   return (
-    <div className="hidden bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 border-t-0 mt-0 md:mt-0">
+    <div className="bg-white dark:bg-gray-900 border-y md:border-x border-gray-200 dark:border-gray-700 border-t-0 mt-0 md:mt-0">
       <div className="p-6">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            Community Feed
+            Feed
           </h2>
-          <button
+          {/* Posting feature disabled for now */}
+          {/* <button
             onClick={() => {
               if (!user) {
                 loginWithDiscord()
@@ -164,13 +166,13 @@ function Forum({ storeId, locationName }) {
           >
             <span className="text-md ml-[-0.25rem]"><svg aria-label="Add" width="20" height="20" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"><path d="M15 9.5H10.5V5a.5.5 0 0 0-1 0v4.5H5a.5.5 0 0 0 0 1h4.5V15a.5.5 0 0 0 1 0V10.5H15a.5.5 0 0 0 0-1z" fill="currentColor"></path></svg></span>
             <span className="text-md">New Post</span>
-          </button>
+          </button> */}
         </div>
 
         {posts.length === 0 ? (
           <div className="text-center py-12 text-gray-500 dark:text-gray-400">
-            <p>No posts yet</p>
-            <p className="text-sm mt-2">Be the first to start a discussion!</p>
+            <p>No issues reported</p>
+            <p className="text-sm mt-2">Click the report button to report an issue with the game at this location.</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -207,14 +209,14 @@ function Forum({ storeId, locationName }) {
                     {post.type === 'report' && (
                       <>
                         {post.resolved ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-green-500 text-white text-xs font-medium rounded">
+                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-[#44cd8b] text-white text-xs font-medium rounded">
                             <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                             </svg>
                             Resolved
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-red-500 text-white text-xs font-medium rounded">
+                          <span className="inline-flex items-center gap-1 px-2 py-1 bg-[#f8564e] text-white text-xs font-medium rounded">
                             <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24">
                               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
                             </svg>
@@ -222,14 +224,6 @@ function Forum({ storeId, locationName }) {
                           </span>
                         )}
                       </>
-                    )}
-                    {user && user.id === post.userId && (
-                      <button
-                        onClick={() => handleDelete(post.id)}
-                        className="text-red-500 hover:text-red-700 text-sm"
-                      >
-                        Delete
-                      </button>
                     )}
                   </div>
                 </div>
@@ -241,7 +235,7 @@ function Forum({ storeId, locationName }) {
                         {post.issues.map((issue, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs rounded"
+                            className="px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs rounded-xl"
                           >
                             {issue}
                           </span>
@@ -267,7 +261,7 @@ function Forum({ storeId, locationName }) {
                         {post.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded"
+                            className="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-xl"
                           >
                             {tag}
                           </span>
@@ -285,8 +279,8 @@ function Forum({ storeId, locationName }) {
                           <span className="text-gray-600 dark:text-gray-400">Status:</span>
                           <span className={`font-medium ${
                             post.workingStatus === 'yes'
-                              ? 'text-green-600 dark:text-green-400'
-                              : 'text-red-600 dark:text-red-400'
+                              ? 'text-[#44cd8b] dark:text-[#44cd8b]'
+                              : 'text-[#f8564e] dark:text-[#f8564e]'
                           }`}>
                             {post.workingStatus === 'yes' ? 'Working Now' : 'Still Not Working'}
                           </span>
@@ -300,13 +294,13 @@ function Forum({ storeId, locationName }) {
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleWorkingStatus(post.id, 'yes')}
-                              className="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors"
+                              className="px-3 py-1 bg-[#44cd8b] text-white text-sm rounded hover:bg-[#44cd8b]/80 transition-colors"
                             >
                               Yes
                             </button>
                             <button
                               onClick={() => handleWorkingStatus(post.id, 'no')}
-                              className="px-3 py-1 bg-red-500 text-white text-sm rounded hover:bg-red-600 transition-colors"
+                              className="px-3 py-1 bg-[#f8564e] text-white text-sm rounded hover:bg-[#f8564e]/80 transition-colors"
                             >
                               No
                             </button>
@@ -321,13 +315,13 @@ function Forum({ storeId, locationName }) {
                           <div className="flex gap-2">
                             <button
                               onClick={() => handleWorkingStatus(post.id, 'yes')}
-                              className="px-3 py-1 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors"
+                              className="px-3 py-1 bg-[#44cd8b] text-white text-sm rounded hover:bg-[#44cd8b]/80 transition-colors"
                             >
                               Yes
                             </button>
                             <button
                               onClick={() => handleWorkingStatus(post.id, 'no')}
-                              className="px-3 py-1 bg-orange-500 text-white text-sm rounded hover:bg-orange-600 transition-colors"
+                              className="px-3 py-1 bg-[#f8564e] text-white text-sm rounded hover:bg-[#f8564e]/80 transition-colors"
                             >
                               No
                             </button>
@@ -339,38 +333,58 @@ function Forum({ storeId, locationName }) {
                           <span className="text-gray-600 dark:text-gray-400">Status:</span>
                           <span className={`font-medium ${
                             post.workingStatus === 'yes'
-                              ? 'text-green-600 dark:text-green-400'
-                              : 'text-red-600 dark:text-red-400'
+                              ? 'text-[#44cd8b] dark:text-[#44cd8b]'
+                              : 'text-[#f8564e] dark:text-[#f8564e]'
                           }`}>
                             {post.workingStatus === 'yes' ? 'Working Now' : 'Still Not Working'}
                           </span>
                         </div>
                       )}
                     </div>
+                    {user && user.id === post.userId && (
+                      <button
+                        onClick={() => handleDelete(post.id)}
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm rounded transition-all ease-in-out duration-200"
+                      >
+                        <TrashCan size={12} />
+                        <span className="text-sm">Delete</span>
+                      </button>
+                    )}
                   </div>
                 ) : (
-                  <div className="flex items-center gap-4 pt-3 border-t border-gray-200 dark:border-gray-700">
-                    {user ? (
-                      <button
-                        onClick={() => handleReact(post.id)}
-                        className={`flex items-center gap-2 px-3 py-1 rounded transition-colors ${
-                          post.userReactions && post.userReactions.length > 0
-                            ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
-                            : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-                        }`}
-                      >
-                        <span>👍</span>
-                        <span className="text-sm">{post.reactionCount || 0}</span>
-                      </button>
-                    ) : (
-                      <div className="flex items-center gap-2 px-3 py-1 text-gray-500 dark:text-gray-400">
-                        <span>👍</span>
-                        <span className="text-sm">{post.reactionCount || 0}</span>
+                  <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-gray-700">
+                    <div className="flex items-center gap-4">
+                      {user ? (
+                        <button
+                          onClick={() => handleReact(post.id)}
+                          className={`flex items-center gap-2 px-3 py-1 rounded transition-colors ${
+                            post.userReactions && post.userReactions.length > 0
+                              ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400'
+                              : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                          }`}
+                        >
+                          <span>👍</span>
+                          <span className="text-sm">{post.reactionCount || 0}</span>
+                        </button>
+                      ) : (
+                        <div className="flex items-center gap-2 px-3 py-1 text-gray-500 dark:text-gray-400">
+                          <span>👍</span>
+                          <span className="text-sm">{post.reactionCount || 0}</span>
+                        </div>
+                      )}
+                      <div className="text-sm text-gray-500 dark:text-gray-400">
+                        {post.replyCount || 0} replies
                       </div>
-                    )}
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      {post.replyCount || 0} replies
                     </div>
+                    {user && user.id === post.userId && (
+                      <button
+                        onClick={() => handleDelete(post.id)}
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 text-sm rounded transition-all ease-in-out duration-200"
+                      >
+                        <TrashCan size={12} />
+                        <span className="text-sm">Delete</span>
+                      </button>
+                    )}
                   </div>
                 )}
               </div>
@@ -379,8 +393,8 @@ function Forum({ storeId, locationName }) {
         )}
       </div>
 
-      {/* Create Post Modal */}
-      {showCreateModal && (
+      {/* Create Post Modal - Disabled for now */}
+      {/* {showCreateModal && (
         <div
           className="fixed inset-0 z-[2000] flex items-center justify-center p-4 bg-black bg-opacity-50"
           onClick={(e) => {
@@ -448,7 +462,7 @@ function Forum({ storeId, locationName }) {
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   )
 }

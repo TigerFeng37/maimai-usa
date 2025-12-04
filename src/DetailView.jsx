@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import data from './r1index-geocoded.json'
 import Navbar from './components/Navbar'
-// import Forum from './components/Forum'
+import Forum from './components/Forum'
 import FavoriteButton from './components/FavoriteButton'
 import { createPost } from './utils/forumApi'
 import { getCurrentUser, loginWithDiscord } from './utils/authApi'
@@ -692,9 +692,9 @@ function DetailView() {
         </div>
 
         {/* Unified Forum & Status Feed */}
-        {/* {location && (
+        {location && (
           <Forum storeId={location.storeid} locationName={location.name} />
-        )} */}
+        )}
       </div>
 
       {/* Report Issue Modal */}
@@ -724,7 +724,7 @@ function DetailView() {
               </div>
 
               <p className="text-sm text-gray-600 dark:text-gray-400 mb-6">
-                Please select the issue(s) you encountered with the cabinets at this location. Your report is anonymous.
+                Please select the issue(s) you encountered with the cabinets at this location.
               </p>
 
               {submitSuccess ? (
@@ -747,7 +747,7 @@ function DetailView() {
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
                       Select Issue Type(s) *
                     </label>
-                    <div className="space-y-2">
+                    <div className="grid grid-cols-2 gap-2">
                       {issueTypes.map((issue) => (
                         <label
                           key={issue}
@@ -757,7 +757,7 @@ function DetailView() {
                             type="checkbox"
                             checked={selectedIssues.includes(issue)}
                             onChange={() => toggleIssue(issue)}
-                            className="w-4 h-4 accent-[#41BCCC] border-gray-300 rounded focus:ring-[#41BCCC]"
+                            className="w-4 h-4 min-w-[1rem] min-h-[1rem] flex-shrink-0 accent-[#41BCCC] border-gray-300 rounded focus:ring-[#41BCCC]"
                           />
                           <span className="ml-3 text-sm text-gray-900 dark:text-white">
                             {issue}
@@ -790,7 +790,7 @@ function DetailView() {
                     <button
                       onClick={handleSubmitReport}
                       disabled={selectedIssues.length === 0 || isSubmitting}
-                      className="flex-1 px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="flex-1 px-4 py-2 bg-[#41BCCC] text-white rounded-md hover:bg-[#41BCCC]/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? 'Submitting...' : 'Submit Report'}
                     </button>
