@@ -7,7 +7,8 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 const router = express.Router()
-const DATA_DIR = join(dirname(__dirname), 'data')
+// Use persistent volume path if provided (for Railway), otherwise use local data directory
+const DATA_DIR = process.env.DATA_DIR || join(dirname(__dirname), 'data')
 
 // Helper function to get reports file path for a store
 function getReportsFilePath(storeId) {

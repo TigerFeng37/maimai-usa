@@ -40,7 +40,26 @@ Railway 会自动检测到 Node.js 项目，但需要配置：
    - **Start Command**: `npm run server`
    - **Watch Paths**: 可以留空，或设置为 `server/**`
 
-#### 步骤 4: 配置环境变量
+#### 步骤 4: 配置持久化存储（重要！）⭐
+
+**⚠️ 重要**：如果不配置持久化存储，每次重新部署时所有数据（用户、收藏、论坛等）都会丢失，登录 cookies 也会失效。
+
+请按照 `RAILWAY_PERSISTENT_STORAGE.md` 中的详细说明配置 Volume。
+
+**快速步骤**：
+1. 在服务设置中，点击 **"Volumes"** 标签
+2. 点击 **"New Volume"**
+3. 设置：
+   - **Name**: `maimai-data`
+   - **Mount Path**: `/data`
+   - **Size**: 1 GB
+4. 在 **Variables** 中添加：
+   - `DATA_DIR` = `/data`
+   - `SESSIONS_DIR` = `/data/sessions`
+
+详细说明请参考：`RAILWAY_PERSISTENT_STORAGE.md`
+
+#### 步骤 5: 配置环境变量
 
 在 **Variables** 标签页添加以下环境变量：
 
@@ -54,19 +73,21 @@ Railway 会自动检测到 Node.js 项目，但需要配置：
 | `FRONTEND_URL` | `https://你的前端域名` | 你的 Cloudflare Pages 域名 |
 | `SESSION_SECRET` | 生成的强密码 | 运行 `openssl rand -base64 32` 生成 |
 | `VITE_API_BASE_URL` | `https://你的railway域名.up.railway.app/api` | 部署后更新 |
+| `DATA_DIR` | `/data` | 数据目录（如果配置了 Volume，必须与 Mount Path 一致） |
+| `SESSIONS_DIR` | `/data/sessions` | Session 目录（如果配置了 Volume） |
 
 **生成 SESSION_SECRET：**
 ```bash
 openssl rand -base64 32
 ```
 
-#### 步骤 5: 获取域名
+#### 步骤 6: 获取域名
 
 1. 在服务设置中，找到 **Settings → Networking**
 2. Railway 会自动分配一个域名，格式：`你的服务名.up.railway.app`
 3. 或者点击 "Generate Domain" 生成自定义域名
 
-#### 步骤 6: 更新环境变量中的 URL
+#### 步骤 7: 更新环境变量中的 URL
 
 部署后，Railway 会分配域名，需要更新：
 
@@ -80,7 +101,7 @@ openssl rand -base64 32
    https://maimai-api.up.railway.app/api
    ```
 
-#### 步骤 7: 更新 Discord 应用配置
+#### 步骤 8: 更新 Discord 应用配置
 
 1. 访问 [Discord Developer Portal](https://discord.com/developers/applications)
 2. 选择你的应用
@@ -91,7 +112,7 @@ openssl rand -base64 32
    ```
 5. 保存更改
 
-#### 步骤 8: 更新前端配置
+#### 步骤 9: 更新前端配置
 
 在项目根目录创建 `.env.production` 文件：
 
@@ -101,7 +122,7 @@ VITE_API_BASE_URL=https://你的railway域名.up.railway.app/api
 
 然后重新构建并部署前端。
 
-#### 步骤 9: 验证部署
+#### 步骤 10: 验证部署
 
 1. **检查 Railway 部署日志**
    - 在 Railway Dashboard 查看服务
@@ -287,6 +308,7 @@ VITE_API_BASE_URL=https://你的railway域名.up.railway.app/api
 ## 📚 相关文档
 
 - [Railway 官方文档](https://docs.railway.app)
+- `RAILWAY_PERSISTENT_STORAGE.md` - **持久化存储配置指南（重要！）**
 - `SERVER_DEPLOYMENT.md` - 通用服务器部署指南
 - `DEPLOYMENT_PROD.md` - 生产环境配置
 - `AUTO_DEPLOY_SETUP.md` - 自动部署设置
@@ -300,12 +322,14 @@ VITE_API_BASE_URL=https://你的railway域名.up.railway.app/api
 - [ ] Railway 账号已创建
 - [ ] 项目已连接到 GitHub 仓库
 - [ ] 服务配置正确（Start Command: `npm run server`）
-- [ ] 所有环境变量已设置
+- [ ] **持久化存储已配置（Volume + 环境变量）** ⭐
+- [ ] 所有环境变量已设置（包括 `DATA_DIR` 和 `SESSIONS_DIR`）
 - [ ] Discord 回调 URL 已更新
 - [ ] 前端 `VITE_API_BASE_URL` 已更新
 - [ ] 测试部署成功
 - [ ] 测试 Discord 认证
 - [ ] 测试 API 端点
+- [ ] **测试数据持久化（登录、添加数据、重新部署、验证数据保留）** ⭐
 
 ---
 

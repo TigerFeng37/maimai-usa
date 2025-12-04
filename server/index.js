@@ -21,8 +21,9 @@ const __dirname = dirname(__filename)
 
 const app = express()
 const PORT = process.env.PORT || 3001
-const DATA_DIR = join(__dirname, 'data')
-const SESSIONS_DIR = join(DATA_DIR, 'sessions')
+// Use persistent volume path if provided (for Railway), otherwise use local data directory
+const DATA_DIR = process.env.DATA_DIR || join(__dirname, 'data')
+const SESSIONS_DIR = process.env.SESSIONS_DIR || join(DATA_DIR, 'sessions')
 
 // Ensure data directory exists
 async function ensureDataDir() {
@@ -90,7 +91,11 @@ app.use(
       sameSite: isProduction ? 'none' : 'lax', // Allow cross-site cookies in production
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
       // Don't set domain - let browser handle it for cross-origin cookies
-    }
+      // Set path explicitly to ensure cookies work across routes
+      path: '/'
+    },
+    // Use a consistent name for the session cookie
+    name: 'maimai.sid'
   })
 )
 
@@ -148,6 +153,7 @@ async function startServer() {
     console.log(`   DISCORD_CLIENT_SECRET: ${process.env.DISCORD_CLIENT_SECRET ? '✅ Set' : '❌ Missing'}`)
     console.log(`   📁 Data directory: ${DATA_DIR}`)
     console.log(`   📁 Sessions directory: ${SESSIONS_DIR}`)
+    console.log(`   💾 Using persistent storage: ${process.env.DATA_DIR ? '✅ Yes' : '❌ No (data will be lost on redeploy!)'}`)
     
     server = app.listen(PORT, () => {
       console.log(`🚀 API server running on http://localhost:${PORT}`)

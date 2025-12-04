@@ -6,7 +6,9 @@ import fs from 'fs/promises'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-const USERS_FILE = join(__dirname, '../data/users.json')
+// Use persistent volume path if provided (for Railway), otherwise use local data directory
+const DATA_DIR = process.env.DATA_DIR || join(__dirname, '../data')
+const USERS_FILE = join(DATA_DIR, 'users.json')
 
 // Load or create users file
 async function loadUsers() {
