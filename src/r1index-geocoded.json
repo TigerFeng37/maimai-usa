@@ -1313,7 +1313,7 @@
     "lng": -80.1122579,
     "geocoded": true,
     "geocoded_address": "2885D N Military Trail, West Palm Beach, FL 33409",
-    "active": false,
+    "active": true,
     "storeid": "arcadia",
     "hours": "Sunday 9:00 AM - 9:00 PM\nMonday 9:00 AM - 9:00 PM\nTuesday 9:00 AM - 9:00 PM\nWednesday 9:00 AM - 9:00 PM\nThursday 9:00 AM - 9:00 PM\nFriday 9:00 AM - 9:00 PM\nSaturday 9:00 AM - 9:00 PM",
     "phone": "(305) 302-9158"
