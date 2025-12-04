@@ -1,5 +1,5 @@
 // API configuration
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://maimai-usa-production.up.railway.app:3001/api'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://maimai-usa-production.up.railway.app/api'
 
 /**
  * Get all posts
