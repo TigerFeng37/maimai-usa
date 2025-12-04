@@ -26,13 +26,37 @@ async function saveUsers(users) {
   await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2), 'utf-8')
 }
 
+// Normalize callback URL to remove port number for HTTPS in production
+// Discord requires the redirect_uri to exactly match the registered URL (no port for HTTPS)
+function getCallbackURL() {
+  let callbackURL = process.env.DISCORD_CALLBACK_URL || 'https://maimai-usa-production.up.railway.app/auth/discord/callback'
+  
+  // Remove port number from HTTPS URLs (production environments don't need it)
+  if (callbackURL.startsWith('https://')) {
+    try {
+      const url = new URL(callbackURL)
+      // Remove port for HTTPS URLs (standard HTTPS port is 443, which is implicit)
+      if (url.port) {
+        url.port = ''
+        callbackURL = url.toString()
+        // Remove trailing slash if present after removing port
+        callbackURL = callbackURL.replace(/\/$/, '')
+      }
+    } catch (e) {
+      console.warn('Error parsing callback URL:', e)
+    }
+  }
+  
+  return callbackURL
+}
+
 // Configure Discord OAuth2 Strategy
 passport.use(
   new DiscordStrategy(
     {
       clientID: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
-      callbackURL: process.env.DISCORD_CALLBACK_URL || 'https://maimai-usa-production.up.railway.app:3001/auth/discord/callback',
+      callbackURL: getCallbackURL(),
       scope: ['identify', 'email']
     },
     async (accessToken, refreshToken, profile, done) => {
