@@ -32,5 +32,23 @@
     "storeid": "arcadia",
     "hours": "Sunday 9:00 AM - 9:00 PM\nMonday 9:00 AM - 9:00 PM\nTuesday 9:00 AM - 9:00 PM\nWednesday 9:00 AM - 9:00 PM\nThursday 9:00 AM - 9:00 PM\nFriday 9:00 AM - 9:00 PM\nSaturday 9:00 AM - 9:00 PM",
     "phone": "(305) 302-9158"
+  },
+  {
+    "code": "N/A",
+    "name": "H Mart Orlando",
+    "city": "Orlando",
+    "state": "FL",
+    "address": "7501 W Colonial Dr, Orlando, FL 32818",
+    "cab_count": "TBD",
+    "index": "-",
+    "lat": 28.553234,
+    "lng": -81.483738,
+    "geocoded": true,
+    "geocoded_address": "7501 W Colonial Dr, Orlando, FL 32818",
+    "active": true,
+    "storeid": "18521",
+    "hours": "Sunday 9:00 AM - 10:00 PM\nMonday 9:00 AM - 10:00 PM\nTuesday 9:00 AM - 10:00 PM\nWednesday 9:00 AM - 10:00 PM\nThursday 9:00 AM - 10:00 PM\nFriday 9:00 AM - 10:00 PM\nSaturday 9:00 AM - 10:00 PM",
+    "phone": "(407) 853-8010",
+    "website": "https://www.hmart.com/store/orlando-fl-32818/67336882-b0db-453f-b173-89d63c2af774"
   }
 ]
