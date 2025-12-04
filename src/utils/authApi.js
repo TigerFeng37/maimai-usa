@@ -42,17 +42,23 @@ export async function getCurrentUser() {
       credentials: 'include'
     }, 10000) // 10 second timeout
 
+    // 401 is expected when user is not authenticated, return null silently
     if (response.status === 401) {
       return null
     }
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`)
+      // Only log non-401 errors
+      console.error(`Error fetching current user: HTTP ${response.status}`)
+      return null
     }
 
     return await response.json()
   } catch (error) {
-    console.error('Error fetching current user:', error)
+    // Only log actual network/timeout errors, not 401 responses
+    if (error.message !== 'Request timeout' && !error.message.includes('401')) {
+      console.error('Error fetching current user:', error)
+    }
     return null
   }
 }

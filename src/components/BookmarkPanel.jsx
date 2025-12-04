@@ -15,7 +15,7 @@ function BookmarkPanel() {
   const [locations, setLocations] = useState([])
   const [loading, setLoading] = useState(true)
   const [latestPosts, setLatestPosts] = useState({})
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
   const [user, setUser] = useState(null)
   const [checkingAuth, setCheckingAuth] = useState(true)
   const [newPostCount, setNewPostCount] = useState(0)
@@ -49,6 +49,11 @@ function BookmarkPanel() {
       const favoriteLocations = data.filter(loc => favoriteIds.includes(loc.storeid))
       setLocations(favoriteLocations)
       locationsRef.current = favoriteLocations
+
+      // Auto-expand if user has bookmarked locations
+      if (favoriteLocations.length > 0) {
+        setIsCollapsed(false)
+      }
 
       // Load latest posts for each favorite and check for new posts
       const postsMap = {}
@@ -235,7 +240,7 @@ function BookmarkPanel() {
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
-              className={`transition-transform ${isCollapsed ? '' : 'rotate-180'}`}
+              className={`transition-transform ${isCollapsed ? 'rotate-180' : ''}`}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
