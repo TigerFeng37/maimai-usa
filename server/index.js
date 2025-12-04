@@ -39,8 +39,30 @@ async function ensureDataDir() {
 app.set('trust proxy', true)
 
 // Middleware
+// Normalize origin URL by removing trailing slash for CORS
+function normalizeOrigin(origin) {
+  if (!origin) return origin
+  return origin.replace(/\/$/, '')
+}
+
+const allowedOrigin = normalizeOrigin(process.env.FRONTEND_URL || 'https://maimaiusa.com')
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://maimaiusa.com/',
+  origin: (origin, callback) => {
+    // Allow requests without origin (same-origin requests, Postman, etc.)
+    if (!origin) {
+      return callback(null, true)
+    }
+    
+    const normalizedRequestOrigin = normalizeOrigin(origin)
+    
+    // Allow requests from the configured origin (with or without trailing slash)
+    if (normalizedRequestOrigin === allowedOrigin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true
 }))
 app.use(express.json())
@@ -104,7 +126,7 @@ async function startServer() {
     console.log('🔧 Server Configuration:')
     console.log(`   PORT: ${PORT}`)
     console.log(`   NODE_ENV: ${process.env.NODE_ENV || 'production'}`)
-    console.log(`   FRONTEND_URL: ${process.env.FRONTEND_URL || 'https://maimaiusa.com/'}`)
+    console.log(`   FRONTEND_URL (normalized): ${allowedOrigin}`)
     console.log(`   DISCORD_CALLBACK_URL: ${process.env.DISCORD_CALLBACK_URL || 'https://maimai-usa.up.railway.app/auth/discord/callback'}`)
     console.log(`   DISCORD_CLIENT_ID: ${process.env.DISCORD_CLIENT_ID ? '✅ Set' : '❌ Missing'}`)
     console.log(`   DISCORD_CLIENT_SECRET: ${process.env.DISCORD_CLIENT_SECRET ? '✅ Set' : '❌ Missing'}`)
