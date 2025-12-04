@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import data from './r1index-geocoded.json'
 import Navbar from './components/Navbar'
-import Forum from './components/Forum'
+// import Forum from './components/Forum'
 import FavoriteButton from './components/FavoriteButton'
 import { createPost } from './utils/forumApi'
 import { getCurrentUser, loginWithDiscord } from './utils/authApi'
@@ -692,9 +692,9 @@ function DetailView() {
         </div>
 
         {/* Unified Forum & Status Feed */}
-        {location && (
+        {/* {location && (
           <Forum storeId={location.storeid} locationName={location.name} />
-        )}
+        )} */}
       </div>
 
       {/* Report Issue Modal */}
