@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import data from './r1index-geocoded.json';
@@ -10,6 +10,7 @@ import RecentsBanner from './components/RecentsBanner';
 import BookmarkPanel from './components/BookmarkPanel';
 import FavoriteButton from './components/FavoriteButton';
 import { getCurrentUser } from './utils/authApi';
+import { getFavorites } from './utils/favoritesApi';
 import './mapStyles.css';
 
 // Fix for default markers in React-Leaflet
@@ -70,6 +71,19 @@ function ZoomHandler({ setZoom }) {
   return null;
 }
 
+// Component to change map view to a specific location
+function ChangeMapView({ center, zoom }) {
+  const map = useMap();
+  
+  useEffect(() => {
+    if (center && center[0] && center[1]) {
+      map.setView(center, zoom || map.getZoom());
+    }
+  }, [center, zoom, map]);
+  
+  return null;
+}
+
 
 function MapView() {
   const navigate = useNavigate();
@@ -79,6 +93,8 @@ function MapView() {
   const [filteredData, setFilteredData] = useState(data);
   const [currentZoom, setCurrentZoom] = useState(window.innerWidth >= 768 ? 5 : 3);
   const [user, setUser] = useState(null);
+  const [firstBookmarkedLocation, setFirstBookmarkedLocation] = useState(null);
+  const [hasCenteredToBookmark, setHasCenteredToBookmark] = useState(false);
   
   const uniqueStates = [...new Set(data.map(location => location.state))].sort();
 
@@ -95,6 +111,44 @@ function MapView() {
       setUser(null);
     }
   };
+
+  // Reset bookmark centering state when user logs out
+  useEffect(() => {
+    if (!user) {
+      setFirstBookmarkedLocation(null);
+      setHasCenteredToBookmark(false);
+    }
+  }, [user]);
+
+  // Load first bookmarked location when user is signed in
+  useEffect(() => {
+    const loadFirstBookmark = async () => {
+      if (!user || hasCenteredToBookmark) return;
+      
+      try {
+        const favoriteIds = await getFavorites();
+        if (favoriteIds && favoriteIds.length > 0) {
+          // Find the first bookmarked location with coordinates
+          const firstBookmark = data.find(loc => 
+            favoriteIds.some(id => String(id) === String(loc.storeid)) &&
+            loc.lat && loc.lng
+          );
+          
+          if (firstBookmark) {
+            setFirstBookmarkedLocation({
+              lat: firstBookmark.lat,
+              lng: firstBookmark.lng
+            });
+            setHasCenteredToBookmark(true);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading bookmarked locations:', error);
+      }
+    };
+    
+    loadFirstBookmark();
+  }, [user, hasCenteredToBookmark]);
 
   useEffect(() => {
     let filtered = data;
@@ -184,6 +238,12 @@ function MapView() {
           className="z-0 [&_.leaflet-control-zoom]:dark:invert"
         >
           <ZoomHandler setZoom={setCurrentZoom} />
+          {firstBookmarkedLocation && (
+            <ChangeMapView 
+              center={[firstBookmarkedLocation.lat, firstBookmarkedLocation.lng]} 
+              zoom={window.innerWidth >= 768 ? 12 : 11}
+            />
+          )}
           <TileLayer
             className="dark:contrast-[.95] dark:saturate-0 dark:hue-rotate-15 dark:invert"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
