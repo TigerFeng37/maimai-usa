@@ -29,7 +29,7 @@ async function saveUsers(users) {
 // Normalize callback URL to remove port number for HTTPS in production
 // Discord requires the redirect_uri to exactly match the registered URL (no port for HTTPS)
 function getCallbackURL() {
-  let callbackURL = process.env.DISCORD_CALLBACK_URL || 'https://maimai-usa-production.up.railway.app/auth/discord/callback'
+  let callbackURL = process.env.DISCORD_CALLBACK_URL || 'https://maimai-usa-production.up.railway.app:3001/auth/discord/callback'
   
   // Remove port number from HTTPS URLs (production environments don't need it)
   if (callbackURL.startsWith('https://')) {

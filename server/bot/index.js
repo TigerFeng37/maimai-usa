@@ -337,7 +337,7 @@ client.on('interactionCreate', async interaction => {
         .addComponents(
           new ButtonBuilder()
             .setLabel('查看网站')
-            .setURL(`${process.env.FRONTEND_URL || 'https://maimai-usa.pages.dev'}/location/${store.storeid}`)
+            .setURL(`${process.env.FRONTEND_URL || 'https://maimaiusa.com'}/location/${store.storeid}`)
             .setStyle(ButtonStyle.Link)
         )
 

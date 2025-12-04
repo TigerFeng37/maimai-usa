@@ -137,7 +137,7 @@ async function sendNotification(discordUserId, store, post) {
           inline: true
         }
       )
-      .setURL(`${process.env.FRONTEND_URL || 'https://maimai-usa.pages.dev'}/location/${store.storeid}`)
+      .setURL(`${process.env.FRONTEND_URL || 'https://maimaiusa.com'}/location/${store.storeid}`)
       .setFooter({ text: '点击查看完整信息' })
       .setTimestamp(new Date(post.createdAt))
 
