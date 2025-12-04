@@ -67,6 +67,11 @@ app.use(cors({
 }))
 app.use(express.json())
 
+// Determine if we're in production (check multiple indicators)
+const isProduction = process.env.NODE_ENV === 'production' || 
+                     process.env.RAILWAY_ENVIRONMENT === 'production' ||
+                     (process.env.FRONTEND_URL && process.env.FRONTEND_URL.startsWith('https://'))
+
 // Session configuration with file store for production
 app.use(
   session({
@@ -80,10 +85,11 @@ app.use(
     resave: false,
     saveUninitialized: true, // Changed to true to save session even if uninitialized
     cookie: {
-      secure: process.env.NODE_ENV === 'production',
+      secure: isProduction, // Use HTTPS cookies in production
       httpOnly: true,
-      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax', // Allow cross-site cookies in production
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+      sameSite: isProduction ? 'none' : 'lax', // Allow cross-site cookies in production
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      // Don't set domain - let browser handle it for cross-origin cookies
     }
   })
 )
@@ -108,6 +114,16 @@ app.use('/api/peopleCount', peopleCountRouter)
 
 // Get current user
 app.get('/api/user', (req, res) => {
+  // Debug logging for authentication issues
+  console.log('GET /api/user - Session info:', {
+    hasSession: !!req.session,
+    sessionID: req.session?.id,
+    hasUser: !!req.user,
+    userId: req.user?.id,
+    cookies: req.headers.cookie ? 'present' : 'missing',
+    origin: req.headers.origin
+  })
+  
   if (req.user) {
     res.json(req.user)
   } else {
