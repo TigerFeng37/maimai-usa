@@ -24,8 +24,16 @@ async function loadUsers() {
 
 // Helper function to save users
 async function saveUsers(users) {
-  await fs.mkdir(dirname(USERS_FILE), { recursive: true })
-  await fs.writeFile(USERS_FILE, JSON.stringify(users, null, 2), 'utf-8')
+  try {
+    const dir = dirname(USERS_FILE)
+    await fs.mkdir(dir, { recursive: true })
+    const data = JSON.stringify(users, null, 2)
+    await fs.writeFile(USERS_FILE, data, 'utf-8')
+    console.log(`[favorites] Successfully saved users to ${USERS_FILE}`)
+  } catch (error) {
+    console.error(`[favorites] Error saving users to ${USERS_FILE}:`, error)
+    throw error
+  }
 }
 
 // Middleware to check authentication
@@ -42,15 +50,22 @@ const router = express.Router()
 // GET /api/favorites - Get user's favorite stores
 router.get('/', requireAuth, async (req, res) => {
   try {
+    console.log(`[favorites] GET request for user: ${req.user?.id}`)
+    console.log(`[favorites] DATA_DIR: ${DATA_DIR}, USERS_FILE: ${USERS_FILE}`)
+    
     const users = await loadUsers()
     const user = users[req.user.id]
     
     if (!user) {
+      console.error(`[favorites] User not found: ${req.user.id}`)
       return res.status(404).json({ error: 'User not found' })
     }
 
+    const favoriteStores = user.favoriteStores || []
+    console.log(`[favorites] Returning ${favoriteStores.length} favorites for user ${req.user.id}`)
+
     res.json({
-      favoriteStores: user.favoriteStores || []
+      favoriteStores: favoriteStores
     })
   } catch (error) {
     console.error('Error fetching favorites:', error)
@@ -95,9 +110,22 @@ router.post('/', requireAuth, async (req, res) => {
     // Add store to favorites
     user.favoriteStores.push(storeId)
     users[req.user.id] = user
+    
+    console.log(`[favorites] About to save users. User ${req.user.id} now has ${user.favoriteStores.length} favorites`)
+    console.log(`[favorites] DATA_DIR: ${DATA_DIR}, USERS_FILE: ${USERS_FILE}`)
+    
     await saveUsers(users)
 
     console.log(`[favorites] Successfully added storeId ${storeId} to favorites. Total: ${user.favoriteStores.length}`)
+
+    // Verify the save by reading back
+    const verifyUsers = await loadUsers()
+    const verifyUser = verifyUsers[req.user.id]
+    if (verifyUser && verifyUser.favoriteStores) {
+      console.log(`[favorites] Verification: User ${req.user.id} has ${verifyUser.favoriteStores.length} favorites after save`)
+    } else {
+      console.error(`[favorites] WARNING: Could not verify save for user ${req.user.id}`)
+    }
 
     res.json({
       message: 'Store added to favorites',
@@ -147,7 +175,18 @@ router.delete('/:storeId', requireAuth, async (req, res) => {
     }
 
     users[req.user.id] = user
+    
+    console.log(`[favorites] About to save users after removal. User ${req.user.id} now has ${user.favoriteStores.length} favorites`)
     await saveUsers(users)
+
+    // Verify the save by reading back
+    const verifyUsers = await loadUsers()
+    const verifyUser = verifyUsers[req.user.id]
+    if (verifyUser && verifyUser.favoriteStores) {
+      console.log(`[favorites] Verification: User ${req.user.id} has ${verifyUser.favoriteStores.length} favorites after removal`)
+    } else {
+      console.error(`[favorites] WARNING: Could not verify save for user ${req.user.id}`)
+    }
 
     res.json({
       message: 'Store removed from favorites',

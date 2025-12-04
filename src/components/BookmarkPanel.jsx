@@ -44,10 +44,14 @@ function BookmarkPanel() {
     setLoading(true)
     try {
       const favoriteIds = await getFavorites()
+      console.log('[BookmarkPanel] Loaded favorites:', favoriteIds)
       setFavorites(favoriteIds)
 
-      // Get location data for favorites
-      const favoriteLocations = data.filter(loc => favoriteIds.includes(loc.storeid))
+      // Get location data for favorites - use string comparison to handle type mismatches
+      const favoriteLocations = data.filter(loc => 
+        favoriteIds.some(id => String(id) === String(loc.storeid))
+      )
+      console.log('[BookmarkPanel] Found favorite locations:', favoriteLocations.length)
       setLocations(favoriteLocations)
       locationsRef.current = favoriteLocations
 
