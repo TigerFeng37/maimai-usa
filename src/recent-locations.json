@@ -67,5 +67,23 @@
     "storeid": "18504",
     "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 11:00 AM - 12:00 AM\nTuesday 11:00 AM - 12:00 AM\nWednesday 11:00 AM - 1:00 AM\nThursday 11:00 AM - 1:00 AM\nFriday 11:00 AM - 1:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(214) 361-5553"
+  },
+  {
+    "code": "N/A",
+    "name": "GameWorks",
+    "city": "Seattle",
+    "state": "WA",
+    "address": "1511 7th Ave, Seattle, WA 98101",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 47.6117917,
+    "lng": -122.3338358,
+    "geocoded": true,
+    "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
+    "active": true,
+    "storeid": "18511",
+    "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
+    "phone": "(425) 307-8070",
+    "website": null
   }
 ]
