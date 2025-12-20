@@ -139,5 +139,23 @@
     "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 10:00 AM - 12:00 AM\nTuesday 10:00 AM - 12:00 AM\nWednesday 10:00 AM - 12:00 AM\nThursday 10:00 AM - 12:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
     "phone": "(562) 408-2937",
     "website": "http://round1usa.com/"
+  },
+  {
+    "code": "NSM",
+    "name": "Round1 North Star Mall",
+    "city": "San Antonio",
+    "state": "TX",
+    "address": "7400 San Pedro Ave, San Antonio, TX 78216",
+    "cab_count": 2,
+    "index": "052",
+    "lat": 29.5196287,
+    "lng": -98.496303,
+    "geocoded": true,
+    "geocoded_address": "7400 San Pedro Ave, San Antonio, TX 78216",
+    "active": true,
+    "storeid": "19132",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(210) 448-2030",
+    "website": "https://www.round1usa.com/"
   }
 ]
