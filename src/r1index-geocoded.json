@@ -1118,7 +1118,7 @@
     "lng": -88.03518,
     "geocoded": true,
     "geocoded_address": "TBD",
-    "active": true,
+    "active": false,
     "storeid": "18528",
     "hours": "Sunday 11:00 AM - 10:00 PM\nMonday 11:00 AM - 10:00 PM\nTuesday 11:00 AM - 10:00 PM\nWednesday 11:00 AM - 10:00 PM\nThursday 11:00 AM - 10:00 PM\nFriday 11:00 AM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
     "phone": "(847) 805-0257",
@@ -1364,7 +1364,7 @@
     "lng": -96.7689595,
     "geocoded": true,
     "geocoded_address": "9450 N Central Expy, Dallas, TX 75231",
-    "active": false,
+    "active": true,
     "storeid": "18504",
     "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 11:00 AM - 12:00 AM\nTuesday 11:00 AM - 12:00 AM\nWednesday 11:00 AM - 1:00 AM\nThursday 11:00 AM - 1:00 AM\nFriday 11:00 AM - 1:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(214) 361-5553"
