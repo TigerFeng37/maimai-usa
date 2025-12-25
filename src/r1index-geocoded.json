@@ -1136,7 +1136,7 @@
     "lng": -93.242215,
     "geocoded": true,
     "geocoded_address": "342 East Broadway, Bloomington, MN 55425",
-    "active": true,
+    "active": false,
     "storeid": "18518",
     "hours": "Sunday 11:00 AM - 7:00 PM\nMonday 11:00 AM - 9:00 PM\nTuesday 11:00 AM - 9:00 PM\nWednesday 11:00 AM - 9:00 PM\nThursday 11:00 AM - 9:00 PM\nFriday 10:00 AM - 9:00 PM\nSaturday 10:00 AM - 9:00 PM",
     "phone": "(952) 854-1252",
@@ -1280,7 +1280,7 @@
     "lng": -118.242769,
     "geocoded": true,
     "geocoded_address": "319 E 2nd St, Los Angeles, CA 90012",
-    "active": true,
+    "active": false,
     "storeid": "18526"
   },
   {
@@ -1330,7 +1330,7 @@
     "lng": -122.3338358,
     "geocoded": true,
     "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
-    "active": true,
+    "active": false,
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070"
