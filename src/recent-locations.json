@@ -1,23 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Arcadia",
-    "city": "West Palm Beach",
-    "state": "FL",
-    "address": "2885D N Military Trail, West Palm Beach, FL 33409",
-    "cab_count": 1,
-    "index": "-",
-    "lat": 26.7201052,
-    "lng": -80.1122579,
-    "geocoded": true,
-    "geocoded_address": "2885D N Military Trail, West Palm Beach, FL 33409",
-    "active": true,
-    "storeid": "arcadia",
-    "hours": "Sunday 9:00 AM - 9:00 PM\nMonday 9:00 AM - 9:00 PM\nTuesday 9:00 AM - 9:00 PM\nWednesday 9:00 AM - 9:00 PM\nThursday 9:00 AM - 9:00 PM\nFriday 9:00 AM - 9:00 PM\nSaturday 9:00 AM - 9:00 PM",
-    "phone": "(305) 302-9158"
-  },
-  {
-    "code": "N/A",
     "name": "H Mart Orlando",
     "city": "Orlando",
     "state": "FL",
@@ -157,5 +140,41 @@
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(210) 448-2030",
     "website": "https://www.round1usa.com/"
+  },
+  {
+    "code": "N/A",
+    "name": "Enterrium",
+    "city": "Schaumburg",
+    "state": "IL",
+    "address": "2 Woodfield Mall Unit A, Schaumburg, IL 60173",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 42.04582,
+    "lng": -88.03518,
+    "geocoded": true,
+    "geocoded_address": "TBD",
+    "active": true,
+    "storeid": "18528",
+    "hours": "Sunday 11:00 AM - 10:00 PM\nMonday 11:00 AM - 10:00 PM\nTuesday 11:00 AM - 10:00 PM\nWednesday 11:00 AM - 10:00 PM\nThursday 11:00 AM - 10:00 PM\nFriday 11:00 AM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
+    "phone": "(847) 805-0257",
+    "website": "http://enterrium.info/"
+  },
+  {
+    "code": "N/A",
+    "name": "XScape",
+    "city": "Bloomington",
+    "state": "MN",
+    "address": "342 East Broadway, Bloomington, MN 55425",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 44.8548653,
+    "lng": -93.242215,
+    "geocoded": true,
+    "geocoded_address": "342 East Broadway, Bloomington, MN 55425",
+    "active": true,
+    "storeid": "18518",
+    "hours": "Sunday 11:00 AM - 7:00 PM\nMonday 11:00 AM - 9:00 PM\nTuesday 11:00 AM - 9:00 PM\nWednesday 11:00 AM - 9:00 PM\nThursday 11:00 AM - 9:00 PM\nFriday 10:00 AM - 9:00 PM\nSaturday 10:00 AM - 9:00 PM",
+    "phone": "(952) 854-1252",
+    "website": "https://www.mallofamerica.com/directory/xscape"
   }
 ]
