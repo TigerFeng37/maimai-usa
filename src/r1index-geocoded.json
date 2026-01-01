@@ -1364,7 +1364,7 @@
     "lng": -96.7689595,
     "geocoded": true,
     "geocoded_address": "9450 N Central Expy, Dallas, TX 75231",
-    "active": false,
+    "active": true,
     "storeid": "18504",
     "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 11:00 AM - 12:00 AM\nTuesday 11:00 AM - 12:00 AM\nWednesday 11:00 AM - 1:00 AM\nThursday 11:00 AM - 1:00 AM\nFriday 11:00 AM - 1:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(214) 361-5553"
