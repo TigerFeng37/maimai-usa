@@ -1,23 +1,5 @@
 [
   {
-    "code": "N/A",
-    "name": "Little Tokyo",
-    "city": "Los Angeles",
-    "state": "CA",
-    "address": "319 E 2nd St, Los Angeles, CA 90012",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 34.048284,
-    "lng": -118.242769,
-    "geocoded": true,
-    "geocoded_address": "319 E 2nd St, Los Angeles, CA 90012",
-    "active": true,
-    "storeid": "18526",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
     "code": "LWM",
     "name": "Round1 Lakewood Center Mall",
     "city": "Lakewood",
@@ -178,5 +160,23 @@
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(817) 873-7981",
     "website": "http://round1usa.com/"
+  },
+  {
+    "code": "N/A",
+    "name": "H Mart Austin",
+    "city": "Austin",
+    "state": "TX",
+    "address": "11301 Lakeline Blvd suite 124, Austin, TX 78717",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 30.482507,
+    "lng": -97.800942,
+    "geocoded": true,
+    "geocoded_address": "11301 Lakeline Blvd suite 124, Austin, TX 78717",
+    "active": true,
+    "storeid": "18522",
+    "hours": "Sunday 8:00 AM - 10:00 PM\nMonday 8:00 AM - 10:00 PM\nTuesday 8:00 AM - 10:00 PM\nWednesday 8:00 AM - 10:00 PM\nThursday 8:00 AM - 10:00 PM\nFriday 8:00 AM - 10:00 PM\nSaturday 8:00 AM - 10:00 PM",
+    "phone": "(737) 717-6900",
+    "website": "http://www.hmart.com/"
   }
 ]
