@@ -1244,7 +1244,7 @@
     "lng": -122.409418,
     "geocoded": true,
     "geocoded_address": "1581 Webster St #225 San Francisco, CA 94115",
-    "active": true,
+    "active": false,
     "storeid": "18524",
     "hours": "Sunday 8:30 AM - 10:00 PM\nMonday 8:30 AM - 11:00 PM\nTuesday 8:30 AM - 11:00 PM\nWednesday 8:30 AM - 11:00 PM\nThursday 8:30 AM - 11:00 PM\nFriday 8:30 AM - 11:00 PM\nSaturday 8:30 AM - 11:00 PM",
     "phone": "(415) 440-1171",
