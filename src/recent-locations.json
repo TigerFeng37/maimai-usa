@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "XScape",
-    "city": "Bloomington",
-    "state": "MN",
-    "address": "342 East Broadway, Bloomington, MN 55425",
-    "cab_count": 1,
-    "index": "-",
-    "lat": 44.8548653,
-    "lng": -93.242215,
-    "geocoded": true,
-    "geocoded_address": "342 East Broadway, Bloomington, MN 55425",
-    "active": true,
-    "storeid": "18518",
-    "hours": "Sunday 11:00 AM - 7:00 PM\nMonday 11:00 AM - 9:00 PM\nTuesday 11:00 AM - 9:00 PM\nWednesday 11:00 AM - 9:00 PM\nThursday 11:00 AM - 9:00 PM\nFriday 10:00 AM - 9:00 PM\nSaturday 10:00 AM - 9:00 PM",
-    "phone": "(952) 854-1252",
-    "website": "https://www.mallofamerica.com/directory/xscape"
-  },
-  {
-    "code": "N/A",
     "name": "Village of Donki",
     "city": "Tamuning",
     "state": "GU",
@@ -178,5 +160,23 @@
     "hours": "Sunday 11:00 AM - 10:00 PM\nMonday 12:00 PM - 11:00 PM\nTuesday 12:00 PM - 11:00 PM\nWednesday 12:00 PM - 11:00 PM\nThursday 12:00 PM - 11:00 PM\nFriday 12:00 PM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
     "phone": "(949) 334-0054",
     "website": null
+  },
+  {
+    "code": "VCM",
+    "name": "Round1 Vancouver Mall",
+    "city": "Vancouver",
+    "state": "WA",
+    "address": "8800 NE Vancouver Mall Dr, Ste. 100, Vancouver, WA 98662",
+    "cab_count": 2,
+    "index": "047",
+    "lat": 45.6574073,
+    "lng": -122.5825581,
+    "geocoded": true,
+    "geocoded_address": "8800 NE Vancouver Mall Dr, Vancouver, WA 98662",
+    "active": true,
+    "storeid": "19642",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(564) 888-2515",
+    "website": "http://round1usa.com/"
   }
 ]

@@ -1001,7 +1001,7 @@
     "lng": -122.5825581,
     "geocoded": true,
     "geocoded_address": "8800 NE Vancouver Mall Dr, Vancouver, WA 98662",
-    "active": false,
+    "active": true,
     "storeid": "19642",
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(564) 888-2515",
