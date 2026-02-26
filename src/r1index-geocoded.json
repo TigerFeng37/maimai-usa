@@ -1347,7 +1347,7 @@
     "lng": -117.7247835,
     "geocoded": true,
     "geocoded_address": "26503 Aliso Creek Rd, Aliso Viejo, CA 92656",
-    "active": true,
+    "active": false,
     "storeid": "18502",
     "hours": "Sunday 11:00 AM - 10:00 PM\nMonday 12:00 PM - 11:00 PM\nTuesday 12:00 PM - 11:00 PM\nWednesday 12:00 PM - 11:00 PM\nThursday 12:00 PM - 11:00 PM\nFriday 12:00 PM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
     "phone": "(949) 334-0054"
