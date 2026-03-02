@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Village of Donki",
-    "city": "Tamuning",
-    "state": "GU",
-    "address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 13.4928101,
-    "lng": 144.792646,
-    "geocoded": true,
-    "geocoded_address": "120 Chalan Pasaheru STE 101, Tamuning, 96913",
-    "active": true,
-    "storeid": "18523",
-    "hours": "Sunday 7:00 AM - 1:00 AM\nMonday 7:00 AM - 1:00 AM\nTuesday 7:00 AM - 1:00 AM\nWednesday 7:00 AM - 1:00 AM\nThursday 7:00 AM - 1:00 AM\nFriday 7:00 AM - 1:00 AM\nSaturday 7:00 AM - 1:00 AM",
-    "phone": "(671) 969-1430",
-    "website": "https://www.villageofdonki.com/"
-  },
-  {
-    "code": "N/A",
     "name": "SF Japan Center",
     "city": "San Francisco",
     "state": "CA",
@@ -177,6 +159,24 @@
     "storeid": "19642",
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(564) 888-2515",
+    "website": "http://round1usa.com/"
+  },
+  {
+    "code": "MVM",
+    "name": "Round1 Moreno Valley Mall",
+    "city": "Monero Valley",
+    "state": "CA",
+    "address": "22500 Town Circle Suite 2030, Moreno Valley, CA 92553",
+    "cab_count": 2,
+    "index": "002",
+    "lat": 33.938685,
+    "lng": -117.271425,
+    "geocoded": true,
+    "geocoded_address": "22500 Town Circle Suite 2030, Moreno Valley, CA 92553",
+    "active": true,
+    "storeid": "22694",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(951) 697-0260",
     "website": "http://round1usa.com/"
   }
 ]
