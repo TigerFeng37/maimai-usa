@@ -569,7 +569,7 @@
     "lng": -117.271425,
     "geocoded": true,
     "geocoded_address": "22500 Town Circle Suite 2030, Moreno Valley, CA 92553",
-    "active": true,
+    "active": false,
     "storeid": "22694",
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(951) 697-0260",
