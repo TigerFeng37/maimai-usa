@@ -605,7 +605,7 @@
     "lng": -87.8107611,
     "geocoded": true,
     "geocoded_address": "7501 W Cermak Rd, North Riverside, IL 60546",
-    "active": true,
+    "active": false,
     "storeid": "20164",
     "hours": "Sunday 10:00 AM - 1:00 AM\nMonday 10:00 AM - 1:00 AM\nTuesday 10:00 AM - 1:00 AM\nWednesday 10:00 AM - 1:00 AM\nThursday 10:00 AM - 1:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
     "phone": "(708) 762-3113",
@@ -1330,7 +1330,7 @@
     "lng": -122.3338358,
     "geocoded": true,
     "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
-    "active": false,
+    "active": true,
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070"
