@@ -605,7 +605,7 @@
     "lng": -87.8107611,
     "geocoded": true,
     "geocoded_address": "7501 W Cermak Rd, North Riverside, IL 60546",
-    "active": false,
+    "active": true,
     "storeid": "20164",
     "hours": "Sunday 10:00 AM - 1:00 AM\nMonday 10:00 AM - 1:00 AM\nTuesday 10:00 AM - 1:00 AM\nWednesday 10:00 AM - 1:00 AM\nThursday 10:00 AM - 1:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
     "phone": "(708) 762-3113",

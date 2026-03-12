@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "SF Japan Center",
-    "city": "San Francisco",
-    "state": "CA",
-    "address": "1581 Webster St #225 San Francisco, CA 94115",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 37.788566,
-    "lng": -122.409418,
-    "geocoded": true,
-    "geocoded_address": "1581 Webster St #225 San Francisco, CA 94115",
-    "active": true,
-    "storeid": "18524",
-    "hours": "Sunday 8:30 AM - 10:00 PM\nMonday 8:30 AM - 11:00 PM\nTuesday 8:30 AM - 11:00 PM\nWednesday 8:30 AM - 11:00 PM\nThursday 8:30 AM - 11:00 PM\nFriday 8:30 AM - 11:00 PM\nSaturday 8:30 AM - 11:00 PM",
-    "phone": "(415) 440-1171",
-    "website": "https://www.sfjapantown.org/japan-center-malls/"
-  },
-  {
-    "code": "N/A",
     "name": "Japan Village",
     "city": "Brooklyn",
     "state": "NY",
@@ -177,6 +159,24 @@
     "storeid": "22694",
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(951) 697-0260",
+    "website": "http://round1usa.com/"
+  },
+  {
+    "code": "NRS",
+    "name": "Round1 North Riverside Park Mall",
+    "city": "North Riverside",
+    "state": "IL",
+    "address": "7501 W Cermak Rd, North Riverside, IL 60546",
+    "cab_count": 2,
+    "index": "028",
+    "lat": 41.8458104,
+    "lng": -87.8107611,
+    "geocoded": true,
+    "geocoded_address": "7501 W Cermak Rd, North Riverside, IL 60546",
+    "active": true,
+    "storeid": "20164",
+    "hours": "Sunday 10:00 AM - 1:00 AM\nMonday 10:00 AM - 1:00 AM\nTuesday 10:00 AM - 1:00 AM\nWednesday 10:00 AM - 1:00 AM\nThursday 10:00 AM - 1:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
+    "phone": "(708) 762-3113",
     "website": "http://round1usa.com/"
   }
 ]
