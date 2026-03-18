@@ -1,23 +1,5 @@
 [
   {
-    "code": "N/A",
-    "name": "Japan Village",
-    "city": "Brooklyn",
-    "state": "NY",
-    "address": "934 3rd Avenue Brooklyn, NY 11232",
-    "cab_count": 1,
-    "index": "-",
-    "lat": 40.656103,
-    "lng": -74.0064373,
-    "geocoded": true,
-    "geocoded_address": "934 3rd Avenue Brooklyn, NY 11232",
-    "active": true,
-    "storeid": "18525",
-    "hours": "Sunday 11:00 AM - 8:00 PM\nMonday 11:00 AM - 8:00 PM\nTuesday 11:00 AM - 8:00 PM\nWednesday 11:00 AM - 8:00 PM\nThursday 11:00 AM - 8:00 PM\nFriday 11:00 AM - 9:00 PM\nSaturday 11:00 AM - 9:00 PM",
-    "phone": "(347) 584-4578",
-    "website": "https://japanvillage.com/"
-  },
-  {
     "code": "DFM",
     "name": "Round1 Deptford Mall",
     "city": "Deptford",
@@ -178,5 +160,23 @@
     "hours": "Sunday 10:00 AM - 1:00 AM\nMonday 10:00 AM - 1:00 AM\nTuesday 10:00 AM - 1:00 AM\nWednesday 10:00 AM - 1:00 AM\nThursday 10:00 AM - 1:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
     "phone": "(708) 762-3113",
     "website": "http://round1usa.com/"
+  },
+  {
+    "code": "LVO",
+    "name": "Round1 Las Vegas South Premium Outlets",
+    "city": "Las Vegas",
+    "state": "NV",
+    "address": "7400 Las Vegas Blvd S, Las Vegas, NV 89123",
+    "cab_count": 2,
+    "index": "055",
+    "lat": 36.0539382,
+    "lng": -115.1691447,
+    "geocoded": true,
+    "geocoded_address": "7400 Las Vegas Blvd S, Las Vegas, NV 89123",
+    "active": true,
+    "storeid": "18976",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(702) 405-1020",
+    "website": "http://www.round1usa.com/"
   }
 ]
