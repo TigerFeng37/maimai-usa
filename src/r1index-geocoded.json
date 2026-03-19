@@ -227,7 +227,7 @@
     "lng": -75.622268,
     "geocoded": true,
     "geocoded_address": "172 Exton Square Pkwy, Exton, PA",
-    "active": false,
+    "active": true,
     "storeid": "20784",
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(484) 252-2819",
