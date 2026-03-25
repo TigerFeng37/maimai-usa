@@ -1,23 +1,5 @@
 [
   {
-    "code": "GVM",
-    "name": "Round1 Grapevine Mills",
-    "city": "Grapevine",
-    "state": "TX",
-    "address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
-    "cab_count": 3,
-    "index": "010",
-    "lat": 32.9661965,
-    "lng": -97.0428635,
-    "geocoded": true,
-    "geocoded_address": "3000 Grapevine Mills Pkwy, Grapevine, TX 76051",
-    "active": true,
-    "storeid": "20972",
-    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
-    "phone": "(817) 873-7981",
-    "website": "http://round1usa.com/"
-  },
-  {
     "code": "N/A",
     "name": "H Mart Austin",
     "city": "Austin",
@@ -177,6 +159,24 @@
     "storeid": "20784",
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(484) 252-2819",
+    "website": "http://round1usa.com/"
+  },
+  {
+    "code": "LWM",
+    "name": "Round1 Lakewood Center Mall",
+    "city": "Lakewood",
+    "state": "CA",
+    "address": "500 Lakewood Center Mall, Lakewood, CA 90712",
+    "cab_count": 2,
+    "index": "003",
+    "lat": 33.8503463,
+    "lng": -118.117191,
+    "geocoded": true,
+    "geocoded_address": "Lakewood, CA",
+    "active": true,
+    "storeid": "22693",
+    "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 10:00 AM - 12:00 AM\nTuesday 10:00 AM - 12:00 AM\nWednesday 10:00 AM - 12:00 AM\nThursday 10:00 AM - 12:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
+    "phone": "(562) 408-2937",
     "website": "http://round1usa.com/"
   }
 ]
