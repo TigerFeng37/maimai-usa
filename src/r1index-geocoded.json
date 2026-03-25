@@ -479,7 +479,7 @@
     "lng": -118.117191,
     "geocoded": true,
     "geocoded_address": "Lakewood, CA",
-    "active": true,
+    "active": false,
     "storeid": "22693",
     "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 10:00 AM - 12:00 AM\nTuesday 10:00 AM - 12:00 AM\nWednesday 10:00 AM - 12:00 AM\nThursday 10:00 AM - 12:00 AM\nFriday 10:00 AM - 1:00 AM\nSaturday 10:00 AM - 1:00 AM",
     "phone": "(562) 408-2937",
