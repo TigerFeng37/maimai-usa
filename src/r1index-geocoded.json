@@ -1262,7 +1262,7 @@
     "lng": -74.0064373,
     "geocoded": true,
     "geocoded_address": "934 3rd Avenue Brooklyn, NY 11232",
-    "active": true,
+    "active": false,
     "storeid": "18525",
     "hours": "Sunday 11:00 AM - 8:00 PM\nMonday 11:00 AM - 8:00 PM\nTuesday 11:00 AM - 8:00 PM\nWednesday 11:00 AM - 8:00 PM\nThursday 11:00 AM - 8:00 PM\nFriday 11:00 AM - 9:00 PM\nSaturday 11:00 AM - 9:00 PM",
     "phone": "(347) 584-4578",
