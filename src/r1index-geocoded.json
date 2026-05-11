@@ -1208,7 +1208,7 @@
     "lng": -97.800942,
     "geocoded": true,
     "geocoded_address": "11301 Lakeline Blvd suite 124, Austin, TX 78717",
-    "active": true,
+    "active": false,
     "storeid": "18522",
     "hours": "Sunday 8:00 AM - 10:00 PM\nMonday 8:00 AM - 10:00 PM\nTuesday 8:00 AM - 10:00 PM\nWednesday 8:00 AM - 10:00 PM\nThursday 8:00 AM - 10:00 PM\nFriday 8:00 AM - 10:00 PM\nSaturday 8:00 AM - 10:00 PM",
     "phone": "(737) 717-6900",
