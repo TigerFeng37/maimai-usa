@@ -1,23 +1,5 @@
 [
   {
-    "code": "VCM",
-    "name": "Round1 Vancouver Mall",
-    "city": "Vancouver",
-    "state": "WA",
-    "address": "8800 NE Vancouver Mall Dr, Ste. 100, Vancouver, WA 98662",
-    "cab_count": 2,
-    "index": "047",
-    "lat": 45.6574073,
-    "lng": -122.5825581,
-    "geocoded": true,
-    "geocoded_address": "8800 NE Vancouver Mall Dr, Vancouver, WA 98662",
-    "active": true,
-    "storeid": "19642",
-    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
-    "phone": "(564) 888-2515",
-    "website": "http://round1usa.com/"
-  },
-  {
     "code": "MVM",
     "name": "Round1 Moreno Valley Mall",
     "city": "Monero Valley",
@@ -178,5 +160,23 @@
     "hours": "Sunday 10:00 AM - 12:00 AM\nMonday 11:00 AM - 12:00 AM\nTuesday 11:00 AM - 12:00 AM\nWednesday 11:00 AM - 1:00 AM\nThursday 11:00 AM - 1:00 AM\nFriday 11:00 AM - 1:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(214) 361-5553",
     "website": null
+  },
+  {
+    "code": "N/A",
+    "name": "Round1 Menlo Park Mall",
+    "city": "Edison",
+    "state": "NJ",
+    "address": "1000 State Route 18, Edison, NJ 08837",
+    "cab_count": "TBD",
+    "index": "TBD",
+    "lat": 40.5474528,
+    "lng": -74.3369783,
+    "geocoded": true,
+    "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
+    "active": true,
+    "storeid": "18534",
+    "hours": null,
+    "phone": null,
+    "website": "https://www.round1usa.com/"
   }
 ]

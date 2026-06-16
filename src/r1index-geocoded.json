@@ -1037,7 +1037,7 @@
     "lng": -74.3369783,
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
-    "active": false,
+    "active": true,
     "storeid": "18534",
     "website": "https://www.round1usa.com/"
   },
