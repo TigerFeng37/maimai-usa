@@ -5,13 +5,14 @@ import ListView from './ListView'
 import MapView from './MapView'
 import DetailView from './DetailView'
 import Footer from './components/Footer'
+import RecentsBanner from './components/RecentsBanner'
 import MaintenancePage from './components/MaintenancePage'
 
 // Toggle this to enable/disable maintenance mode
 const MAINTENANCE_MODE = false
 
 // Transition wrapper component
-function TransitionWrapper({ children }) {
+function TransitionWrapper({ children, className = '' }) {
   const location = useLocation()
 
   useEffect(() => {
@@ -22,7 +23,7 @@ function TransitionWrapper({ children }) {
   }, [location])
 
   return (
-    <div key={location.pathname} className="transition-wrapper">
+    <div key={location.pathname} className={`transition-wrapper ${className}`}>
       {children}
     </div>
   )
@@ -31,10 +32,13 @@ function TransitionWrapper({ children }) {
 function AppContent() {
   const location = useLocation()
   const isMapView = location.pathname === '/map'
+  const showRecents = location.pathname === '/map'
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-gray-900 transition-colors duration-200">
-      <TransitionWrapper>
+    <div className={`flex flex-col bg-white dark:bg-gray-900 transition-colors duration-200 ${
+      isMapView ? 'h-dvh overflow-hidden' : 'min-h-screen'
+    }`}>
+      <TransitionWrapper className={isMapView ? 'flex-1 min-h-0 flex flex-col' : ''}>
         <Routes location={location}>
           <Route path="/" element={<Navigate to="/map" replace />} />
           <Route path="/list" element={<ListView />} />
@@ -42,6 +46,7 @@ function AppContent() {
           <Route path="/location/:storeId" element={<DetailView />} />
         </Routes>
       </TransitionWrapper>
+      {showRecents && <RecentsBanner />}
       <Footer isMapView={isMapView} />
     </div>
   )

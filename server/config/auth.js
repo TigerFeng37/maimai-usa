@@ -31,25 +31,38 @@ async function saveUsers(users) {
 // Normalize callback URL to remove port number for HTTPS in production
 // Discord requires the redirect_uri to exactly match the registered URL (no port for HTTPS)
 function getCallbackURL() {
-  let callbackURL = process.env.DISCORD_CALLBACK_URL || 'https://maimai-usa-production.up.railway.app:3001/auth/discord/callback'
+  const isProduction = process.env.NODE_ENV === 'production' || process.env.RAILWAY_ENVIRONMENT === 'production';
   
+  const callbackUri = isProduction
+    ? process.env.DISCORD_CALLBACK_URI_PROD
+    : process.env.DISCORD_CALLBACK_URI_DEV;
+
+  let finalCallbackURL = callbackUri;
+
+  if (!finalCallbackURL) {
+    console.error(`Error: DISCORD_CALLBACK_URI_${isProduction ? 'PROD' : 'DEV'} is not set. Falling back to default.`);
+    // Provide a fallback for now, but ideally these should always be set.
+    finalCallbackURL = isProduction
+      ? 'https://maimai-usa-production.up.railway.app/auth/discord/callback'
+      : 'http://localhost:3001/auth/discord/callback';
+  }
+
   // Remove port number from HTTPS URLs (production environments don't need it)
-  if (callbackURL.startsWith('https://')) {
+  if (finalCallbackURL.startsWith('https://')) {
     try {
-      const url = new URL(callbackURL)
-      // Remove port for HTTPS URLs (standard HTTPS port is 443, which is implicit)
+      const url = new URL(finalCallbackURL);
       if (url.port) {
-        url.port = ''
-        callbackURL = url.toString()
+        url.port = '';
+        finalCallbackURL = url.toString();
         // Remove trailing slash if present after removing port
-        callbackURL = callbackURL.replace(/\/$/, '')
+        finalCallbackURL = finalCallbackURL.replace(/\/$/, '');
       }
     } catch (e) {
-      console.warn('Error parsing callback URL:', e)
+      console.warn('Error parsing callback URL for port removal:', e);
     }
   }
   
-  return callbackURL
+  return finalCallbackURL;
 }
 
 // Configure Discord OAuth2 Strategy

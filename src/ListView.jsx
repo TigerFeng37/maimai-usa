@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import data from './r1index-geocoded.json'
 import Navbar from './components/Navbar'
 import FilterBar from './components/FilterBar'
+import { isRecentLocation } from './utils/recentLocations'
 
 function ListView() {
   const navigate = useNavigate()
@@ -28,6 +29,11 @@ function ListView() {
     }
     
     const sorted = [...filtered].sort((a, b) => {
+      // Private locations always stay at the bottom, regardless of sort
+      const aPrivate = a.code === 'Private'
+      const bPrivate = b.code === 'Private'
+      if (aPrivate !== bPrivate) return aPrivate ? 1 : -1
+
       let comparison = 0
       
       switch (sortType) {
@@ -143,14 +149,20 @@ function ListView() {
         />
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200 mt-[6rem] transition-all duration-300 ease-in-out">
-        {sortedData.map((location) => (
+        {sortedData.map((location) => {
+          const isPrivate = location.code === 'Private'
+          return (
           <div 
-            className="p-4 border-b border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-[18rem] md:min-h-0 cursor-pointer bg-white hover:bg-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 transition-colors duration-200 text-black dark:text-white" 
+            className={`p-4 border-b border-r border-gray-200 dark:border-gray-700 flex flex-col min-h-[18rem] md:min-h-0 bg-white dark:bg-gray-900 transition-colors duration-200 text-black dark:text-white ${
+              isPrivate
+                ? 'cursor-default opacity-60'
+                : 'cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800'
+            }`}
             key={location.storeid}
-            onClick={() => handleLocationClick(location.storeid)}
+            onClick={isPrivate ? undefined : () => handleLocationClick(location.storeid)}
           >
             <div className="flex flex-row justify-between items-center">
-              <div className="flex flex-row items-start gap-2">
+              <div className="flex flex-row items-start gap-2 flex-wrap">
                 {location.code !== "N/A" && (
                   <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
                 )}
@@ -158,6 +170,12 @@ function ListView() {
                 <span className={`hidden md:flex text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-3xl flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                   <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                 </span>
+                {isRecentLocation(location.storeid) && (
+                  <span className="hidden md:flex text-sm text-black dark:text-white py-1 px-2 bg-[#41BCCC]/20 rounded-3xl flex-row items-center gap-1">
+                    New
+                    <span className="text-[.5rem] text-[#41BCCC]">●</span>
+                  </span>
+                )}
               </div>
               {location.index !== "-" && (
                 <span className="text-sm font-mono font-light text-gray-500">{`#${location.index}`}</span>
@@ -169,11 +187,20 @@ function ListView() {
               <span className="text-sm text-black dark:text-white">Cabinet(s)</span>
             </div>
             <span className="text-xs text-gray-500 mt-auto">{location.address}</span>
-            <span className={`md:hidden w-fit text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-xl flex flex-row items-center gap-1 mt-2`}>{location.active ? 'Active' : 'Coming Soon'}
-              <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
-            </span>
+            <div className="md:hidden flex flex-row items-center gap-2 mt-2 flex-wrap">
+              <span className={`w-fit text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-xl flex flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
+                <span className={`text-[.5rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
+              </span>
+              {isRecentLocation(location.storeid) && (
+                <span className="w-fit text-sm text-black dark:text-white py-1 px-2 bg-[#41BCCC]/20 rounded-xl flex flex-row items-center gap-1">
+                  New
+                  <span className="text-[.5rem] text-[#41BCCC]">●</span>
+                </span>
+              )}
+            </div>
           </div>
-        ))}
+          )
+        })}
       </div>
     </div>
   )

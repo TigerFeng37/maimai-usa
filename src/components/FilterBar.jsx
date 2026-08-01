@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+import { getStateName, groupStates } from '../utils/stateNames'
 
 function FilterBar({
   // Sort props (optional)
@@ -50,6 +51,8 @@ function FilterBar({
     }
   }, [selectedStates])
 
+  const groupedStates = groupStates(uniqueStates)
+
   return (
     <div 
       ref={filterBarRef} 
@@ -83,13 +86,13 @@ function FilterBar({
               onClick={() => handleSort('cab_count')} 
               className={`py-1 px-2 text-black dark:text-white rounded-md text-sm transition-colors ${sortType === 'cab_count' ? 'bg-[#41BCCC] text-white' : 'bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700'}`}
             >
-              Cabinet Count {sortType === 'cab_count' && (sortDirection === 'asc' ? '↑' : '↓')}
+              Cabs {sortType === 'cab_count' && (sortDirection === 'asc' ? '↑' : '↓')}
             </button>
           </div>
         )}
         
         {/* Active Filter Section (Map View Only) */}
-        {!showSort && (
+        {/* {!showSort && (
           <div className="flex flex-row items-center gap-2">
             <button
               onClick={() => onActiveFilter(selectedActive === true ? null : true)}
@@ -102,23 +105,25 @@ function FilterBar({
               Active Cabs
             </button>
           </div>
-        )}
+        )} */}
 
-        
         {/* State Filter Section */}
         <div className="flex flex-row items-center gap-2">
-          <span className="block md:hidden text-sm text-gray-500">Filter</span>
-          <span className="hidden md:block text-sm text-gray-500">Filter by State</span>
+          <span className="text-sm text-gray-500">Filter</span>
           <select 
             value="" 
             onChange={(e) => e.target.value && onStateFilter(e.target.value)}
             className="py-1 pl-2 pr-1.5 text-black dark:text-white rounded-md bg-gray-100 text-sm hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
           >
-            <option value="">Add State</option>
-            {uniqueStates.map(state => (
-              <option key={state} value={state} disabled={selectedStates.includes(state)}>
-                {state}
-              </option>
+            <option value="">By State</option>
+            {groupedStates.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.states.map((state) => (
+                  <option key={state} value={state} disabled={selectedStates.includes(state)}>
+                    {getStateName(state)}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
           {selectedStates.length > 0 && (

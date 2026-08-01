@@ -121,11 +121,11 @@ function DetailView() {
         const currentTempCount = tempPeopleCountRef.current
         const currentUser = userRef.current
         
-        // Only update if count has changed
-        if (newCount !== currentCount) {
+        // Only update if count has changed or lastUpdated is newer
+        if (newCount !== currentCount || data.lastUpdated > lastUpdated) {
           setPeopleCount(newCount)
           // Update tempPeopleCount only if user is not logged in or not currently editing
-          if (!currentUser || currentTempCount === currentCount) {
+          if (!currentUser || currentTempCount === currentCount || data.lastUpdated > lastUpdated) {
             setTempPeopleCount(newCount)
           }
         }
@@ -202,6 +202,16 @@ function DetailView() {
   const decrementPeopleCount = () => {
     setTempPeopleCount(prev => Math.max(0, prev - 1))
   }
+
+  useEffect(() => {
+    // Only trigger update if user is logged in and tempPeopleCount has changed from actual peopleCount
+    if (user && tempPeopleCount !== peopleCount && !isUpdatingPeopleCount && !isLoadingPeopleCount) {
+      const timeoutId = setTimeout(() => {
+        handleUpdatePeopleCount()
+      }, 500) // Debounce for 500ms
+      return () => clearTimeout(timeoutId)
+    }
+  }, [tempPeopleCount, user, peopleCount, isUpdatingPeopleCount, isLoadingPeopleCount])
 
   // Format timestamp to readable format (e.g., "10:35 PM Today")
   const formatLastUpdated = (timestamp) => {
@@ -398,6 +408,7 @@ function DetailView() {
         <Navbar 
           showBackButton={true}
           onBackClick={handleBack}
+          hideViewToggle={true}
         />
       </div>
 
@@ -530,13 +541,6 @@ function DetailView() {
                         </svg>
                       </button>
                     </div>
-                    <button
-                      onClick={handleUpdatePeopleCount}
-                      disabled={isUpdatingPeopleCount || isLoadingPeopleCount || tempPeopleCount === peopleCount}
-                      className="max-w-32 px-4 py-2 bg-[#41BCCC] text-white rounded-md hover:bg-[#3598a8] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
-                    >
-                      {isUpdatingPeopleCount ? 'Updating...' : 'Submit'}
-                    </button>
                   </div>
                 ) : (
                   <div className="flex items-center justify-start">

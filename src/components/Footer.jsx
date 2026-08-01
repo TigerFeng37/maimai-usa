@@ -4,7 +4,9 @@ function Footer({ isMapView = false }) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="w-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-[-1px] dark:text-white">
+    <footer className={`w-full shrink-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 dark:text-white ${
+      isMapView ? 'z-[998]' : ''
+    }`}>
       {/* Top section - only show when not in map view */}
       {!isMapView && (
         <div className="w-full mx-auto px-4 py-6">
@@ -36,18 +38,17 @@ function Footer({ isMapView = false }) {
                   GekiChuMai Discord ↗
                 </a>
               </div>
-              {/* <div className="text-gray-500">
-                © {currentYear} Maimai USA Directory
-              </div> */}
             </div>
           </div>
         </div>
       )}
       
       {/* Bottom section - always show */}
-      <div className="w-full p-4 border-t border-gray-100 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400 flex flex-col md:flex-row md:justify-between md:items-center gap-2">
-          <span className="font-medium">This is an unofficial directory. All location data is provided as-is. Please verify hours and availability with individual locations.</span>
-          <span className="font-light">Created by FENGUY &nbsp;&nbsp;|&nbsp;&nbsp; Last updated: {new Date().toLocaleDateString()}</span>
+      <div className={`w-full border-t border-gray-100 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400 flex flex-col md:flex-row md:justify-between md:items-center gap-1 md:gap-2 ${
+        isMapView ? 'px-4 py-2' : 'p-4'
+      }`}>
+          <span className="font-medium leading-snug">This is an unofficial directory. All location data is provided as-is. Please verify hours and availability with individual locations.</span>
+          <span className="font-light shrink-0">Created by FENGUY &nbsp;&nbsp;|&nbsp;&nbsp; Last updated: {new Date().toLocaleDateString()}</span>
         </div>
     </footer>
   )

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -6,12 +6,64 @@ import L from 'leaflet';
 import data from './r1index-geocoded.json';
 import Navbar from './components/Navbar';
 import FilterBar from './components/FilterBar';
-import RecentsBanner from './components/RecentsBanner';
 import BookmarkPanel from './components/BookmarkPanel';
 import FavoriteButton from './components/FavoriteButton';
 import { getCurrentUser } from './utils/authApi';
 import { getFavorites } from './utils/favoritesApi';
+import { isRecentLocation } from './utils/recentLocations';
 import './mapStyles.css';
+
+const DEFAULT_MAP_CENTER = [39.8283, -98.5795];
+const DEFAULT_MAP_ZOOM = typeof window !== 'undefined' && window.innerWidth >= 768 ? 5 : 3;
+
+// Apple Maps–style ease-out for map transitions
+function easeOutQuint(t) {
+  return 1 - Math.pow(1 - t, 5);
+}
+
+function animateMapTo(map, targetCenter, targetZoom, { duration = 1100 } = {}) {
+  const startCenter = map.getCenter();
+  const startZoom = map.getZoom();
+  const endLat = targetCenter.lat ?? targetCenter[0];
+  const endLng = targetCenter.lng ?? targetCenter[1];
+  const startTime = performance.now();
+
+  // Cancel any in-flight custom animation
+  if (map._easeAnimFrame) {
+    cancelAnimationFrame(map._easeAnimFrame);
+    map._easeAnimFrame = null;
+  }
+
+  return new Promise((resolve) => {
+    const step = (now) => {
+      const t = Math.min(1, (now - startTime) / duration);
+      const e = easeOutQuint(t);
+
+      const lat = startCenter.lat + (endLat - startCenter.lat) * e;
+      const lng = startCenter.lng + (endLng - startCenter.lng) * e;
+      const zoom = startZoom + (targetZoom - startZoom) * e;
+
+      map.setView([lat, lng], zoom, { animate: false });
+
+      if (t < 1) {
+        map._easeAnimFrame = requestAnimationFrame(step);
+      } else {
+        map._easeAnimFrame = null;
+        resolve();
+      }
+    };
+
+    map._easeAnimFrame = requestAnimationFrame(step);
+  });
+}
+
+function animateMapToBounds(map, bounds, { padding = [56, 56], maxZoom = 10, duration = 1100 } = {}) {
+  const targetZoom = Math.min(
+    map.getBoundsZoom(bounds, false, L.point(padding[0], padding[1])),
+    maxZoom
+  );
+  return animateMapTo(map, bounds.getCenter(), targetZoom, { duration });
+}
 
 // Fix for default markers in React-Leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -81,6 +133,50 @@ function ChangeMapView({ center, zoom }) {
     }
   }, [center, zoom, map]);
   
+  return null;
+}
+
+// Fit map to selected state locations when state filters change
+function FitStateBounds({ selectedStates }) {
+  const map = useMap();
+  const prevHadStates = useRef(false);
+  const selectedStatesKey = selectedStates.slice().sort().join('|');
+
+  useEffect(() => {
+    const hasStates = selectedStates.length > 0;
+
+    if (!hasStates) {
+      if (prevHadStates.current) {
+        animateMapTo(map, DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM);
+      }
+      prevHadStates.current = false;
+      return;
+    }
+
+    prevHadStates.current = true;
+
+    const locations = data.filter(
+      (loc) => selectedStates.includes(loc.state) && loc.lat != null && loc.lng != null
+    );
+
+    if (!locations.length) return;
+
+    const bounds = L.latLngBounds(locations.map((loc) => [loc.lat, loc.lng]));
+    if (!bounds.isValid()) return;
+
+    animateMapToBounds(map, bounds, {
+      padding: [56, 56],
+      maxZoom: locations.length === 1 ? 11 : 10,
+    });
+
+    return () => {
+      if (map._easeAnimFrame) {
+        cancelAnimationFrame(map._easeAnimFrame);
+        map._easeAnimFrame = null;
+      }
+    };
+  }, [selectedStatesKey, map, selectedStates]);
+
   return null;
 }
 
@@ -208,10 +304,10 @@ function MapView() {
         locationsWithCoords.reduce((sum, loc) => sum + loc.lat, 0) / locationsWithCoords.length,
         locationsWithCoords.reduce((sum, loc) => sum + loc.lng, 0) / locationsWithCoords.length
       ]
-    : [39.8283, -98.5795]; // Fallback to center of US
+    : DEFAULT_MAP_CENTER;
 
   return (
-    <div className="w-screen safe-area-screen flex flex-col view-map page-enter page-enter-map mb-[-6rem] md:mb-[-3rem] overflow-hidden">
+    <div className="w-full flex-1 min-h-0 flex flex-col view-map page-enter page-enter-map overflow-hidden">
       {/* Header */}
       <Navbar currentView="map" />
       <FilterBar
@@ -228,17 +324,19 @@ function MapView() {
         locationCount={filteredData.length}
         className="z-[999]"
       />
-      <RecentsBanner />
-      <div className="flex-1 mb-[6rem] md:mb-[3rem]">
+      <div className="flex-1 min-h-0">
         <MapContainer 
           center={center}
           attributionControl={false}
-          zoom={window.innerWidth >= 768 ? 5 : 3}
+          zoom={DEFAULT_MAP_ZOOM}
+          zoomSnap={0}
+          zoomDelta={0.5}
           style={{ height: '100%', width: '100%' }}
           className="z-0 [&_.leaflet-control-zoom]:dark:invert"
         >
           <ZoomHandler setZoom={setCurrentZoom} />
-          {firstBookmarkedLocation && (
+          <FitStateBounds selectedStates={selectedStates} />
+          {firstBookmarkedLocation && selectedStates.length === 0 && (
             <ChangeMapView 
               center={[firstBookmarkedLocation.lat, firstBookmarkedLocation.lng]} 
               zoom={window.innerWidth >= 768 ? 12 : 11}
@@ -261,7 +359,7 @@ function MapView() {
                 <Popup className="dark:bg-gray-900 dark:text-white [&_.leaflet-popup-content-wrapper]:dark:bg-gray-900 [&_.leaflet-popup-content-wrapper]:dark:text-white [&_.leaflet-popup-tip]:dark:bg-gray-900 [&_.leaflet-popup-content]:dark:bg-gray-900">
                   <div className="py-2 min-w-[18rem] max-w-[25rem] dark:bg-gray-900">
                     <div className="flex flex-row justify-between items-center mb-2">
-                      <div className="flex flex-row items-center gap-2">
+                      <div className="flex flex-row items-center gap-2 flex-wrap">
                       {location.code !== "N/A" && (
                         <span className="text-sm font-medium text-black dark:text-white py-1 px-2 bg-gray-100 dark:bg-gray-800 rounded-md">{location.code}</span>
                       )}
@@ -269,6 +367,12 @@ function MapView() {
                       <span className={`text-sm text-black dark:text-white py-1 px-2 ${location.active ? 'bg-[#41BCCC]/20' : 'bg-gray-50 dark:bg-gray-800'} rounded-3xl flex flex-row items-center gap-1`}>{location.active ? 'Active' : 'Coming Soon'}
                         <span className={`text-[1rem] ${location.active ? 'text-[#41BCCC]' : 'text-gray-400'}`}>●</span>
                       </span>
+                      {isRecentLocation(location.storeid) && (
+                        <span className="text-sm text-black dark:text-white py-1 px-2 bg-[#41BCCC]/20 rounded-3xl flex flex-row items-center gap-1">
+                          New
+                          <span className="text-[1rem] text-[#41BCCC]">●</span>
+                        </span>
+                      )}
                     </div>
                     {user && <FavoriteButton storeId={location.storeid} />}
                     </div>

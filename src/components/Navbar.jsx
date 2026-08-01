@@ -1,13 +1,11 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { List, Location } from '@carbon/icons-react'
-import DisplayToggle from './DisplayToggle'
 import AuthButton from './AuthButton'
 
 function Navbar({ currentView = 'list', showBackButton = false, onBackClick, hideViewToggle = false }) {
   const navigate = useNavigate()
 
   const handleNavigation = (path) => {
-    // Use View Transitions API if supported
     if ('startViewTransition' in document) {
       document.startViewTransition(() => {
         navigate(path)
@@ -31,7 +29,8 @@ function Navbar({ currentView = 'list', showBackButton = false, onBackClick, hid
           </button>
         )}
         <img src="/kuma.png" alt="Kuma" className="aspect-auto w-10 mt-[-.25rem] mr-[-.15rem]" />
-        <h1 className="text-2xl font-regular">Maimai USA</h1>
+        <h1 className="text-2xl hidden md:block font-regular">Maimai North America</h1>
+        <h1 className="text-2xl block md:hidden font-regular">Maimai NA</h1>
         <span className="text-2xl font-extralight text-gray-500 dark:text-gray-300 hidden md:block">Directory</span>
         {!hideViewToggle && (
           <div className="flex flex-row items-center gap-2 ml-2">

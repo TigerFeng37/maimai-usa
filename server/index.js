@@ -13,6 +13,7 @@ import forumRouter from './routes/forum.js'
 import favoritesRouter from './routes/favorites.js'
 import peopleCountRouter from './routes/peopleCount.js'
 
+
 const require = createRequire(import.meta.url)
 const FileStore = require('session-file-store')(session)
 
