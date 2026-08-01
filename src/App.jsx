@@ -6,6 +6,7 @@ import MapView from './MapView'
 import DetailView from './DetailView'
 import Footer from './components/Footer'
 import RecentsBanner from './components/RecentsBanner'
+import OnboardingPopup from './components/OnboardingPopup'
 import MaintenancePage from './components/MaintenancePage'
 
 // Toggle this to enable/disable maintenance mode
@@ -47,6 +48,7 @@ function AppContent() {
         </Routes>
       </TransitionWrapper>
       {showRecents && <RecentsBanner />}
+      <OnboardingPopup />
       <Footer isMapView={isMapView} />
     </div>
   )
