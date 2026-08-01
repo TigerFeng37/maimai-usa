@@ -156,7 +156,7 @@
     "lng": -73.4807429,
     "geocoded": true,
     "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
-    "active": false,
+    "active": true,
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(475) 204-3141",
     "website": "https://round1usa.com/"
