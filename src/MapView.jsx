@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import './lib/leafletSmoothWheelZoom';
 import data from './r1index-geocoded.json';
 import Navbar from './components/Navbar';
 import FilterBar from './components/FilterBar';
@@ -73,50 +74,54 @@ L.Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Function to calculate icon size based on zoom level
-const calculateIconSize = (zoom) => {
-  // Base size at zoom level 5, scale between 12-30 pixels
+const ACTIVE_ICON_URL = 'data:image/svg+xml;base64,' + btoa(`
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="8" fill="#41BCCC" stroke="#ffffff" stroke-width="2"/>
+  </svg>
+`);
+
+const COMING_SOON_ICON_URL = 'data:image/svg+xml;base64,' + btoa(`
+  <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="12" cy="12" r="8" fill="#808080" stroke="#ffffff" stroke-width="2"/>
+  </svg>
+`);
+
+const iconCache = new Map();
+
+function calculateIconSize(zoom) {
   const baseZoom = 5;
   const baseSize = 15;
   const minSize = 12;
   const maxSize = 30;
-  
-  // Scale factor increases with zoom
   const scale = Math.pow(1.2, zoom - baseZoom);
-  const size = Math.round(baseSize * scale);
-  
-  // Clamp between min and max sizes
-  return Math.max(minSize, Math.min(maxSize, size));
-};
+  return Math.max(minSize, Math.min(maxSize, Math.round(baseSize * scale)));
+}
 
-// Function to create dynamic icons
-const createActiveIcon = (zoom) => new L.Icon({
-  iconUrl: 'data:image/svg+xml;base64,' + btoa(`
-    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="8" fill="#41BCCC" stroke="#ffffff" stroke-width="2"/>
-    </svg>
-  `),
-  iconSize: [calculateIconSize(zoom), calculateIconSize(zoom)],
-  iconAnchor: [calculateIconSize(zoom) / 2, calculateIconSize(zoom) / 2],
-  popupAnchor: [0, -calculateIconSize(zoom) / 2]
-});
+function getMarkerIcon(active, size) {
+  const key = `${active ? 'a' : 'c'}-${size}`;
+  let icon = iconCache.get(key);
+  if (!icon) {
+    icon = new L.Icon({
+      iconUrl: active ? ACTIVE_ICON_URL : COMING_SOON_ICON_URL,
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+      popupAnchor: [0, -size / 2],
+    });
+    iconCache.set(key, icon);
+  }
+  return icon;
+}
 
-const createComingSoonIcon = (zoom) => new L.Icon({
-  iconUrl: 'data:image/svg+xml;base64,' + btoa(`
-    <svg width="25" height="25" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="12" cy="12" r="8" fill="#808080" stroke="#ffffff" stroke-width="2"/>
-    </svg>
-  `),
-  iconSize: [calculateIconSize(zoom), calculateIconSize(zoom)],
-  iconAnchor: [calculateIconSize(zoom) / 2, calculateIconSize(zoom) / 2],
-  popupAnchor: [0, -calculateIconSize(zoom) / 2]
-});
-
-// Update marker icon sizes after zoom settles (avoid re-render thrash mid-gesture)
-function ZoomHandler({ setZoom }) {
+// Only re-render markers when the pixel size bucket changes
+function ZoomHandler({ setIconSize }) {
+  const sizeRef = useRef(null);
   const map = useMapEvents({
     zoomend: () => {
-      setZoom(map.getZoom());
+      const next = calculateIconSize(map.getZoom());
+      if (sizeRef.current !== next) {
+        sizeRef.current = next;
+        setIconSize(next);
+      }
     },
   });
 
@@ -191,7 +196,7 @@ function MapView() {
   const [selectedCabCount, setSelectedCabCount] = useState(null);
   const [selectedActive, setSelectedActive] = useState(null);
   const [filteredData, setFilteredData] = useState(data);
-  const [currentZoom, setCurrentZoom] = useState(window.innerWidth >= 768 ? 5 : 3);
+  const [iconSize, setIconSize] = useState(calculateIconSize(DEFAULT_MAP_ZOOM));
   const [user, setUser] = useState(null);
   const [firstBookmarkedLocation, setFirstBookmarkedLocation] = useState(null);
   const [hasCenteredToBookmark, setHasCenteredToBookmark] = useState(false);
@@ -333,12 +338,15 @@ function MapView() {
           center={center}
           attributionControl={false}
           zoom={DEFAULT_MAP_ZOOM}
+          scrollWheelZoom={false}
+          smoothWheelZoom
+          smoothSensitivity={1.5}
           zoomSnap={0}
           zoomDelta={0.5}
           style={{ height: '100%', width: '100%' }}
           className="z-0 [&_.leaflet-control-zoom]:dark:invert"
         >
-          <ZoomHandler setZoom={setCurrentZoom} />
+          <ZoomHandler setIconSize={setIconSize} />
           <FitStateBounds selectedStates={selectedStates} />
           {firstBookmarkedLocation && selectedStates.length === 0 && (
             <ChangeMapView 
@@ -354,11 +362,12 @@ function MapView() {
           />
           {locationsWithCoords.flatMap((location, index) => {
             const worldCopies = [-2, -1, 0, 1, 2];
+            const icon = getMarkerIcon(location.active, iconSize);
             return worldCopies.map(copyIndex => (
               <Marker
                 key={`${location.storeid}-${index}-${copyIndex}`}
                 position={[location.lat, location.lng + (360 * copyIndex)]}
-                icon={location.active ? createActiveIcon(currentZoom) : createComingSoonIcon(currentZoom)}
+                icon={icon}
                 clasName="dark:saturate-0"
               >
                 <Popup className="dark:bg-gray-900 dark:text-white [&_.leaflet-popup-content-wrapper]:dark:bg-gray-900 [&_.leaflet-popup-content-wrapper]:dark:text-white [&_.leaflet-popup-tip]:dark:bg-gray-900 [&_.leaflet-popup-content]:dark:bg-gray-900">
