@@ -123,16 +123,20 @@ function ZoomHandler({ setZoom }) {
   return null;
 }
 
-// Component to change map view to a specific location
-function ChangeMapView({ center, zoom }) {
+// One-shot map recenter — runs once then calls onCentered so it can unmount
+function ChangeMapView({ center, zoom, onCentered }) {
   const map = useMap();
-  
+  const hasCentered = useRef(false);
+
   useEffect(() => {
+    if (hasCentered.current) return;
     if (center && center[0] && center[1]) {
+      hasCentered.current = true;
       map.setView(center, zoom || map.getZoom());
+      onCentered?.();
     }
-  }, [center, zoom, map]);
-  
+  }, [center, zoom, map, onCentered]);
+
   return null;
 }
 
@@ -340,6 +344,7 @@ function MapView() {
             <ChangeMapView 
               center={[firstBookmarkedLocation.lat, firstBookmarkedLocation.lng]} 
               zoom={window.innerWidth >= 768 ? 12 : 11}
+              onCentered={() => setFirstBookmarkedLocation(null)}
             />
           )}
           <TileLayer
