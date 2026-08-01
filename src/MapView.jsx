@@ -112,14 +112,14 @@ const createComingSoonIcon = (zoom) => new L.Icon({
   popupAnchor: [0, -calculateIconSize(zoom) / 2]
 });
 
-// Component to track zoom changes
+// Update marker icon sizes after zoom settles (avoid re-render thrash mid-gesture)
 function ZoomHandler({ setZoom }) {
   const map = useMapEvents({
-    zoom: () => {
+    zoomend: () => {
       setZoom(map.getZoom());
     },
   });
-  
+
   return null;
 }
 

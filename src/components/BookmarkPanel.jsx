@@ -55,11 +55,6 @@ function BookmarkPanel() {
       setLocations(favoriteLocations)
       locationsRef.current = favoriteLocations
 
-      // Auto-expand if user has bookmarked locations
-      if (favoriteLocations.length > 0) {
-        setIsCollapsed(false)
-      }
-
       // Load latest posts for each favorite and check for new posts
       const postsMap = {}
       let newCount = 0
@@ -220,9 +215,9 @@ function BookmarkPanel() {
   }
 
   return (
-    <div className="fixed bottom-[5.5rem] md:bottom-12 md:right-3 z-[1000] w-full md:w-96 max-h-[60vh] md:max-h-[calc(100vh-8rem)] flex flex-col">
+    <div className="fixed bottom-[5.5rem] md:bottom-12 md:right-3 z-[1000] w-full md:w-96 max-h-[60vh] md:max-h-[calc(100vh-8rem)] flex flex-col pointer-events-none">
       {/* Panel */}
-      <div className="bg-white dark:bg-gray-900 border-0 md:border border-gray-200 dark:border-gray-700 rounded-none shadow-none md:shadow-xl overflow-hidden flex flex-col max-h-full">
+      <div className="bg-white dark:bg-gray-900 border-0 md:border border-gray-200 dark:border-gray-700 rounded-none shadow-none md:shadow-xl overflow-hidden flex flex-col max-h-full pointer-events-auto">
         <div className="sticky top-0 bg-white dark:bg-gray-900 border-y md:border-b border-gray-200 dark:border-gray-700 py-2 px-2 flex items-center justify-between z-10 group">
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
