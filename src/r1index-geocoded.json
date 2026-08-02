@@ -1671,7 +1671,7 @@
     "lng": -114.0704014,
     "geocoded": true,
     "geocoded_address": "8730 Hwy 2 E, Hungry Horse, MT 59919",
-    "active": false,
+    "active": true,
     "storeid": "18393"
   },
   {
