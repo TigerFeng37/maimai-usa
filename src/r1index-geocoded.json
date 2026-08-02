@@ -156,7 +156,7 @@
     "lng": -73.4807429,
     "geocoded": true,
     "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
-    "active": true,
+    "active": false,
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(475) 204-3141",
     "website": "https://round1usa.com/"
@@ -1038,7 +1038,6 @@
     "geocoded": true,
     "geocoded_address": "1000 State Route 18, Edison, NJ 08837",
     "active": true,
-    "active": true,
     "storeid": "18534",
     "website": "https://www.round1usa.com/"
   },
@@ -1054,7 +1053,7 @@
     "lng": -73.8337681,
     "geocoded": true,
     "geocoded_address": "133-33 39th Ave, Flushing, NY 11354",
-    "active": true,
+    "active": false,
     "storeid": "gatcha-flushing",
     "hours": "Sunday 11:00 AM - 12:00 AM\nMonday 11:00 AM - 12:00 AM\nTuesday 11:00 AM - 12:00 AM\nWednesday 11:00 AM - 12:00 AM\nThursday 11:00 AM - 12:00 AM\nFriday 11:00 AM - 12:00 AM\nSaturday 11:00 AM - 12:00 AM",
     "phone": "(347) 438-1080",
