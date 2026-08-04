@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Dave & Buster's King of Prussia",
-    "city": "King of Prussia",
-    "state": "PA",
-    "address": "310 Goddard Blvd, Suite 200, King of Prussia, PA 19406",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 40.0892,
-    "lng": -75.3964,
-    "geocoded": true,
-    "geocoded_address": "310 Goddard Blvd, Suite 200, King of Prussia, PA 19406",
-    "active": true,
-    "storeid": "18378",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
-    "code": "N/A",
     "name": "Cidercade Houston",
     "city": "Houston",
     "state": "TX",
@@ -178,5 +160,23 @@
     "hours": null,
     "phone": null,
     "website": null
+  },
+  {
+    "code": "N/A",
+    "name": "Ikigai Arcade",
+    "city": "Pittsburgh",
+    "state": "PA",
+    "address": "5738 Baum Blvd, Pittsburgh, PA 15206",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 40.4586569,
+    "lng": -79.9323794,
+    "geocoded": true,
+    "geocoded_address": "5738 Baum Blvd, Pittsburgh, PA 15206",
+    "active": true,
+    "storeid": "18493",
+    "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
+    "phone": "(412) 573-1234",
+    "website": "https://www.ikigaiarcade.com/"
   }
 ]
