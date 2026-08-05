@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Cidercade Houston",
-    "city": "Houston",
-    "state": "TX",
-    "address": "2320 Canal St #100, Houston, TX 77003",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 29.7575862,
-    "lng": -95.346493,
-    "geocoded": true,
-    "geocoded_address": "2320 Canal St #100, Houston, TX 77003",
-    "active": true,
-    "storeid": "18420",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
-    "code": "N/A",
     "name": "Cidercade Austin",
     "city": "Austin",
     "state": "TX",
@@ -178,5 +160,23 @@
     "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
     "phone": "(412) 573-1234",
     "website": "https://www.ikigaiarcade.com/"
+  },
+  {
+    "code": "N/A",
+    "name": "GameWorks",
+    "city": "Seattle",
+    "state": "WA",
+    "address": "1511 7th Ave, Seattle, WA 98101",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 47.6117917,
+    "lng": -122.3338358,
+    "geocoded": true,
+    "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
+    "active": true,
+    "storeid": "18511",
+    "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
+    "phone": "(425) 307-8070",
+    "website": null
   }
 ]

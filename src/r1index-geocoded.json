@@ -1294,7 +1294,7 @@
     "lng": -122.3338358,
     "geocoded": true,
     "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
-    "active": false,
+    "active": true,
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070"
@@ -1671,7 +1671,7 @@
     "lng": -114.0704014,
     "geocoded": true,
     "geocoded_address": "8730 Hwy 2 E, Hungry Horse, MT 59919",
-    "active": false,
+    "active": true,
     "storeid": "18393"
   },
   {
@@ -1896,7 +1896,7 @@
     "lng": -97.2003,
     "geocoded": true,
     "geocoded_address": "847 Northeast Mall Blvd, Hurst, TX 76053",
-    "active": false,
+    "active": true,
     "storeid": "18318"
   },
   {
