@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Cidercade Austin",
-    "city": "Austin",
-    "state": "TX",
-    "address": "600 E Riverside Dr, Austin, TX 78704",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 30.2524716,
-    "lng": -97.7410337,
-    "geocoded": true,
-    "geocoded_address": "600 E Riverside Dr, Austin, TX 78704",
-    "active": true,
-    "storeid": "18421",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
-    "code": "N/A",
     "name": "Dave & Buster's Dallas",
     "city": "Dallas",
     "state": "TX",
@@ -177,6 +159,24 @@
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070",
+    "website": null
+  },
+  {
+    "code": "N/A",
+    "name": "2nd Loop Arcade",
+    "city": "Gardena",
+    "state": "CA",
+    "address": "18529 S Western Ave, Gardena, CA 90248",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 33.8626797,
+    "lng": -118.3098189,
+    "geocoded": true,
+    "geocoded_address": "18529 S Western Ave, Gardena, CA 90248",
+    "active": true,
+    "storeid": "18497",
+    "hours": null,
+    "phone": null,
     "website": null
   }
 ]
