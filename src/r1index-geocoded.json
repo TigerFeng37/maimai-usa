@@ -1761,7 +1761,7 @@
     "lng": -73.8381919,
     "geocoded": true,
     "geocoded_address": "131-07 40th Road, Suite C01, Flushing, Queens, NY 11354",
-    "active": true,
+    "active": false,
     "storeid": "18367"
   },
   {
