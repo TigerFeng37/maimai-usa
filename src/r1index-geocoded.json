@@ -1259,7 +1259,7 @@
     "lng": -79.9323794,
     "geocoded": true,
     "geocoded_address": "5738 Baum Blvd, Pittsburgh, PA 15206",
-    "active": false,
+    "active": true,
     "storeid": "18493",
     "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
     "phone": "(412) 573-1234",
@@ -1551,7 +1551,7 @@
     "lng": -157.8431,
     "geocoded": true,
     "geocoded_address": "1450 Ala Moana Blvd, Honolulu, HI 96814",
-    "active": false,
+    "active": true,
     "storeid": "18391"
   },
   {
