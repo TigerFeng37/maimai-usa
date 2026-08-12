@@ -1294,7 +1294,7 @@
     "lng": -122.3338358,
     "geocoded": true,
     "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
-    "active": false,
+    "active": true,
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070"
@@ -1761,7 +1761,7 @@
     "lng": -73.8381919,
     "geocoded": true,
     "geocoded_address": "131-07 40th Road, Suite C01, Flushing, Queens, NY 11354",
-    "active": false,
+    "active": true,
     "storeid": "18367"
   },
   {
