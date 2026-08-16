@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Dave & Buster's Sugar Land",
-    "city": "Sugar Land",
-    "state": "TX",
-    "address": "19892 Southwest Fwy, Sugar Land, TX 77479",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 29.6197,
-    "lng": -95.6349,
-    "geocoded": true,
-    "geocoded_address": "19892 Southwest Fwy, Sugar Land, TX 77479",
-    "active": true,
-    "storeid": "18371",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
-    "code": "N/A",
     "name": "Gamescape by Cinemark",
     "city": "Greenville",
     "state": "TX",
@@ -178,5 +160,23 @@
     "hours": null,
     "phone": null,
     "website": null
+  },
+  {
+    "code": "APM",
+    "name": "Round1 Arlington Parks",
+    "city": "Arlington",
+    "state": "TX",
+    "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
+    "cab_count": 2,
+    "index": "005",
+    "lat": 32.684034,
+    "lng": -97.1325439,
+    "geocoded": true,
+    "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
+    "active": true,
+    "storeid": "21467",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(817) 855-4941",
+    "website": "http://round1usa.com/"
   }
 ]
