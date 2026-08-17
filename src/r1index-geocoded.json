@@ -1311,7 +1311,7 @@
     "lng": -123.0016,
     "geocoded": true,
     "geocoded_address": "1920 Wellington Ave Unit 21-06, Burnaby, BC V5C 0K3",
-    "active": true,
+    "active": false,
     "storeid": "18365"
   },
   {
