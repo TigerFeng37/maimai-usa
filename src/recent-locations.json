@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Gamescape by Cinemark",
-    "city": "Greenville",
-    "state": "TX",
-    "address": "3800 Ablowich Dr, Greenville, TX 75402",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 33.1384,
-    "lng": -96.1108,
-    "geocoded": true,
-    "geocoded_address": "3800 Ablowich Dr, Greenville, TX 75402",
-    "active": true,
-    "storeid": "18345",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
-    "code": "N/A",
     "name": "Dave & Buster's McKinney",
     "city": "McKinney",
     "state": "TX",
@@ -178,5 +160,23 @@
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(817) 855-4941",
     "website": "http://round1usa.com/"
+  },
+  {
+    "code": "DBF",
+    "name": "Round1 Danbury Fair",
+    "city": "Danbury",
+    "state": "CT",
+    "address": "7 Backus Ave, Ste. 210, Danbury, CT 06810",
+    "cab_count": 2,
+    "index": "054",
+    "lat": 41.3793031,
+    "lng": -73.4807429,
+    "geocoded": true,
+    "geocoded_address": "7 Backus Ave, Danbury, CT 06810",
+    "active": true,
+    "storeid": "18977",
+    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
+    "phone": "(475) 204-3141",
+    "website": "https://round1usa.com/"
   }
 ]
