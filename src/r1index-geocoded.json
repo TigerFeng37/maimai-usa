@@ -1326,7 +1326,7 @@
     "lng": -73.7124,
     "geocoded": true,
     "geocoded_address": "563 Boul des Laurentides, Laval, QC H7G 2V3",
-    "active": true,
+    "active": false,
     "storeid": "18355"
   },
   {
@@ -1356,7 +1356,7 @@
     "lng": -80.5449,
     "geocoded": true,
     "geocoded_address": "140 University Ave W, Unit 2-5, Waterloo, ON N2L 6J3",
-    "active": true,
+    "active": false,
     "storeid": "18331"
   },
   {
