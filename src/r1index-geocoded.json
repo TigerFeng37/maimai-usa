@@ -1226,7 +1226,7 @@
     "lng": -74.0064373,
     "geocoded": true,
     "geocoded_address": "934 3rd Avenue Brooklyn, NY 11232",
-    "active": false,
+    "active": true,
     "storeid": "18525",
     "hours": "Sunday 11:00 AM - 8:00 PM\nMonday 11:00 AM - 8:00 PM\nTuesday 11:00 AM - 8:00 PM\nWednesday 11:00 AM - 8:00 PM\nThursday 11:00 AM - 8:00 PM\nFriday 11:00 AM - 9:00 PM\nSaturday 11:00 AM - 9:00 PM",
     "phone": "(347) 584-4578",
@@ -1259,7 +1259,7 @@
     "lng": -79.9323794,
     "geocoded": true,
     "geocoded_address": "5738 Baum Blvd, Pittsburgh, PA 15206",
-    "active": false,
+    "active": true,
     "storeid": "18493",
     "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
     "phone": "(412) 573-1234",
@@ -1294,7 +1294,7 @@
     "lng": -122.3338358,
     "geocoded": true,
     "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
-    "active": false,
+    "active": true,
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070"
@@ -1431,7 +1431,7 @@
     "lng": -118.3098189,
     "geocoded": true,
     "geocoded_address": "18529 S Western Ave, Gardena, CA 90248",
-    "active": false,
+    "active": true,
     "storeid": "18497"
   },
   {

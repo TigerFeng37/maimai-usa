@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "Dave & Buster's McKinney",
-    "city": "McKinney",
-    "state": "TX",
-    "address": "4064 W University Dr, McKinney, TX 75071",
-    "cab_count": "TBD",
-    "index": "-",
-    "lat": 33.2163,
-    "lng": -96.6394,
-    "geocoded": true,
-    "geocoded_address": "4064 W University Dr, McKinney, TX 75071",
-    "active": true,
-    "storeid": "18344",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
-    "code": "N/A",
     "name": "Claw Zone",
     "city": "Hurst",
     "state": "TX",
@@ -178,5 +160,23 @@
     "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
     "phone": "(475) 204-3141",
     "website": "https://round1usa.com/"
+  },
+  {
+    "code": "N/A",
+    "name": "Japan Village",
+    "city": "Brooklyn",
+    "state": "NY",
+    "address": "934 3rd Avenue Brooklyn, NY 11232",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 40.656103,
+    "lng": -74.0064373,
+    "geocoded": true,
+    "geocoded_address": "934 3rd Avenue Brooklyn, NY 11232",
+    "active": true,
+    "storeid": "18525",
+    "hours": "Sunday 11:00 AM - 8:00 PM\nMonday 11:00 AM - 8:00 PM\nTuesday 11:00 AM - 8:00 PM\nWednesday 11:00 AM - 8:00 PM\nThursday 11:00 AM - 8:00 PM\nFriday 11:00 AM - 9:00 PM\nSaturday 11:00 AM - 9:00 PM",
+    "phone": "(347) 584-4578",
+    "website": "https://japanvillage.com/"
   }
 ]
