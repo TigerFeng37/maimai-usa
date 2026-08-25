@@ -1259,7 +1259,7 @@
     "lng": -79.9323794,
     "geocoded": true,
     "geocoded_address": "5738 Baum Blvd, Pittsburgh, PA 15206",
-    "active": true,
+    "active": false,
     "storeid": "18493",
     "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
     "phone": "(412) 573-1234",
@@ -1294,7 +1294,7 @@
     "lng": -122.3338358,
     "geocoded": true,
     "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
-    "active": true,
+    "active": false,
     "storeid": "18511",
     "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
     "phone": "(425) 307-8070"
@@ -1416,7 +1416,7 @@
     "lng": -117.7248752,
     "geocoded": true,
     "geocoded_address": "26501 Aliso Creek Rd, Aliso Viejo, CA 92656",
-    "active": true,
+    "active": false,
     "storeid": "18502"
   },
   {
@@ -1431,7 +1431,7 @@
     "lng": -118.3098189,
     "geocoded": true,
     "geocoded_address": "18529 S Western Ave, Gardena, CA 90248",
-    "active": true,
+    "active": false,
     "storeid": "18497"
   },
   {
@@ -1566,7 +1566,7 @@
     "lng": -157.8431,
     "geocoded": true,
     "geocoded_address": "1450 Ala Moana Blvd #1218, Honolulu, HI 96814",
-    "active": true,
+    "active": false,
     "storeid": "18386"
   },
   {
@@ -1866,7 +1866,7 @@
     "lng": -96.1108,
     "geocoded": true,
     "geocoded_address": "3800 Ablowich Dr, Greenville, TX 75402",
-    "active": true,
+    "active": false,
     "storeid": "18345"
   },
   {
