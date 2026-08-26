@@ -1566,7 +1566,7 @@
     "lng": -157.8431,
     "geocoded": true,
     "geocoded_address": "1450 Ala Moana Blvd #1218, Honolulu, HI 96814",
-    "active": false,
+    "active": true,
     "storeid": "18386"
   },
   {
