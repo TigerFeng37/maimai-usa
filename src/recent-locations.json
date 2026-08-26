@@ -1,24 +1,6 @@
 [
   {
     "code": "N/A",
-    "name": "2nd Loop Arcade",
-    "city": "Gardena",
-    "state": "CA",
-    "address": "18529 S Western Ave, Gardena, CA 90248",
-    "cab_count": 1,
-    "index": "-",
-    "lat": 33.8626797,
-    "lng": -118.3098189,
-    "geocoded": true,
-    "geocoded_address": "18529 S Western Ave, Gardena, CA 90248",
-    "active": true,
-    "storeid": "18497",
-    "hours": null,
-    "phone": null,
-    "website": null
-  },
-  {
-    "code": "N/A",
     "name": "Dave & Buster's Ala Moana",
     "city": "Honolulu",
     "state": "HI",
@@ -177,6 +159,24 @@
     "storeid": "18386",
     "hours": null,
     "phone": null,
+    "website": null
+  },
+  {
+    "code": "N/A",
+    "name": "GameWorks",
+    "city": "Seattle",
+    "state": "WA",
+    "address": "1511 7th Ave, Seattle, WA 98101",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 47.6117917,
+    "lng": -122.3338358,
+    "geocoded": true,
+    "geocoded_address": "1511 7th Ave, Seattle, WA 98101",
+    "active": true,
+    "storeid": "18511",
+    "hours": "Sunday 11:00 AM - 9:00 PM\nMonday Closed\nTuesday Closed\nWednesday 12:00 AM - 9:00 PM\nThursday 12:00 AM - 9:00 PM\nFriday 12:00 AM - 11:00 PM\nSaturday 11:00 AM - 11:00 PM",
+    "phone": "(425) 307-8070",
     "website": null
   }
 ]
