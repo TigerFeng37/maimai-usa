@@ -1913,5 +1913,20 @@
     "geocoded_address": "14006 Riverside Dr, Sherman Oaks, CA 91423",
     "active": true,
     "storeid": "18523"
+  },
+  {
+    "code": "N/A",
+    "name": "DAVE & BUSTERS COLLEGE STATION｜Location information",
+    "city": "College Station",
+    "state": "TX",
+    "address": "100 Oak Mall, College Station, TX 77840",
+    "cab_count": "TBD",
+    "index": "-",
+    "lat": null,
+    "lng": null,
+    "geocoded": false,
+    "geocoded_address": null,
+    "active": true,
+    "storeid": "18291"
   }
 ]
