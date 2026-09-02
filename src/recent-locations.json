@@ -1,23 +1,5 @@
 [
   {
-    "code": "APM",
-    "name": "Round1 Arlington Parks",
-    "city": "Arlington",
-    "state": "TX",
-    "address": "3811 S Cooper St, Ste. 6004, Arlington, TX 76015",
-    "cab_count": 2,
-    "index": "005",
-    "lat": 32.684034,
-    "lng": -97.1325439,
-    "geocoded": true,
-    "geocoded_address": "3811 S Cooper St, Arlington, TX 76015",
-    "active": true,
-    "storeid": "21467",
-    "hours": "Sunday 10:00 AM - 2:00 AM\nMonday 10:00 AM - 2:00 AM\nTuesday 10:00 AM - 2:00 AM\nWednesday 10:00 AM - 2:00 AM\nThursday 10:00 AM - 2:00 AM\nFriday 10:00 AM - 2:00 AM\nSaturday 10:00 AM - 2:00 AM",
-    "phone": "(817) 855-4941",
-    "website": "http://round1usa.com/"
-  },
-  {
     "code": "DBF",
     "name": "Round1 Danbury Fair",
     "city": "Danbury",
@@ -178,5 +160,23 @@
     "hours": "Sunday 12:00 AM - Open 24 hours",
     "phone": "(866) 791-7626",
     "website": "https://www.southpointcasino.com/"
+  },
+  {
+    "code": "N/A",
+    "name": "Ikigai Arcade",
+    "city": "Pittsburgh",
+    "state": "PA",
+    "address": "5738 Baum Blvd, Pittsburgh, PA 15206",
+    "cab_count": 1,
+    "index": "-",
+    "lat": 40.4586569,
+    "lng": -79.9323794,
+    "geocoded": true,
+    "geocoded_address": "5738 Baum Blvd, Pittsburgh, PA 15206",
+    "active": true,
+    "storeid": "18493",
+    "hours": "Sunday 3:00 PM - 9:30 PM\nTuesday 5:00 PM - 10:00 PM\nWednesday 5:00 PM - 10:00 PM\nThursday 5:00 PM - 10:00 PM\nFriday 5:00 PM - 11:00 PM\nSaturday 3:00 PM - 11:00 PM",
+    "phone": "(412) 573-1234",
+    "website": "https://www.ikigaiarcade.com/"
   }
 ]
