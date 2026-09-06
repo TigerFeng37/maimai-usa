@@ -1926,7 +1926,7 @@
     "lng": null,
     "geocoded": false,
     "geocoded_address": null,
-    "active": true,
+    "active": false,
     "storeid": "18291"
   }
 ]
