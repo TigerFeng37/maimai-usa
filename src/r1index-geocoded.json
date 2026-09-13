@@ -1866,7 +1866,7 @@
     "lng": -96.1108,
     "geocoded": true,
     "geocoded_address": "3800 Ablowich Dr, Greenville, TX 75402",
-    "active": false,
+    "active": true,
     "storeid": "18345"
   },
   {
